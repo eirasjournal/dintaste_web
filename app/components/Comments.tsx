@@ -9,9 +9,9 @@ export default function Comments() {
       <Giscus
         id="comments"
         repo="eirasjournal/dintaste" // <-- Pune aici datele tale
-        repoId="R_kgDOQhPOHw"            // <-- De pe giscus.app
+        repoId="R_kgDOQiwAEA"            // <-- De pe giscus.app
         category="General"
-        categoryId="DIC_kwDOQhPOH84CzTqG"      // <-- De pe giscus.app
+        categoryId="DIC_kwDOQiwAEM4CzaFe"      // <-- De pe giscus.app
         mapping="pathname"
         reactionsEnabled="1"
         emitMetadata="0"
