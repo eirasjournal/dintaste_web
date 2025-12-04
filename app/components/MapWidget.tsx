@@ -17,7 +17,16 @@ export default function MapWidget() {
   }, []);
 
   return (
-    // Aici va apărea harta. Poți centra div-ul cu clase CSS/Tailwind
-    <div ref={containerRef} style={{ display: 'flex', justifyContent: 'center', margin: '20px 0' }} />
-  );
+    <div 
+        ref={containerRef} 
+        style={{ 
+        width: '100%', 
+        minHeight: '250px', // <--- Adaugă asta ca să forțezi spațiul
+        display: 'flex', 
+        justifyContent: 'center', 
+        alignItems: 'center',
+        margin: '20px 0' 
+        }} 
+    />
+);
 }
