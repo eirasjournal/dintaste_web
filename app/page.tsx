@@ -33,13 +33,13 @@ export default function Home() {
             <li className="list-item">
               <Link href="/" onClick={() => setIsMenuOpen(false)}>Home</Link>
             </li>
-            <li className="list-item">
+            {/* <li className="list-item">
               <Link href="/articles" onClick={() => setIsMenuOpen(false)}>Articles</Link>
             </li>
             <li className="list-item">
-              {/* Linkul acesta poate duce momentan tot spre home sau o pagina in constructie */}
+              Linkul acesta poate duce momentan tot spre home sau o pagina in constructie 
               <Link href="#" onClick={() => setIsMenuOpen(false)}>Films&Series</Link>
-            </li>
+            </li> */}
           </ul>
         </div>
         <button 
