@@ -1,32 +1,38 @@
-'use client'; // Obligatoriu, pentru că harta rulează în browser
+'use client'; 
 import { useEffect, useRef } from 'react';
 
 export default function MapWidget() {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // Verificăm dacă scriptul a fost deja adăugat ca să nu apară de 2 ori
-    if (containerRef.current && containerRef.current.innerHTML === "") {
+    // Verificăm dacă scriptul există deja ca să nu îl duplicăm
+    // De data asta verificăm după ID-ul specific al noului serviciu
+    if (containerRef.current && !document.getElementById("mmvst_globe")) {
+      
       const script = document.createElement("script");
-      script.src = "//rf.revolvermaps.com/0/0/8.js?i=5alg43m8j13&m=0c&c=ff0000&cr1=ffffff&f=arial&l=33&bv=45&cw=fe98ff&cb=221f38";
-      script.async = true;
+      // Adăugăm ID-ul obligatoriu cerut de MapMyVisitors
+      script.id = "mmvst_globe"; 
+      // Folosim https explicit pentru siguranță
+      script.src = "https://mapmyvisitors.com/globe.js?d=c4LSSPOF7Fleplz6Un1s30tLd3fKYtiXWTHFnHVgj2U";
       script.type = "text/javascript";
+      script.async = true;
       
       containerRef.current.appendChild(script);
     }
   }, []);
 
   return (
+    // Setăm o înălțime minimă ca să nu fie "turtit" până se încarcă
     <div 
-        ref={containerRef} 
-        style={{ 
+      ref={containerRef} 
+      style={{ 
         width: '100%', 
-        minHeight: '250px', // <--- Adaugă asta ca să forțezi spațiul
+        minHeight: '300px', // Am pus 300px ca să aibă loc globul
         display: 'flex', 
         justifyContent: 'center', 
         alignItems: 'center',
-        margin: '20px 0' 
-        }} 
+        marginTop: '20px'
+      }} 
     />
-);
+  );
 }
