@@ -332,10 +332,21 @@
     float:left;
     width: 70%;
     font-size: large;
-    text-indent: 40px;
     padding: 15px;
     background-color: #341c74;
     color: white;
+  }
+
+  .column2 p {
+    font-family: "PT Sans Narrow", "Fjalla One", sans-serif;
+    font-weight: 900;
+    text-indent: 40px;
+  }
+
+  .column2 h2 {
+    font-family: "PT Sans Narrow", "Fjalla One", sans-serif;
+    font-weight: 900;
+    text-indent: 40px;
   }
 
   .column3 {

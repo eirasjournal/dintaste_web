@@ -123,7 +123,8 @@ export default function Home() {
             Salut și bine ai venit! Am construit acest site ca o provocare personală, 
             pentru a-mi testa abilitățile de dezvoltare și administrare web. Este un 
             spațiu dedicat evoluției și intereselor mele.
-            <br /><br />
+          </p>
+          <p style={{ marginBottom: '2%' }}>
             Pe acest site, vei găsi articole și reflecții despre diverse subiecte care 
             mă pasionează, de la tehnologie și programare, până la hobby-urile mele 
             personale.
