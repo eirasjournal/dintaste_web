@@ -482,9 +482,10 @@ footer {
 .scroller {
   width: 100%;
   /* Larger vertical length: taller on desktop, still usable on mobile */
-  height: clamp(320px, 60vh, 900px);
-  min-height: 260px;
-  max-height: 85vh;
+  /* Increased so comments area shows more content on tall screens */
+  height: clamp(500px, 75vh, 1400px);
+  min-height: 400px;
+  max-height: 90vh;
   overflow-y: auto;
   scrollbar-color: rebeccapurple #221f38;
   scrollbar-width: thin;

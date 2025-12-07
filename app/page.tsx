@@ -13,6 +13,7 @@ export default function Home() {
   const leftRef = useRef<HTMLDivElement | null>(null);
   const rightRef = useRef<HTMLDivElement | null>(null);
   const centerRef = useRef<HTMLDivElement | null>(null);
+  const MAX_DECOR = 30; // safety cap to avoid infinite repetition on extremely tall screens
 
   useEffect(() => {
     let t: number | null = null;
@@ -33,7 +34,8 @@ export default function Home() {
 
         if (patternH <= 0) return;
 
-        const needed = Math.max(3, Math.ceil(centerHeight / patternH));
+        let needed = Math.max(3, Math.ceil(centerHeight / patternH));
+        if (MAX_DECOR && needed > MAX_DECOR) needed = MAX_DECOR;
         if (needed !== decorCount) setDecorCount(needed);
       } catch {
         // ignore measurement errors
@@ -102,7 +104,7 @@ export default function Home() {
               <div className="zig-zag-bottom"></div>
               <div className="sep1"><p></p></div>
             
-              {[...Array(decorCount)].map((_, i) => (
+              {[...Array(decorCount + 1)].map((_, i) => (
               /* React.Fragment tine loc de parinte, dar dispare in browser */
               <React.Fragment key={i}>
                 <div className="zig-zag-bottom zig-zag-top1"><p></p></div>
@@ -149,7 +151,7 @@ export default function Home() {
             <div className="zig-zag-bottom"></div>
             <div className="sep1"><p></p></div>
             
-            {[...Array(decorCount)].map((_, i) => (
+            {[...Array(decorCount + 1)].map((_, i) => (
               /* React.Fragment tine loc de parinte, dar dispare in browser */
               <React.Fragment key={i}>
                 <div className="zig-zag-bottom zig-zag-top1"><p></p></div>
