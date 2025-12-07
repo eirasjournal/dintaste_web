@@ -25,8 +25,8 @@
   position: relative;
 }
 
-#d-wrapper div.sep1::before,
-#d-wrapper div.sep2::before {
+#d-wrapper div.sep1::after,
+#d-wrapper div.sep2::after {
   content: "";
   position: absolute;
   top: 0;
@@ -41,21 +41,9 @@
   z-index: -1; /* important!!! Pune fundalul sub conținut și sub zig-zag */
 }
 
-#d-wrapper div.sep1::before {
+#d-wrapper div.sep1::after {
   background-position-y: -200px;
 }
-
-    /* 2. CONFIGURARE SPARKLES DIFERENȚIATĂ */
-
-    /* Pentru SEP1: Sparkles încep de la 0 (chiar de sus) */
-    #d-wrapper div.sep1 canvas.sparkle-canvas {
-      top: 0 !important; 
-    }
-
-    /* Pentru SEP2: Sparkles coboară 32px (ca să nu intre sub zig-zag-ul de mijloc) */
-    #d-wrapper div.sep2 canvas.sparkle-canvas {
-      top: 32px !important; 
-    }
 
     /* Opțional: Aliniere text paragrafe */
     #d-wrapper div.sep1 p,
