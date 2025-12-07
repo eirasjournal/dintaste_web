@@ -68,7 +68,7 @@ export default function Home() {
         <div className="navbar-left">
           {/* Asigura-te ca ai poza asta in folderul public */}
           <Image 
-            src="/logo.png" 
+            src="/pixelcat.png" 
             className="image" 
             alt="Logo AZAX" 
             width={150}  // Asta e doar pentru rezoluție, CSS-ul decide mărimea vizuală
