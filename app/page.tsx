@@ -104,7 +104,7 @@ export default function Home() {
               <div className="zig-zag-bottom"></div>
               <div className="sep1"><p></p></div>
             
-              {[...Array(decorCount + 1)].map((_, i) => (
+              {[...Array(decorCount + 2)].map((_, i) => (
               /* React.Fragment tine loc de parinte, dar dispare in browser */
               <React.Fragment key={i}>
                 <div className="zig-zag-bottom zig-zag-top1"><p></p></div>
@@ -152,7 +152,7 @@ export default function Home() {
             <div className="zig-zag-bottom"></div>
             <div className="sep1"><p></p></div>
             
-            {[...Array(decorCount + 1)].map((_, i) => (
+            {[...Array(decorCount + 2)].map((_, i) => (
               /* React.Fragment tine loc de parinte, dar dispare in browser */
               <React.Fragment key={i}>
                 <div className="zig-zag-bottom zig-zag-top1"><p></p></div>
