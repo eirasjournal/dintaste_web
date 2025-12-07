@@ -19,14 +19,31 @@
     
     /* --- CONFIGURARE ZONE SEP1 ȘI SEP2 --- */
 
-    /* 1. Definiția de bază pentru ambele zone (DIMENSIUNE ȘI PADDING) */
     #d-wrapper div.sep1,
-    #d-wrapper div.sep2 {
-      padding: 32px 0 0 0; /* Păstrăm padding-ul ca textul să nu fie lipit de sus */
-      min-height: 15vh;    /* Le forțăm pe ambele să aibă aceeași înălțime minimă */
-      overflow: hidden; 
-      position: relative; 
-    }
+#d-wrapper div.sep2 {
+  min-height: 15vh; /* Le forțăm pe ambele să aibă aceeași înălțime minimă */
+  position: relative;
+}
+
+#d-wrapper div.sep1::before,
+#d-wrapper div.sep2::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  
+  background-image: url("/f1356e49255313134793b55e2978e472.jpg");
+  background-repeat: repeat-y;
+  background-size: 44vw;
+
+  z-index: -1; /* important!!! Pune fundalul sub conținut și sub zig-zag */
+}
+
+#d-wrapper div.sep1::before {
+  background-position-y: -200px;
+}
 
     /* 2. CONFIGURARE SPARKLES DIFERENȚIATĂ */
 
