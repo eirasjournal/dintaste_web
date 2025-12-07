@@ -20,30 +20,32 @@
     /* --- CONFIGURARE ZONE SEP1 ȘI SEP2 --- */
 
     #d-wrapper div.sep1,
-#d-wrapper div.sep2 {
-  min-height: 15vh; /* Le forțăm pe ambele să aibă aceeași înălțime minimă */
-  position: relative;
-}
+    #d-wrapper div.sep2 {
+      min-height: 15vh; /* Le forțăm pe ambele să aibă aceeași înălțime minimă */
+      position: relative;
+    }
 
-#d-wrapper div.sep1::after,
-#d-wrapper div.sep2::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  
-  background-image: url("/f1356e49255313134793b55e2978e472.jpg");
-  background-repeat: repeat-y;
-  background-size: 44vw;
+    #d-wrapper div.sep1::after,
+    #d-wrapper div.sep2::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      
+      background-image: url("/f1356e49255313134793b55e2978e472.jpg");
+      background-repeat: repeat-y;
+      background-size: 44vw;
 
-  z-index: -1; /* important!!! Pune fundalul sub conținut și sub zig-zag */
-}
+      z-index: -1; /* important!!! Pune fundalul sub conținut și sub zig-zag */
+    }
 
-#d-wrapper div.sep1::after {
-  background-position-y: -200px;
-}
+    #d-wrapper div.sep1::after {
+      background-position-y: -200px;
+    }
+
+    #d-wrapper div.sep2 canvas.sparkle-canvas { top: 5px !important; }
 
     /* Opțional: Aliniere text paragrafe */
     #d-wrapper div.sep1 p,
