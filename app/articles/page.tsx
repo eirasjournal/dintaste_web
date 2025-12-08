@@ -130,9 +130,9 @@ export default function ArticlesPage() {
           {!selectedArticle ? (
             // --- LISTĂ ---
             <div className="articles-list fade-in " style={{ maxWidth: '800px', margin: '0 auto', paddingTop: '20px' }}>
-              {/* <h2 style={{ marginBottom: '40px', borderBottom: '2px solid #fe98ff', paddingBottom: '10px' }}>
+              <h2 style={{ marginBottom: '40px', borderBottom: '2px solid #fe98ff', paddingBottom: '10px' }}>
                 Articles
-              </h2> */}
+              </h2>
               {ARTICLES.map((art) => (
                 <div 
                   key={art.id} 
@@ -144,8 +144,7 @@ export default function ArticlesPage() {
                     backgroundColor: 'rgba(255,255,255,0.05)',
                     borderRadius: '10px',
                     transition: 'transform 0.2s, background 0.2s',
-                    border: '1px solid transparent',
-                    borderColor: '#fe98ff'
+                    border: '1px solid transparent'
                   }}
                   className="article-preview-card"
                   onMouseEnter={(e) => {
@@ -157,9 +156,9 @@ export default function ArticlesPage() {
                     e.currentTarget.style.borderColor = 'transparent';
                   }}
                 >
-                  <h3 style={{textAlign: 'center', color: '#fe98ff', fontSize: '1.5rem'}}>{art.title}</h3>
-                  {/* <span style={{ color: '#ccc', fontFamily: 'monospace', fontSize: '0.9rem' }}>{art.date}</span>
-                  <p style={{ marginTop: '10px', color: '#ddd' }}>{art.preview} [Read more]</p> */}
+                  <h3 style={{ color: '#fe98ff', fontSize: '1.5rem', marginBottom: '5px' }}>{art.title}</h3>
+                  <span style={{ color: '#ccc', fontFamily: 'monospace', fontSize: '0.9rem' }}>{art.date}</span>
+                  <p style={{ marginTop: '10px', color: '#ddd' }}>{art.preview} [Read more]</p>
                 </div>
               ))}
             </div>

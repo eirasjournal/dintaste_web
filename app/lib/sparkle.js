@@ -18,21 +18,12 @@ export function initSparkle($) {
   
             var sparkle = new Sparkle($this, settings);
   
-            var timer; // Variabilă pentru a ține minte timpul
-
             $this.on({
-                // SCHIMBARE: Folosim click în loc de mouseover
-                "click.sparkle": function() {
-                    // Dacă dăm click rapid de mai multe ori, resetăm timer-ul anterior
-                    clearTimeout(timer);
-                    
-                    // Pornim sclipiciul
+                "mouseover.sparkle focus.sparkle": function() {
                     $this.trigger("start.sparkle");
-
-                    // Îl oprim automat după 1500ms (1.5 secunde) - poți modifica numărul
-                    timer = setTimeout(function() {
-                        $this.trigger("stop.sparkle");
-                    }, 20000);
+                },
+                "mouseout.sparkle blur.sparkle": function() {
+                    $this.trigger("stop.sparkle");
                 },
                 "start.sparkle": function() {
                     sparkle.start($this);

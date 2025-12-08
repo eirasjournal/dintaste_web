@@ -21,7 +21,7 @@
 
     #d-wrapper div.sep1,
     #d-wrapper div.sep2 {
-      min-height: 12vh; /* Le forțăm pe ambele să aibă aceeași înălțime minimă */
+      min-height: 15vh; /* Le forțăm pe ambele să aibă aceeași înălțime minimă */
       position: relative;
     }
 
