@@ -91,7 +91,7 @@ export default function Contact() {
               <Link href="/articles" onClick={() => setIsMenuOpen(false)}>Articles</Link>
             </li>
             <li className="list-item">
-              <Link href="#" onClick={() => setIsMenuOpen(false)}>Contact</Link>
+              <Link href="/contact" onClick={() => setIsMenuOpen(false)}>Contact</Link>
             </li>
           </ul>
         </div>

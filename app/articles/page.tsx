@@ -100,6 +100,9 @@ export default function ArticlesPage() {
                   setSelectedArticle(null);
                 }}>Articles</Link>
             </li>
+            <li className="list-item">
+              <Link href="/contact" onClick={() => setIsMenuOpen(false)}>Contact</Link>
+            </li>
           </ul>
         </div>
         <button className="menu-toggle" onClick={() => setIsMenuOpen(!isMenuOpen)}>☰</button>
