@@ -115,7 +115,7 @@ export default function Home() {
         </div>
 
         {/* COLOANA CENTRALA - Continut */}
-        <div className="column2" ref={centerRef}>
+        <div className="column2" ref={centerRef} style={{ maxWidth: '800px', margin: '0 auto', paddingTop: '20px' }}>
           <h2 style={{ marginBottom: '40px', borderBottom: '2px solid #fe98ff', paddingBottom: '10px' }}>
           About me
           </h2>

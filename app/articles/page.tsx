@@ -65,7 +65,7 @@ export default function ArticlesPage() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   // TRUC: Setăm un număr FIX și mare de decorațiuni (ex: 50).
   // CSS-ul (overflow: hidden) va ascunde surplusul automat.
-  const decorCount = 10; 
+  const decorCount = 11; 
   
   const [selectedArticle, setSelectedArticle] = useState<typeof ARTICLES[number] | null>(null);
 
@@ -129,7 +129,7 @@ export default function ArticlesPage() {
           
           {!selectedArticle ? (
             // --- LISTĂ ---
-            <div className="articles-list fade-in">
+            <div className="articles-list fade-in " style={{ maxWidth: '800px', margin: '0 auto', paddingTop: '20px' }}>
               <h2 style={{ marginBottom: '40px', borderBottom: '2px solid #fe98ff', paddingBottom: '10px' }}>
                 Articles
               </h2>
@@ -165,7 +165,7 @@ export default function ArticlesPage() {
 
           ) : (
             // --- ARTICOL COMPLET ---
-            <div className="single-article fade-in">
+            <div className="single-article fade-in" style={{ maxWidth: '800px', margin: '0 auto', paddingTop: '20px' }}>
               <button 
                 onClick={() => setSelectedArticle(null)}
                 style={{
