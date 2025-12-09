@@ -49,7 +49,11 @@ At first, my answers were yes. In the meantime, I woke up to reality.
 
 So, what matters in a relationship?
 Psychologically speaking, there are two main things:
+
+
 * Chemistry (attraction to the other person)
+
+
 * Compatibility (shared values and perspectives)
 
 So, my next relationship will be based on both. And if it can't be... better not to be at all. As the saying goes: better nothing than something bad!
@@ -180,7 +184,7 @@ export default function ArticlesPage() {
               <h2 style={{ fontSize: '2.5rem', color: '#fe98ff', marginBottom: '10px' }}>{selectedArticle.title}</h2>
               <p style={{ fontFamily: 'monospace', color: '#ccc', marginBottom: '40px' }}>{selectedArticle.date}</p>
               
-              <div style={{ lineHeight: '1.8', fontSize: '1.2rem', textAlign: 'justify' }}>
+              <div style={{ lineHeight: '1.8', fontSize: '1.15rem', color: '#e0e0e0', letterSpacing: '0.02em' }}>
                 {selectedArticle.content.split('\n\n').map((para: string, idx: number) => (
                    <p key={idx} style={{ marginBottom: '20px', textIndent: '40px' }}>{para}</p>
                 ))}

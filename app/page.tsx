@@ -119,19 +119,20 @@ export default function Home() {
           <h2 style={{ marginBottom: '40px', borderBottom: '2px solid #fe98ff', paddingBottom: '10px' }}>
           About me
           </h2>
-          <p style={{ marginBottom: '2%', fontSize: '1.2rem' }}>
-            Hello and welcome! I started this site with two goals in mind: to push my technical boundaries and to find my voice. What began as a &quot;built-from-scratch&quot; coding challenge quickly became my space of freedom.
-          </p>
-          <p style={{ marginBottom: '2%', fontSize: '1.2rem' }}>
-            It’s a space where my technical projects collide with my personal thoughts. Consider it an ongoing experiment in development: building a functional website, but also building myself. 
-          </p>
-          <p style={{ marginBottom: '2%', fontSize: '1.2rem' }}>
-            Why &apos;Din Taste&apos;? It translates to &apos;From Keys&apos; in my native Romanian. It’s a reminder that everything here comes raw, straight from my keyboard to your screen.
-          </p>
-          <p style={{ marginBottom: '2%', fontSize: '1.2rem' }}>
-            I hope reading this inspires you to start your own project, no matter what it is.
-          </p>
-
+          <div style={{lineHeight: '1.8', fontSize: '1.15rem', color: '#e0e0e0', letterSpacing: '0.02em' }}>
+            <p style={{ marginBottom: '2%', fontSize: '1.2rem' }}>
+              Hello and welcome! I started this site with two goals in mind: to push my technical boundaries and to find my voice. What began as a &quot;built-from-scratch&quot; coding challenge quickly became my space of freedom.
+            </p>
+            <p style={{ marginBottom: '2%', fontSize: '1.2rem' }}>
+              It’s a space where my technical projects collide with my personal thoughts. Consider it an ongoing experiment in development: building a functional website, but also building myself. 
+            </p>
+            <p style={{ marginBottom: '2%', fontSize: '1.2rem' }}>
+              Why &apos;Din Taste&apos;? It translates to &apos;From Keys&apos; in my native Romanian. It’s a reminder that everything here comes raw, straight from my keyboard to your screen.
+            </p>
+            <p style={{ marginBottom: '2%', fontSize: '1.2rem' }}>
+              I hope reading this inspires you to start your own project, no matter what it is.
+            </p>
+          </div>
           <MapWidget />
 
           {/* AICI AI PUTEA PUNE BUTONUL DE BUY ME A COFFEE */}

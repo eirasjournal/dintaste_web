@@ -3,7 +3,7 @@
 export function initSparkle($) {
     "use strict";
   
-    $.fn.sparkle = function(options) {
+    $.fn.sparkle_hover = function(options) {
         return this.each(function(k, v) {
             var $this = $(v);
             var settings = $.extend({
@@ -35,6 +35,52 @@ export function initSparkle($) {
                     sparkle.resize($this);
                     sparkle.setParticles();
                 }
+            });
+        });
+    };
+
+    $.fn.sparkle_always = function(options) {
+        return this.each(function(k, v) {
+            var $this = $(v);
+            var settings = $.extend({
+                color: "#e0e0e0",
+                count: 30,
+                overlap: 0,
+                speed: 1,
+                minSize: 4,
+                maxSize: 7,
+                direction: "both"
+            }, options);
+  
+            var sparkle = new Sparkle($this, settings);
+
+            // 1. Definim evenimentele
+            $this.on({
+                "start.sparkle": function() {
+                    sparkle.start($this);
+                },
+                "stop.sparkle": function() {
+                    sparkle.stop();
+                },
+                "resize.sparkle": function() {
+                    // Aici se întâmplă magia recalculării
+                    sparkle.resize($this);
+                    sparkle.setParticles();
+                }
+            });
+
+            // 2. Pornim efectul IMEDIAT
+            $this.trigger("start.sparkle");
+
+            // --- FIXUL ESTE AICI ---
+            // 3. Ascultăm redimensionarea ferestrei (Window Resize)
+            var resizeTimer;
+            $(window).on("resize", function() {
+                clearTimeout(resizeTimer);
+                // Așteptăm 100ms după ce utilizatorul termină de tras de fereastră
+                resizeTimer = setTimeout(function() {
+                    $this.trigger("resize.sparkle");
+                }, 100);
             });
         });
     };
@@ -85,6 +131,7 @@ export function initSparkle($) {
             this.sprite.src = this.datauri;
             this.spriteCoords = [0, 6, 13, 20];
   
+            // Setăm dimensiunea inițială
             this.canvas.width = $parent.outerWidth() * 1.2;
             this.canvas.height = $parent.outerHeight() * 1.2;
   
@@ -160,76 +207,77 @@ export function initSparkle($) {
         },
   
         "update": function() {
-this.anim = window.requestAnimationFrame((time) => {
-    var flatTime = Math.floor(time);
-    for (var i = 0; i < this.particles.length; i++) {
-        var p = this.particles[i];
-        var resizeParticle = false;
-        var randX = (Math.random() > Math.random() * 2);
-        var randY = (Math.random() < Math.random() * 5);
-
-        if (randX) {
-            p.position.x += ((p.delta.x * this.options.speed) / 1500);
-        }
-        if (randY) {
-            p.position.y -= ((p.delta.y * this.options.speed) / 800);
-        }
-
-        if (p.position.x > this.canvas.width) {
-            p.position.x = -(this.options.maxSize);
-            resizeParticle = true;
-        } else if (p.position.x < -(this.options.maxSize)) {
-            p.position.x = this.canvas.width;
-            resizeParticle = true;
-        }
-
-        if (p.position.y > this.canvas.height) {
-            p.position.y = -(this.options.maxSize);
-            p.position.x = Math.floor(Math.random() * this.canvas.width);
-            resizeParticle = true;
-        } else if (p.position.y < -(this.options.maxSize)) {
-            p.position.y = this.canvas.height;
-            p.position.x = Math.floor(Math.random() * this.canvas.width);
-            resizeParticle = true;
-        }
-
-        if (resizeParticle) {
-            p.size = this.randomParticleSize();
-            p.opacity = 0.4;
-        }
-
-        if (this.fade) {
-            p.opacity -= 0.035;
-        } else {
-            p.opacity -= 0.005;
-        }
-
-        if (p.opacity <= 0.15) {
-            p.opacity = (this.fade) ? 0 : 1.2;
-        }
-
-        if (flatTime % Math.floor((Math.random() * 7) + 1) === 0) {
-            p.style = this.spriteCoords[Math.floor(Math.random() * this.spriteCoords.length)];
-        }
-    }
-
-    this.draw(time);
-
-    if (this.fade) {
-        this.fadeCount -= 1;
-        if (this.fadeCount < 0) {
-            window.cancelAnimationFrame(this.anim);
-            this.$canvas.hide();
-        } else {
-            this.update();
-        }
-    } else {
-        this.update();
-    }
-});
+            this.anim = window.requestAnimationFrame((time) => {
+                var flatTime = Math.floor(time);
+                for (var i = 0; i < this.particles.length; i++) {
+                    var p = this.particles[i];
+                    var resizeParticle = false;
+                    var randX = (Math.random() > Math.random() * 2);
+                    var randY = (Math.random() < Math.random() * 5);
+  
+                    if (randX) {
+                        p.position.x += ((p.delta.x * this.options.speed) / 1500);
+                    }
+                    if (randY) {
+                        p.position.y -= ((p.delta.y * this.options.speed) / 800);
+                    }
+  
+                    if (p.position.x > this.canvas.width) {
+                        p.position.x = -(this.options.maxSize);
+                        resizeParticle = true;
+                    } else if (p.position.x < -(this.options.maxSize)) {
+                        p.position.x = this.canvas.width;
+                        resizeParticle = true;
+                    }
+  
+                    if (p.position.y > this.canvas.height) {
+                        p.position.y = -(this.options.maxSize);
+                        p.position.x = Math.floor(Math.random() * this.canvas.width);
+                        resizeParticle = true;
+                    } else if (p.position.y < -(this.options.maxSize)) {
+                        p.position.y = this.canvas.height;
+                        p.position.x = Math.floor(Math.random() * this.canvas.width);
+                        resizeParticle = true;
+                    }
+  
+                    if (resizeParticle) {
+                        p.size = this.randomParticleSize();
+                        p.opacity = 0.4;
+                    }
+  
+                    if (this.fade) {
+                        p.opacity -= 0.035;
+                    } else {
+                        p.opacity -= 0.005;
+                    }
+  
+                    if (p.opacity <= 0.15) {
+                        p.opacity = (this.fade) ? 0 : 1.2;
+                    }
+  
+                    if (flatTime % Math.floor((Math.random() * 7) + 1) === 0) {
+                        p.style = this.spriteCoords[Math.floor(Math.random() * this.spriteCoords.length)];
+                    }
+                }
+  
+                this.draw(time);
+  
+                if (this.fade) {
+                    this.fadeCount -= 1;
+                    if (this.fadeCount < 0) {
+                        window.cancelAnimationFrame(this.anim);
+                        this.$canvas.hide();
+                    } else {
+                        this.update();
+                    }
+                } else {
+                    this.update();
+                }
+            });
         },
   
         "resize": function($parent) {
+            // Această funcție este apelată când declanșăm "resize.sparkle"
             this.canvas.width = $parent.outerWidth() + (this.options.overlap * 2);
             this.canvas.height = $parent.outerHeight() + (this.options.overlap * 2);
             if (this.isSingleton) {
