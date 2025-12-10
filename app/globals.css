@@ -215,7 +215,7 @@ body {
 .header {
   position: relative;
   /* --- 1. Fundalul --- */
-  background-image: #341c74;
+  background: linear-gradient(to bottom, #18032c 0%, #341c74 100%);
   background-size: 25vw;
   background-position: center;
   background-repeat: repeat;
