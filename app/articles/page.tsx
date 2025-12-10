@@ -71,6 +71,8 @@ export default function ArticlesPage() {
       
       {/* HEADER */}
       <div className="header">
+        {/* --- AICI: Containerul nou pentru stele --- */}
+        <div className="header-sparkles"></div>
         <h1 className="typewriter-title">d i n<span className="word-space"></span>t a s t e</h1> 
       </div>
 
