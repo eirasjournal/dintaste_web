@@ -593,3 +593,7 @@ footer {
   transform: scale(0.97);
   background-color: rgba(254, 152, 255, 0.15);
 }
+
+.article-preview-card {
+  -webkit-tap-highlight-color: transparent;
+}
