@@ -166,10 +166,10 @@ export default function Contact() {
                 {/* Buton Copy */}
                 <button 
                   onClick={handleCopy}
-                  className="btn"
+                  className="copy-btn"
                   style={{ 
                     background: copied ? '#4caf50' : '#fe98ff', // Se face verde când e copiat
-                    color: '#341c74',
+                    color: '#1a1a1a',
                     border: 'none',
                     padding: '10px 25px',
                     fontSize: '1rem',

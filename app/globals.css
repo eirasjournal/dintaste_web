@@ -473,6 +473,76 @@ hsl(299deg 100% 80% / 0.95) 100%
   }
 }
 
+.btn { 
+  background-color: #fe98ff; 
+  color: #1a1a1a; 
+  margin-left: 30px; 
+  border-radius: 20px; 
+  margin-bottom: 10px; 
+  padding-top: 1%; 
+  padding-left: 1%; 
+  padding-right: 1%; 
+  padding-bottom: 1%; 
+  cursor: pointer; 
+}
+
+/* Butonul Retro-Tactil */
+.copy-btn {
+  /* Aspect implicit: Sticla transparenta cu bordura fina */
+  background: rgba(254, 152, 255, 0.1); 
+  border: 1px solid #fe98ff;
+  color: #fe98ff;
+  padding: 12px 35px;
+  font-size: 1rem;
+  font-family: monospace; /* Pastram tema "din taste" */
+  font-weight: bold;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  border-radius: 8px; /* Colturi usor rotunjite */
+  cursor: pointer;
+  
+  /* Tranzitii rapide pentru senzatia de electricitate */
+  transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  
+  /* Glow subtil initial */
+  box-shadow: 0 0 5px rgba(254, 152, 255, 0.2);
+  position: relative;
+  overflow: hidden;
+
+  background-color: #fe98ff; 
+  color: #1a1a1a; 
+  margin-left: 30px; 
+  border-radius: 20px; 
+  margin-bottom: 10px; 
+  padding-top: 1%; 
+  padding-left: 1%; 
+  padding-right: 1%; 
+  padding-bottom: 1%; 
+  cursor: pointer; 
+}
+
+/* Efectul de Hover (se ridica putin) */
+.copy-btn:hover {
+    background: rgba(254, 152, 255, 0.2);
+    box-shadow: 0 0 15px rgba(254, 152, 255, 0.5);
+    text-shadow: 0 0 5px #fe98ff;
+}
+
+/* Efectul de Click (se apasa fizic) */
+.copy-btn:active {
+  transform: scale(0.95); /* Se micsoreaza la 95% */
+  background: #fe98ff;    /* Se umple cu culoare */
+  box-shadow: 0 0 25px rgba(254, 152, 255, 0.8); /* Glow puternic */
+}
+
+/* Starea cand e copiat (verde) */
+.copy-btn.success {
+  background-color: #4caf50;
+  border-color: #4caf50;
+  color: white;
+  box-shadow: 6px 6px 0px rgba(76, 175, 80, 0.4);
+}
+
 /* --- BUTTONS & FOOTER --- */
 .sparkley {
   background: #1a1a1a;
