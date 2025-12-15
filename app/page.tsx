@@ -3,8 +3,9 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import React, { useState, useEffect, useRef } from 'react';
-import SparkleManager from './components/SparkleManager'; // <--- IMPORT AICI
+import SparkleManager from './components/SparkleManager'; 
 import MapWidget from './components/MapWidget';
+
 
 export default function Home() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -12,7 +13,7 @@ export default function Home() {
   const leftRef = useRef<HTMLDivElement | null>(null);
   const rightRef = useRef<HTMLDivElement | null>(null);
   const centerRef = useRef<HTMLDivElement | null>(null);
-  const MAX_DECOR = 30; // safety cap to avoid infinite repetition on extremely tall screens
+  const MAX_DECOR = 30; 
 
   useEffect(() => {
     let t: number | null = null;
@@ -24,7 +25,6 @@ export default function Home() {
 
         const centerHeight = center.offsetHeight;
 
-        // Try to measure one pattern block: a zig + sep2
         const oneZig = left.querySelector('.zig-zag-top1') || left.querySelector('.zig-zag-bottom');
         const oneSep = left.querySelector('.sep2');
         const zigH = oneZig ? (oneZig as HTMLElement).offsetHeight : 1;
@@ -55,11 +55,11 @@ export default function Home() {
   }, [decorCount]);
 
   return (
-    <main className="min-h-screen bg-[#341c74]">
+    /* Mentine fundalul negru premium pentru contrastul cu rozul neon */
+    <main className="min-h-screen bg-[#050505]">
       <SparkleManager />
       {/* HEADER */}
       <div className="header">
-        {/* --- AICI: Containerul nou pentru stele --- */}
         <div className="header-sparkles"></div>
         <h1 className="typewriter-title">d i n<span className="word-space"></span>t a s t e</h1> 
       </div>
@@ -67,13 +67,12 @@ export default function Home() {
       {/* NAVBAR */}
       <nav className="navbar">
         <div className="navbar-left">
-          {/* Asigura-te ca ai poza asta in folderul public */}
           <Image 
             src="/pixelcat.png" 
             className="image" 
             alt="Logo AZAX" 
-            width={150}  // Asta e doar pentru rezoluție, CSS-ul decide mărimea vizuală
-            height={150} // Asta e doar pentru rezoluție
+            width={150} 
+            height={150} 
             priority
           />
           <ul className={`nav-list ${isMenuOpen ? 'active' : ''}`}>
@@ -105,7 +104,6 @@ export default function Home() {
               <div className="sep1"><p></p></div>
             
               {[...Array(decorCount)].map((_, i) => (
-              /* React.Fragment tine loc de parinte, dar dispare in browser */
               <React.Fragment key={i}>
                 <div className="zig-zag-bottom zig-zag-top1"><p></p></div>
                 <div className="sep2"><p style={{ marginTop: '20%' }}></p></div>
@@ -117,32 +115,28 @@ export default function Home() {
         </div>
 
         {/* COLOANA CENTRALA - Continut */}
-        <div className="column2" ref={centerRef} style={{ maxWidth: '800px', margin: '0 auto', paddingTop: '20px' }}>
-          <h2 style={{ marginBottom: '40px', borderBottom: '2px solid #fe98ff', paddingBottom: '10px' }}>
-          About me
-          </h2>
-          <div style={{lineHeight: '1.8', fontSize: '1.15rem', color: '#e0e0e0', letterSpacing: '0.02em' }}>
-            <p style={{ marginBottom: '2%', fontSize: '1.2rem' }}>
-              Hello and welcome! I started this site with two goals in mind: to push my technical boundaries and to find my voice. What began as a &quot;built-from-scratch&quot; coding challenge quickly became my space of freedom.
-            </p>
-            <p style={{ marginBottom: '2%', fontSize: '1.2rem' }}>
-              It’s a space where my technical projects collide with my personal thoughts. Consider it an ongoing experiment in development: building a functional website, but also building myself. 
-            </p>
-            <p style={{ marginBottom: '2%', fontSize: '1.2rem' }}>
-              Why &apos;Din Taste&apos;? It translates to &apos;From Keys&apos; in my native Romanian. It’s a reminder that everything here comes raw, straight from my keyboard to your screen.
-            </p>
-            <p style={{ marginBottom: '2%', fontSize: '1.2rem' }}>
-              I hope reading this inspires you to start your own project, no matter what it is.
-            </p>
+        <div className="column2" ref={centerRef}>
+          <div className="fade-in" style={{ maxWidth: '800px', margin: '0 auto', paddingTop: '20px' }}>
+            {/* SCHIMBAT: Border-bottom este acum #fe98ff (Rozul tau) */}
+            <h2 style={{ marginBottom: '40px', borderBottom: '2px solid #fe98ff', paddingBottom: '10px', color: '#dcdcdc' }}> 
+              About me 
+            </h2> 
+            <div style={{lineHeight: '1.8', fontSize: '1.15rem', color: '#dcdcdc', letterSpacing: '0.02em' }}> 
+              <p style={{ marginBottom: '2%', fontSize: '1.2rem', textIndent: '40px' }}> 
+                Hello and welcome! I started this site with two goals in mind: to push my technical boundaries and to find my voice. What began as a &quot;built-from-scratch&quot; coding challenge quickly became my space of freedom. 
+              </p> 
+              <p style={{ marginBottom: '2%', fontSize: '1.2rem', textIndent: '40px' }}> 
+                It’s a space where my technical projects collide with my personal thoughts. Consider it an ongoing experiment in development: building a functional website, but also building myself. 
+              </p> 
+              <p style={{ marginBottom: '2%', fontSize: '1.2rem', textIndent: '40px' }}> 
+                Why &apos;Din Taste&apos;? It translates to &apos;From Keys&apos; in my native Romanian. It’s a reminder that everything here comes raw, straight from my keyboard to your screen. 
+              </p> 
+              <p style={{ marginBottom: '2%', fontSize: '1.2rem', textIndent: '40px' }}> 
+                I hope reading this inspires you to start your own project, no matter what it is. 
+              </p> 
+            </div> 
+            <MapWidget />
           </div>
-          <MapWidget />
-
-          {/* AICI AI PUTEA PUNE BUTONUL DE BUY ME A COFFEE */}
-          {/* <div style={{ margin: '40px 0', textAlign: 'center' }}>
-            <a href="#" className="sparkley" style={{ color: 'white', textDecoration: 'none' }}>
-              ☕ Buy me a coffee (Coming Soon)
-            </a>
-          </div> */}
         </div>
 
         {/* COLOANA DREAPTA - Decorativa */}
@@ -152,7 +146,6 @@ export default function Home() {
             <div className="sep1"><p></p></div>
             
             {[...Array(decorCount)].map((_, i) => (
-              /* React.Fragment tine loc de parinte, dar dispare in browser */
               <React.Fragment key={i}>
                 <div className="zig-zag-bottom zig-zag-top1"><p></p></div>
                 <div className="sep2"><p style={{ marginTop: '20%' }}></p></div>
@@ -166,7 +159,6 @@ export default function Home() {
 
       {/* FOOTER */}
       <footer>
-        {/* Am scos linkurile reale pentru anonimitate. Poti pune linkuri catre Github-ul tau anonim */}
         <p>Ⓒ 2025 din taste</p>
       </footer>
     </main>

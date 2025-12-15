@@ -117,7 +117,7 @@ export default function Contact() {
               /* React.Fragment tine loc de parinte, dar dispare in browser */
               <React.Fragment key={i}>
                 <div className="zig-zag-bottom zig-zag-top1"><p></p></div>
-                <div className="sep2"><p style={{ marginTop: '20%' }}></p></div>
+                <div className="sep2"></div>
               </React.Fragment>
             ))}
             
@@ -195,7 +195,7 @@ export default function Contact() {
               /* React.Fragment tine loc de parinte, dar dispare in browser */
               <React.Fragment key={i}>
                 <div className="zig-zag-bottom zig-zag-top1"><p></p></div>
-                <div className="sep2"><p style={{ marginTop: '20%' }}></p></div>
+                <div className="sep2"></div>
               </React.Fragment>
             ))}
             

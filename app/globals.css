@@ -1,25 +1,28 @@
+:root {
+  --accent-main: #fd99ff;        /* Rozul tău pentru hover/linkuri */
+  --text-main: #e0e0e0;          /* Alb murdar pentru text */
+  --bg-dark: #050505;            /* Negru aproape absolut */
+  --bg-panel: #111111;           /* Negru panou */
+}
+
 * {
   box-sizing: border-box;
 }
 
 body {
   margin: 0;
-  background-color: #341c74;
-  /* Setăm culoarea globală aici ca fallback */
-  color: #e0e0e0; 
+  background-color: var(--bg-dark);
+  color: var(--text-main);
+  font-family: 'Courier New', Courier, monospace;
 }
 
 #d-wrapper {
-  background: linear-gradient(
-  to bottom, 
-  #341c74 0%, 
-  #221f38 50%,  /* Culoarea panourilor laterale */
-  #3e5871 80%,  /* Culoarea albastruie a butoanelor */
-  #341c74 100%
-);
-  background-size: 44vw;
-  background-position-x: 0%;
-  background-position-y: 0%;
+  background-image:
+    repeating-linear-gradient(45deg, #000 25%, transparent 25%, transparent 75%, #000 75%, #000),
+    repeating-linear-gradient(45deg, #000 25%, #0a0a0a 25%, #0a0a0a 75%, #000 75%, #000);
+  background-position: 0 0, 10px 10px;
+  background-size: 20px 20px;
+  z-index: 0;
 }
 
 #d-wrapper * {
@@ -106,20 +109,20 @@ body {
       hsl(286deg 82% 64%) 9%,
       hsl(279deg 72% 55%) 13%,
       hsl(272deg 62% 47%) 17%,
-      hsl(265deg 54% 39% / 0.80) 22%,
-      hsl(258deg 44% 31% / 0.80) 26%,
-      hsl(252deg 35% 22% / 0.80) 30%,
-      hsl(247deg 29% 17% / 0.70) 35%,
-      hsl(247deg 29% 17% / 0.65) 39%,
-      hsl(247deg 29% 17% / 0.60) 43%,
-      hsl(247deg 29% 17% / 0.60) 48%,
-      hsl(247deg 29% 17% / 0.60) 52%,
-      hsl(247deg 29% 17% / 0.60) 57%,
-      hsl(247deg 29% 17% / 0.60) 61%,
-      hsl(247deg 29% 17% / 0.65) 65%,
-      hsl(252deg 35% 22% / 0.70) 70%,
-      hsl(258deg 44% 31% / 0.80) 74%,
-      hsl(265deg 54% 39% / 0.80) 78%,
+      hsl(265deg 54% 39%) 22%,
+      hsl(258deg 44% 31%) 26%,
+      hsl(252deg 35% 22%) 30%,
+      hsl(247deg 29% 17%) 35%,
+      hsl(247deg 29% 17%) 39%,
+      hsl(247deg 29% 17%) 43%,
+      hsl(247deg 29% 17%) 48%,
+      hsl(247deg 29% 17%) 52%,
+      hsl(247deg 29% 17%) 57%,
+      hsl(247deg 29% 17% ) 61%,
+      hsl(247deg 29% 17%) 65%,
+      hsl(252deg 35% 22%) 70%,
+      hsl(258deg 44% 31%) 74%,
+      hsl(265deg 54% 39%) 78%,
       hsl(272deg 62% 47%) 83%,
       hsl(279deg 72% 55%) 87%,
       hsl(286deg 82% 64%) 91%,
@@ -214,34 +217,27 @@ body {
   margin-bottom: 20px;
 }
 
-/* Style the header */
+
+/* --- HEADER --- */
 .header {
   position: relative;
-  /* --- 1. Fundalul --- */
-  background: linear-gradient(to bottom, #18032c 0%, #341c74 100%);
-  background-size: 25vw;
-  background-position: center;
-  background-repeat: repeat;
-
-  /* --- 2. Dimensiuni și Centrare --- */
+  /* Fundal negru profund */
+  background: radial-gradient(circle at center, #1c1c1c 0%, #000000 100%);
   width: 100%;
   min-height: 45vh;
-
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-
-  /* MODIFICARE AICI: */
-  padding-bottom: 100px; /* Era 12vh */
-  
-  /* Adaugă asta pentru siguranță, taie orice sclipici rebel care iese din chenar */
+  padding-bottom: 100px;
   overflow: hidden;
+  color: #f0f0f0;
+  text-shadow: 2px 2px 10px rgba(0,0,0,0.8);
+}
 
-  /* --- 4. Stil Text --- */
-  color: #e0e0e0; /* MODIFICAT */
-  text-align: center;
-  text-shadow: 1px 1px 0 #18032c, 2px 2px 0 #18032c, 3px 3px 0 #18032c;
+.word-space { 
+  display: inline-block;
+  width: 2em; 
 }
 
 .header-sparkles {
@@ -249,30 +245,29 @@ body {
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%; /* Acum poți pune 100% fără frică */
+  height: 100%;
   z-index: 1;
   pointer-events: none;
-  overflow: hidden;
-}
-
-.header h1 {
-  font-size: clamp(1.3rem, 4vw, 3rem);
 }
 
 .typewriter-title {
-  font-family: "Courier New", "IBM Plex Mono", "Courier", monospace;
+  font-family: "Courier New", monospace;
   letter-spacing: 0.3em;
   font-weight: 900;
   font-size: clamp(2rem, 5vw, 5rem);
+  color: #ffffff;
+  /* Glow Roz Neon fin adaptat la #fd99ff */
+  text-shadow: 0px 0px 15px rgba(253, 153, 255, 0.4);
 }
 
-.word-space {
-  display: inline-block;
-  width: 2em;
+.image { 
+  height: 4vw; 
+  min-height: 40px; 
+  width: auto; 
+  object-fit: contain; 
 }
 
-/* Navigation bar */
-
+/* --- NAVBAR --- */
 .navbar {
   display: flex;
   align-items: center;
@@ -283,23 +278,16 @@ body {
   position: sticky;
   top: 0;
   z-index: 100;
-
-  /* MODIFICARE AICI: */
-  margin-top: -100px; /* Era -12vh */
-  
-  /* Opțional: Setăm o înălțime minimă ca să fim siguri că acoperă tot padding-ul */
+  margin-top: -100px;
   min-height: 100px; 
-  
-  /* Ajustăm padding-ul ca să centrăm elementele vertical */
   padding-top: 10px;
-  padding-bottom: 10px;;
+  padding-bottom: 10px;
 
-  background: rgba(34, 31, 56, 0.6);
-  backdrop-filter: blur(8px);
-
-  border-bottom: 1px solid rgba(255, 255, 255, 0);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-
+  /* Sticla fumurie */
+  background: rgba(5, 5, 5, 0.9);
+  opacity: 0.98;
+  border-bottom: 1px solid #333;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
 }
 
 .navbar-left {
@@ -316,88 +304,92 @@ body {
   padding: 0;
 }
 
-@media screen and (max-width: 820px) {
-  .nav-list {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    flex-direction: column;
-    background: rgba(34, 31, 56, 0.6);
-    gap: 0;
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.3s ease;
-    z-index: 1000;
-  }
 
-  .nav-list.active {
-    max-height: 300px;
-  }
+.menu-toggle:hover {
+  color: var(--accent-main);
+}
 
-  .header {
-    
-    /* Setăm o zonă fixă pentru meniu (ex: 80px) */
-    padding-bottom: 80px !important; 
-  }
+.navbar a {
+  font-family: "Courier New", monospace;
+  font-size: clamp(1rem, 1.4vw, 1.5rem);
+  color: #a0a0a0; 
+  text-decoration: none;
+  font-weight: 900;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
 
-  /* 2. Ajustăm Navbar-ul să acopere perfect acea zonă */
-  .navbar {
-    /* Tragem în sus exact cât am lăsat spațiu mai sus */
-    margin-top: -80px !important; 
-    
-    /* FORȚĂM înălțimea minimă să fie fix cât spațiul, ca să acopere tot */
-    min-height: 80px !important; 
-    
-    /* Ajustăm padding-ul ca să centrăm conținutul vertical */
-    padding: 0 20px !important; 
-  }
+.navbar a:hover {
+  color: var(--accent-main); /* Roz la hover */
+  /* Glow neon la text adaptat */
+  text-shadow: 0 0 8px rgba(253, 153, 255, 0.7);
+}
+
+.nav-list .list-item { 
+  padding: 0; 
+  display: block; 
 }
 
 .menu-toggle {
   display: none;
   background: none;
   border: none;
-  color: #e0e0e0; /* MODIFICAT */
+  color: var(--text-main);
   font-size: 28px;
   cursor: pointer;
   padding: 10px;
 }
 
-.menu-toggle:hover {
-  color: #fe98ff;
+@media screen and (max-width: 820px) { 
+  .nav-list { 
+    position: absolute; 
+    top: 100%; 
+    left: 0; 
+    right: 0; 
+    flex-direction: column; 
+    background: rgba(10, 10, 10, 0.95); 
+    gap: 0; 
+    max-height: 0; 
+    overflow: hidden; 
+    transition: max-height 0.3s ease; 
+    z-index: 1000; 
+  } 
+
+  .nav-list.active { 
+    max-height: 300px; 
+  }
+
+  .header { 
+    padding-bottom: 80px !important; 
+  } 
+
+  .navbar { 
+    margin-top: -80px !important; 
+    min-height: 80px !important; 
+    padding: 0 20px !important; 
+    flex-wrap: wrap;
+  } 
+
+  .menu-toggle { 
+    display: block; 
+  }
+
+  .nav-list .list-item { 
+    padding: 15px 40px; 
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05); 
+    width: 100%; } 
+    
+  .nav-list .list-item:last-child { 
+    border-bottom: none; 
+  } 
+  
+  .navbar a { 
+    font-size: 16px; 
+  }
 }
 
-.navbar a {
-  font-family: "PT Sans Narrow", "Fjalla One", sans-serif;
-  font-size: clamp(1rem, 1.4vw, 1.5rem);
-
-  color: #ffffff; /* <--- AICI AM PUS ALBUL PUR ÎNAPOI */
-  text-decoration: none;
-  font-weight: 900;
-  transition: color 0.3s ease;
-  text-shadow: 1px 1px 0 #18032c, 2px 2px 0 #18032c, 3px 3px 0 #18032c, 4px 4px 0 #18032c, 5px 5px 0 #18032c;
-  letter-spacing: 0.1em;
-}
-
-.navbar a:hover {
-  color: #fe98ff;
-}
-
-.image {
-  height: 4vw;
-  min-height: 40px;
-  width: auto;
-  object-fit: contain;
-}
-
-.nav-list .list-item {
-  padding: 0;
-  display: block;
-}
-
-/* --- CSS NOU (Flexbox) --- */
-
+/* --- LAYOUT COLOANE --- */
 .row {
   display: flex;
   flex-direction: row;
@@ -407,247 +399,100 @@ body {
 
 .column1 {
   width: 10%;
-  border-right: 3px solid #221f38;
-  background-color: #341c74;
+  border-right: 1px solid #222;
+  background-color: #080808;
   overflow: hidden;
+  box-shadow: inset -10px 0 20px rgba(0,0,0,0.8);
 }
 
 .column2 {
   width: 80%;
   padding: 15px;
-  background-color: #341c74;
-  color: #e0e0e0; /* MODIFICAT */
+  background-color: #0c0c0c; 
+  color: #d0d0d0;
+  /* Grid subtil */
+  background-image: linear-gradient(#1a1a1a 1px, transparent 1px), linear-gradient(90deg, #1a1a1a 1px, transparent 1px);
+  background-size: 30px 30px; 
 }
 
 .column3 {
   width: 10%;
-  border-left: 3px solid #221f38;
-  background-color: #341c74;
+  border-left: 1px solid #222;
+  background-color: #080808;
   overflow: hidden;
+  box-shadow: inset 10px 0 20px rgba(0,0,0,0.8);
 }
 
-/* Pentru Mobil */
+/* --- RESPONSIVE --- */
 @media screen and (max-width: 820px) {
-  .row {
-    flex-direction: column;
-  }
+  .row { 
+    flex-direction: column; 
+  } 
 
-  .column1,
-  .column2,
-  .column3 {
-    width: 100%;
-    height: auto;
-  }
+  .column1, .column2, .column3 { 
+    width: 100%; 
+    height: auto; 
+  } 
 
   #d-wrapper div.sep1 {
-    min-height: 12vh;
-    position: relative;
+    position: relative; 
+  }
+  
+  #d-wrapper div.sep1 { 
+    padding: 0 0; 
+  } 
+
+  #d-wrapper div.sep2 { 
+    display: none; 
+  } 
+
+  .column1 { 
+    width: 100%; 
+    border-left: none; 
+    border-right: none; 
+  } 
+
+  .column1 #d-wrapper .zig-zag-top1 { 
+    display: none; 
+  } 
+
+  .column2 { 
+    width: 100%; 
+  } 
+
+  .column3 { 
+    width: 100%; 
+    border-left: none; 
+    border-right: none; 
+  } 
+  .column3 #d-wrapper .zig-zag-top1 { 
+    display: none; 
   }
 }
 
-.column2 p {
-  font-family: "PT Sans Narrow", "Fjalla One", sans-serif;
-  font-weight: 900;
-  text-indent: 40px;
-}
-
-.column2 h2 {
-  font-family: "PT Sans Narrow", "Fjalla One", sans-serif;
-  font-weight: 900;
-  text-indent: 40px;
-}
-
-/* Clear floats after the columns */
-.row:after {
-  content: "";
-  display: table;
-  clear: both;
-}
-
-/* Responsive layout - makes the three columns stack on top of each other instead of next to each other */
-@media screen and (max-width:820px) {
-  #d-wrapper {
-    background-size: 100vw;
-  }
-
-  #d-wrapper div.sep1 {
-    padding: 0 0;
-  }
-
-  #d-wrapper div.sep2 {
-    display: none;
-  }
-
-  .column1 {
-    width: 100%;
-    border-left: none;
-    border-right: none;
-  }
-
-  .column1 #d-wrapper .zig-zag-top1 {
-    display: none;
-  }
-
-  .column2 {
-    width: 100%;
-  }
-
-  .column3 {
-    width: 100%;
-    border-left: none;
-    border-right: none;
-  }
-
-  .column3 #d-wrapper .zig-zag-top1 {
-    display: none;
-  }
-
-  .menu-toggle {
-    display: block;
-  }
-
-  .navbar {
-    flex-wrap: wrap;
-  }
-
-  .nav-list .list-item {
-    padding: 15px 40px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    width: 100%;
-  }
-
-  .nav-list .list-item:last-child {
-    border-bottom: none;
-  }
-
-  .navbar a {
-    font-size: 16px;
-  }
-}
-
+/* --- BUTTONS & FOOTER --- */
 .sparkley {
-  background: #3e5871;
-  color: #e0e0e0; /* MODIFICAT */
-  border: none;
-  padding: 16px 36px;
-  font-weight: normal;
-  border-radius: 3px;
-  transition: all 0.25s ease;
-  box-shadow: 0 38px 32px -23px black;
-  margin: 0 1em 1em;
+  background: #1a1a1a;
+  color: var(--accent-main); /* Foloseste variabila actualizata */
+  border: 1px solid #333;
+  box-shadow: 0px 0px 10px rgba(0,0,0,0.5); 
+  transition: all 0.3s ease;
 }
 
 .sparkley:hover {
-  background: #2c3e50;
-  color: rgba(224, 224, 224, 0.2); /* MODIFICAT puțin pentru consistență */
+  background: var(--accent-main); 
+  color: #000;
+  border-color: var(--accent-main);
+  /* Glow adaptat */
+  box-shadow: 0px 0px 15px rgba(253, 153, 255, 0.5);
 }
 
 footer {
   text-align: center;
-  padding-top: 1%;
-  padding-bottom: 0.5%;
-  background-color: #221f38;
-  color: #e0e0e0; /* MODIFICAT */
-}
-
-.fa {
-  padding-left: 1%;
-  padding-right: 2.3%;
-  padding-top: 0.8%;
-  padding-bottom: 0.8%;
-  font-size: 1.5vw;
-  width: 5px;
-  text-align: center;
-  text-decoration: none;
-  margin: 0.5% 1%;
-  border-radius: 50%;
-}
-
-.fa:hover {
-  opacity: 0.7;
-}
-
-.fa-instagram {
-  background: #125688;
-  color: #e0e0e0; /* MODIFICAT */
-}
-
-.fa-facebook {
-  background: #3B5998;
-  color: #e0e0e0; /* MODIFICAT */
-}
-
-.fa-twitter {
-  background: #55ACEE;
-  color: #e0e0e0; /* MODIFICAT */
-}
-
-.fa-google {
-  background: #dd4b39;
-  color: #e0e0e0; /* MODIFICAT */
-}
-
-.fa-linkedin {
-  background: #007bb5;
-  color: #e0e0e0; /* MODIFICAT */
-}
-
-.scroller {
-  width: 100%;
-  height: clamp(500px, 75vh, 1400px);
-  min-height: 400px;
-  max-height: 90vh;
-  overflow-y: auto;
-  scrollbar-color: rebeccapurple #221f38;
-  scrollbar-width: thin;
-}
-
-.form input {
-  margin-left: -10px;
-  background-color: #221f38;
-  color: #e0e0e0; /* MODIFICAT */
-  width: 100px;
-  height: 30px;
-  padding: 10px;
-  border: none;
-  border-radius: 20px;
-  margin-bottom: 10px;
-}
-
-.form textarea {
-  margin-left: 30px;
-  background-color: #221f38;
-  color: #e0e0e0; /* MODIFICAT */
-  width: 90%;
-  height: 50px;
-  padding: 10px;
-  border: none;
-  border-radius: 20px;
-  margin-bottom: 10px;
-  resize: none;
-}
-
-.btn {
-  background-color: #fe98ff;
-  color: #341c74;
-  margin-left: 30px;
-  border-radius: 20px;
-  margin-bottom: 10px;
-  padding-top: 1%;
-  padding-left: 1%;
-  padding-right: 1%;
-  padding-bottom: 1%;
-  cursor: pointer;
-}
-
-.content {
-  display: flex;
-  flex-direction: column;
-  background-color: #221f38;
-  color: #e0e0e0; /* MODIFICAT */
-  margin-left: 4%;
-  margin-right: 4%;
-  margin-top: 2%;
-  margin-bottom: 2%;
-  border-radius: 20px;
+  padding: 30px 0;
+  background-color: #000;
+  color: #444; 
+  border-top: 1px solid #111;
+  font-family: monospace;
+  font-size: 0.8rem;
 }

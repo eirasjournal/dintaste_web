@@ -9,6 +9,21 @@ import Comments from '../components/Comments';
 // --- DATELE ARTICOLELOR ---
 const ARTICLES = [
   {
+    id: 1, // ID nou pentru articolul mai recent
+    title: "The Memory Box of 2023",
+    date: "31 December, 2023",
+    preview: "The last week of December has caught me feeling deeply nostalgic...",
+    content: `The last week of December has caught me feeling deeply nostalgic. I'm reflecting on the music I listened to, the books I read, the plays and movies I watched, the future plans I made, the projects I finished, the parties where I danced the night away, and the people with whom I forged—but also severed—friendships... all of which are now memories of 2023. Things that, had the old me known were coming, she surely would have refused to believe.
+
+Each of them holds a piece of me. Maybe they don't define me, but they certainly contribute to the person I am today. They are all now in my memory box, tucked away in a corner of my mind. A corner where time might leave its mark; without me realizing it, dust will settle on the box, it will wear with age, and perhaps sometimes I will forget about it. But I know that every time I open it, I will rummage through it with the same enthusiasm and pride. Because I poured my soul into everything I did, and every place I visited, every person I met, even every scent I smelled, stirs emotions in me that I am grateful to have experienced.
+
+It was a year I can't quite find the right words to describe. It was the year I truly felt what it means to suffer for love; I saw what it's like to be dumped, as well as what it's like to be the one doing the dumping, and now, placing both perspectives side by side, I'm starting to understand the dynamics better. It was the year I saw that shared experiences can bond friendships just as easily as they can break them. It was the year we revived friendships only to watch them die again.
+
+It was a movie-worthy year, yet the people in it were merely episodic characters. But I, despite my acting talent, played no role. I was always myself, and I did what I felt. That doesn't automatically mean I always did the right thing. But I allowed myself to make mistakes and live through the consequences, so I could learn from them.
+
+Perhaps many people are upset now because I chose to distance myself instead of accepting their attitude. And maybe they have every right to be upset. But I realized that being at peace with myself is what matters most, and the peace I feel now was worth becoming the villain in their movie. I own my solitude, and I prefer it over the company of the wrong people.`
+  },
+  {
     id: 0,
     title: "Love Is Not All That Matters",
     date: "29 April, 2023",

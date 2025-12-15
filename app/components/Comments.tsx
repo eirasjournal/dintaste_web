@@ -16,7 +16,7 @@ export default function Comments() {
         reactionsEnabled="1"
         emitMetadata="0"
         inputPosition="top"
-        theme="purple_dark"              // Tema intunecata
+        theme="noborder_gray"              // Tema intunecata
         lang="en"
         loading="lazy"
       />
