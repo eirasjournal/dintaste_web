@@ -235,6 +235,8 @@ body {
   text-shadow: 2px 2px 10px rgba(0,0,0,0.8);
 }
 
+.header h1 { font-size: clamp(1.3rem, 4vw, 3rem); }
+
 .word-space { 
   display: inline-block;
   width: 2em; 
