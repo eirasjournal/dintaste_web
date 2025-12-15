@@ -30,14 +30,14 @@ export default function SparkleManager() {
       
       // Setări pentru HEADER (Active mereu)
       const headerSettings = isMobile ? {
-        color: ["#e0e0e0", "#e67976"],
+        color: ["#e0e0e0", "#fe98ff"],
         minSize: 6,     // Mai mic pe mobil
         maxSize: 10,
         count: 150,      // Mai puține particule
         direction: "up",
         speed: 1.5
       } : {
-        color: ["#e0e0e0", "#e67976"],
+        color: ["#e0e0e0", "#fe98ff"],
         minSize: 8,     // Mare pe desktop
         maxSize: 16,
         count: 200,

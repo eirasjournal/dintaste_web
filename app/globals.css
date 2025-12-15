@@ -573,3 +573,23 @@ footer {
   font-family: monospace;
   font-size: 0.8rem;
 }
+
+.article-preview-card {
+  transition: transform 0.15s ease, background-color 0.15s ease, border-color 0.15s ease;
+  border: 1px solid transparent;
+}
+
+/* Desktop hover */
+@media (hover: hover) {
+  .article-preview-card:hover {
+    transform: scale(1.02);
+    border-color: #fe98ff;
+    background-color: rgba(255,255,255,0.08);
+  }
+}
+
+/* Mobile tap feedback */
+.article-preview-card:active {
+  transform: scale(0.97);
+  background-color: rgba(254, 152, 255, 0.15);
+}

@@ -144,28 +144,18 @@ export default function ArticlesPage() {
                 Articles
               </h2>
               {ARTICLES.map((art) => (
-                <div 
-                  key={art.id} 
-                  onClick={() => setSelectedArticle(art)}
-                  style={{ 
-                    marginBottom: '30px', 
-                    cursor: 'pointer',
-                    padding: '20px',
-                    backgroundColor: 'rgba(255,255,255,0.05)',
-                    borderRadius: '10px',
-                    transition: 'transform 0.2s, background 0.2s',
-                    border: '1px solid transparent'
-                  }}
-                  className="article-preview-card"
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.transform = 'scale(1.02)';
-                    e.currentTarget.style.borderColor = '#fe98ff';
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.transform = 'scale(1)';
-                    e.currentTarget.style.borderColor = 'transparent';
-                  }}
-                >
+               <div
+                    key={art.id}
+                    onClick={() => setSelectedArticle(art)}
+                    className="article-preview-card"
+                    style={{
+                      marginBottom: '30px',
+                      cursor: 'pointer',
+                      padding: '20px',
+                      backgroundColor: 'rgba(255,255,255,0.05)',
+                      borderRadius: '10px'
+                    }}
+                  >
                   <h3 style={{ color: '#fe98ff', fontSize: '1.5rem', marginBottom: '5px' }}>{art.title}</h3>
                   <span style={{ color: '#ccc', fontFamily: 'monospace', fontSize: '0.9rem' }}>{art.date}</span>
                   <p style={{ marginTop: '10px', color: '#ddd' }}>{art.preview} [Read more]</p>

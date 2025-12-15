@@ -128,7 +128,7 @@ export default function Contact() {
         {/* COLOANA CENTRALA - Continut */}
         <div className="column2" ref={centerRef}>
           <div className="fade-in" style={{ width: '90%', maxWidth: '800px', margin: '0 auto', paddingTop: '20px' }}>
-            <h2 style={{ width: '90%', paddingLeft: '40px', marginBottom: '40px', borderBottom: '2px solid #fe98ff', paddingBottom: '10px' }}>
+            <h2 style={{ paddingLeft: '40px', marginBottom: '40px', borderBottom: '2px solid #fe98ff', paddingBottom: '10px' }}>
               Get in Touch
             </h2>
 
@@ -146,18 +146,24 @@ export default function Contact() {
               borderRadius: '15px', 
               border: '1px dashed #fe98ff',
               textAlign: 'center',
-              marginTop: '50px'
+              marginTop: '50px',
+              marginBottom: '50px'
             }}>
-              <p style={{marginLeft: '-45px', fontFamily: 'monospace', color: '#ccc', marginBottom: '15px' }}>
+              <p style={{fontFamily: 'monospace', 
+                              color: '#ccc', 
+                              marginBottom: '15px',
+                              textAlign: 'center'}}>
                 You can reach me at:
               </p>
               
               <div style={{ 
-                fontSize: '1.5rem', 
+                fontSize: 'clamp(1rem, 4vw, 1.4rem)', 
                 color: '#fff', 
                 fontFamily: 'monospace', 
                 marginBottom: '25px',
-                wordBreak: 'break-all' 
+                textAlign: 'center',
+                wordBreak: 'break-word',
+                overflowWrap: 'anywhere' 
               }}>
                 {email}
               </div>
