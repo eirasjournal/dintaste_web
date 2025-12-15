@@ -449,6 +449,10 @@ hsl(299deg 100% 80% / 0.95) 100%
     display: none; 
   } 
 
+  #d-wrapper div.sep1{
+    min-height: 8vh;
+  }
+
   .column1 { 
     width: 100%; 
     border-left: none; 
