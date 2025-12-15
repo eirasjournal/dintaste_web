@@ -116,9 +116,9 @@ export default function Home() {
 
         {/* COLOANA CENTRALA - Continut */}
         <div className="column2" ref={centerRef}>
-          <div className="fade-in" style={{ maxWidth: '800px', margin: '0 auto', paddingTop: '20px' }}>
+          <div className="fade-in" style={{width: '90%', maxWidth: '800px', margin: '0 auto', paddingTop: '20px' }}>
             {/* SCHIMBAT: Border-bottom este acum #fe98ff (Rozul tau) */}
-            <h2 style={{ marginBottom: '40px', borderBottom: '2px solid #fe98ff', paddingBottom: '10px', color: '#dcdcdc' }}> 
+            <h2 style={{ paddingLeft: '40px', marginBottom: '40px', borderBottom: '2px solid #fe98ff', paddingBottom: '10px', color: '#dcdcdc'}}> 
               About me 
             </h2> 
             <div style={{lineHeight: '1.8', fontSize: '1.15rem', color: '#dcdcdc', letterSpacing: '0.02em' }}> 

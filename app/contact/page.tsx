@@ -127,15 +127,15 @@ export default function Contact() {
 
         {/* COLOANA CENTRALA - Continut */}
         <div className="column2" ref={centerRef}>
-          <div className="fade-in" style={{ maxWidth: '800px', margin: '0 auto', paddingTop: '20px' }}>
-            <h2 style={{ marginBottom: '40px', borderBottom: '2px solid #fe98ff', paddingBottom: '10px' }}>
+          <div className="fade-in" style={{ width: '90%', maxWidth: '800px', margin: '0 auto', paddingTop: '20px' }}>
+            <h2 style={{ width: '90%', paddingLeft: '40px', marginBottom: '40px', borderBottom: '2px solid #fe98ff', paddingBottom: '10px' }}>
               Get in Touch
             </h2>
 
-            <p style={{ fontSize: '1.2rem', lineHeight: '1.6', marginBottom: '30px' }}>
+            <p style={{ fontSize: '1.2rem', lineHeight: '1.6', marginBottom: '30px', textIndent: '40px' }}>
               Have something to share? A thought about an article, a song recommendation, or just want to say hi?
             </p>
-            <p style={{ fontSize: '1.2rem', lineHeight: '1.6', marginBottom: '30px' }}>
+            <p style={{ fontSize: '1.2rem', lineHeight: '1.6', marginBottom: '30px', textIndent: '40px' }}>
               I&apos;m always open to reading emails from strangers. It reminds me that there are real people behind the screens.
             </p>
 
