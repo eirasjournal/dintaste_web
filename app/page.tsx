@@ -127,7 +127,7 @@ export default function Home() {
               </p> 
               
               <p style={{ marginBottom: '2%', fontSize: '1.2rem', textIndent: '40px' }}> 
-                I recently found some interesting insights on <a href="https://www.journalinghabit.com/observing-journals-leonardo-da-vinci/" target="_blank" rel="noopener noreferrer" style={{ color: '#0056b3', textDecoration: 'underline' }}>Journaling Habit</a> regarding the chaotic beauty of <strong>Leonardo da Vinci’s notebooks</strong>. It struck a chord with me: in his pages, sketches of complex flying machines and anatomical studies sit right next to doodles and philosophical musings. He showed that the technical mind and the human soul are not separate compartments. They bleed into each other.
+                I recently found some interesting insights on <a href="https://www.journalinghabit.com/observing-journals-leonardo-da-vinci/" target="_blank" rel="noopener noreferrer" style={{ color: '#0056b3', textDecoration: 'underline' }}>Journaling Habit</a> regarding the chaotic beauty of <strong>Leonardo da Vinci’s notebooks</strong>. It struck a chord with me: in his pages, sketches of complex flying machines sit right next to doodles and philosophical musings. He showed that the technical mind and the human soul are not separate compartments. They bleed into each other.
               </p> 
 
               <p style={{ marginBottom: '2%', fontSize: '1.2rem', textIndent: '40px' }}> 
@@ -135,7 +135,7 @@ export default function Home() {
               </p>
 
               <p style={{ marginBottom: '2%', fontSize: '1.2rem', textIndent: '40px' }}> 
-                Here, you will find my technical projects sitting side-by-side with my rawest thoughts. Why &apos;Din Taste&apos;? It translates to &apos;From Keys&apos; in my native Romanian. Whether I’m typing an algorithm for a robot or a journal entry about growing up, it all flows from the same keyboard. Consider it an ongoing experiment in development
+                Here, you will find my technical projects sitting side-by-side with my rawest thoughts. Why &apos;Din Taste&apos;? It translates to &apos;From Keys&apos; in my native Romanian. Whether I’m typing an algorithm for a robot or a journal entry about growing up, it all flows from the same keyboard. Consider it an ongoing experiment in development.
               </p> 
 
               <p style={{ marginBottom: '2%', fontSize: '1.2rem', textIndent: '40px' }}> 

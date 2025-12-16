@@ -4,7 +4,6 @@ export function initSparkle($) {
   // --- CONFIGURARE SIMBOLURI ---
   const SYMBOLS = ["θ", "ω", "∫", "π", "Σ", "≈", "∂", "λ"];
   
-  // Cache pentru imagini (performanță maximă)
   const spriteCache = {};
 
   function getSymbolSprite(symbol, color, size) {
@@ -16,7 +15,6 @@ export function initSparkle($) {
       const resolution = 2; 
       const fontSize = size * resolution;
       
-      // Facem sprite-ul suficient de mare să nu tăiem colțurile literei
       canvas.width = fontSize * 1.5;
       canvas.height = fontSize * 1.5;
 
@@ -36,9 +34,16 @@ export function initSparkle($) {
       return spriteCache[key];
   }
 
+  // --- PLUGIN JQUERY ---
+
   $.fn.sparkle_hover = function(options) {
       return this.each(function(k, v) {
           var $this = $(v);
+          // Curățăm instanța veche dacă există
+          if ($this.data("sparkle-instance")) {
+              $this.data("sparkle-instance").destroy();
+          }
+
           var settings = $.extend({
               color: "#2b5797",
               count: 30,
@@ -50,13 +55,15 @@ export function initSparkle($) {
           }, options);
 
           var sparkle = new Sparkle($this, settings);
+          $this.data("sparkle-instance", sparkle); // Salvăm referința
 
           $this.on({
               "mouseover.sparkle focus.sparkle": function() { $this.trigger("start.sparkle"); },
               "mouseout.sparkle blur.sparkle": function() { $this.trigger("stop.sparkle"); },
               "start.sparkle": function() { sparkle.start($this); },
               "stop.sparkle": function() { sparkle.stop(); },
-              "resize.sparkle": function() { sparkle.resize($this); sparkle.setParticles(); }
+              "resize.sparkle": function() { sparkle.resize($this); sparkle.setParticles(); },
+              "destroy.sparkle": function() { sparkle.destroy(); }
           });
       });
   };
@@ -64,6 +71,11 @@ export function initSparkle($) {
   $.fn.sparkle_always = function(options) {
       return this.each(function(k, v) {
           var $this = $(v);
+          // KILL SWITCH: Dacă există deja sclipici aici, îl distrugem pe cel vechi
+          if ($this.data("sparkle-instance")) {
+              $this.data("sparkle-instance").destroy();
+          }
+
           var settings = $.extend({
               color: "#2b5797",
               count: 30,
@@ -75,20 +87,25 @@ export function initSparkle($) {
           }, options);
 
           var sparkle = new Sparkle($this, settings);
+          $this.data("sparkle-instance", sparkle);
 
           $this.on({
               "start.sparkle": function() { sparkle.start($this); },
               "stop.sparkle": function() { sparkle.stop(); },
-              "resize.sparkle": function() { sparkle.resize($this); sparkle.setParticles(); }
+              "resize.sparkle": function() { sparkle.resize($this); sparkle.setParticles(); },
+              "destroy.sparkle": function() { sparkle.destroy(); }
           });
 
           $this.trigger("start.sparkle");
 
+          // Gestionăm resize-ul global cu grijă
           var resizeTimer;
-          $(window).on("resize", function() {
+          $(window).on("resize.sparkleGlobal", function() {
               clearTimeout(resizeTimer);
               resizeTimer = setTimeout(function() {
-                  $this.trigger("resize.sparkle");
+                  if ($this.find('canvas').length > 0) { // Verificăm dacă elementul mai există
+                      $this.trigger("resize.sparkle");
+                  }
               }, 100);
           });
       });
@@ -101,23 +118,23 @@ export function initSparkle($) {
 
   Sparkle.prototype = {
       "init": function($parent) {
+          this.$parent = $parent; // Păstrăm referința la părinte
           var relativeOverlap = 0 - parseInt(this.options.overlap, 10);
-          
-          // REPARAT: Setăm canvas-ul să fie puțin deplasat (negative margin)
-          // pentru că îl vom face mai mare (1.2x)
           var cssOpts = {
               position: "absolute",
               top: relativeOverlap.toString() + "px",
               left: relativeOverlap.toString() + "px",
-              "pointer-events": "none",
-              "z-index": 999
+              "pointer-events": "none"
           };
 
           if ($parent.css("position") === "static") {
               $parent.css("position", "relative");
           }
 
-          this.$canvas = $("<canvas>").addClass("sparkle-canvas").css(cssOpts).hide();
+          this.$canvas = $("<canvas>")
+              .addClass("sparkle-canvas")
+              .css(cssOpts)
+              .hide();
 
           if ($parent.css("z-index") !== "auto") {
               var zdex = parseInt($parent.css("z-index"), 10);
@@ -132,22 +149,27 @@ export function initSparkle($) {
 
           this.canvas = this.$canvas[0];
           this.context = this.canvas.getContext("2d");
-          
-          // --- REPARAT DIMENSIUNI ---
-          // Revenim la multiplicatorul de 1.2 (20% mai mare) ca să nu se taie la margine
-          this.canvas.width = $parent.outerWidth() * 1.2;
-          this.canvas.height = $parent.outerHeight() * 1.2;
-          
-          // Ajustăm poziția canvasului să fie centrat peste element
-          // (Tragem -10% stânga și -10% sus)
-          this.$canvas.css({
-              "margin-left": -($parent.outerWidth() * 0.1) + "px",
-              "margin-top": -($parent.outerHeight() * 0.1) + "px"
-          });
+
+          this.canvas.width = $parent.outerWidth() + (this.options.overlap * 2);
+          this.canvas.height = $parent.outerHeight() + (this.options.overlap * 2);
 
           this.setParticles();
           this.anim = null;
           this.fade = false;
+      },
+
+      "destroy": function() {
+          // --- ACEASTA ESTE FUNCȚIA CARE SALVEAZĂ MEMORIA ---
+          // 1. Oprește bucla infinită
+          if (this.anim) {
+              window.cancelAnimationFrame(this.anim);
+          }
+          // 2. Șterge canvas-ul din HTML
+          this.$canvas.remove();
+          // 3. Șterge datele atașate
+          this.$parent.removeData("sparkle-instance");
+          // 4. Oprește event listenerii specifici
+          this.$parent.off(".sparkle");
       },
 
       "randomParticleSize": function() {
@@ -167,7 +189,6 @@ export function initSparkle($) {
 
               var size = this.randomParticleSize();
               var randomSymbol = SYMBOLS[Math.floor(Math.random() * SYMBOLS.length)];
-              
               var spriteData = getSymbolSprite(randomSymbol, color, size);
 
               var yDelta = Math.floor(Math.random() * 1000) - 500;
@@ -191,15 +212,7 @@ export function initSparkle($) {
               var p = this.particles[i];
               this.context.save();
               this.context.globalAlpha = p.opacity;
-              
-              this.context.drawImage(
-                  p.sprite.canvas, 
-                  p.position.x, 
-                  p.position.y, 
-                  p.sprite.width, 
-                  p.sprite.height
-              );
-              
+              this.context.drawImage(p.sprite.canvas, p.position.x, p.position.y, p.sprite.width, p.sprite.height);
               this.context.restore();
           }
       },
@@ -208,17 +221,11 @@ export function initSparkle($) {
           this.anim = window.requestAnimationFrame(() => {
               for (var i = 0; i < this.particles.length; i++) {
                   var p = this.particles[i];
-                  
-                  // Logica Originală
                   var randX = (Math.random() > Math.random() * 2);
                   var randY = (Math.random() < Math.random() * 5);
 
-                  if (randX) {
-                      p.position.x += ((p.delta.x * this.options.speed) / 1500);
-                  }
-                  if (randY) {
-                      p.position.y -= ((p.delta.y * this.options.speed) / 800);
-                  }
+                  if (randX) p.position.x += ((p.delta.x * this.options.speed) / 1500);
+                  if (randY) p.position.y -= ((p.delta.y * this.options.speed) / 800);
 
                   if (p.position.x > this.canvas.width) p.position.x = -10;
                   else if (p.position.x < -10) p.position.x = this.canvas.width;
@@ -231,15 +238,10 @@ export function initSparkle($) {
                       p.position.x = Math.floor(Math.random() * this.canvas.width);
                   }
 
-                  if (this.fade) {
-                      p.opacity -= 0.035;
-                  } else {
-                      p.opacity -= 0.005;
-                  }
+                  if (this.fade) p.opacity -= 0.035;
+                  else p.opacity -= 0.005;
 
-                  if (p.opacity <= 0.15) {
-                      p.opacity = (this.fade) ? 0 : 1.2;
-                  }
+                  if (p.opacity <= 0.15) p.opacity = (this.fade) ? 0 : 1.2;
               }
 
               this.draw();
@@ -259,15 +261,8 @@ export function initSparkle($) {
       },
 
       "resize": function($parent) {
-          // REPARAT: Și la resize menținem proporția de 1.2
-          this.canvas.width = $parent.outerWidth() * 1.2;
-          this.canvas.height = $parent.outerHeight() * 1.2;
-          
-          // Re-centrăm
-          this.$canvas.css({
-              "margin-left": -($parent.outerWidth() * 0.1) + "px",
-              "margin-top": -($parent.outerHeight() * 0.1) + "px"
-          });
+          this.canvas.width = $parent.outerWidth() + (this.options.overlap * 2);
+          this.canvas.height = $parent.outerHeight() + (this.options.overlap * 2);
       },
 
       "start": function($parent) {

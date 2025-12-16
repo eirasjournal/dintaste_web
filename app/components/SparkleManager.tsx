@@ -2,7 +2,7 @@
 
 import { useEffect } from 'react';
 import $ from 'jquery';
-import { initSparkle } from '../lib/sparkle';
+import { initSparkle } from '../lib/sparkle'; // Verifică calea să fie corectă
 
 declare global {
   interface JQuery<TElement = HTMLElement> {
@@ -13,85 +13,84 @@ declare global {
 
 export default function SparkleManager() {
   useEffect(() => {
-    // 1. Inițializăm pluginul jQuery
     if (typeof window !== 'undefined') {
       initSparkle($);
     }
 
-    // Funcția care aplică sclipiciul în funcție de ecran
     const applySparkles = () => {
-      // A. CURĂȚENIE: Ștergem sclipiciul vechi ca să nu se dubleze la resize
-      $('.sparkle-canvas').remove();
+      // 1. CURĂȚENIE TOTALĂ (Distrugem instanțele vechi înainte să creăm altele)
+      // Acest pas este crucial pentru performanță
+      $(".header-sparkles, .sep1, .sep2, .list-item, .btn, .sparkley, .copy-btn").each(function() {
+         if ($(this).data('sparkle-instance')) {
+             $(this).trigger('destroy.sparkle');
+         }
+      });
 
-      // B. DETECTĂM MĂRIMEA ECRANULUI
       const isMobile = window.innerWidth < 820;
 
-      // C. DEFINIM SETĂRILE (Mic pe mobil, Mare pe Desktop)
-      
-      // Setări pentru HEADER (Active mereu)
       const headerSettings = isMobile ? {
-        color: ["#e0e0e0", "#99c2ff"],
-        minSize: 6,     // Mai mic pe mobil
-        maxSize: 10,
-        count: 150,      // Mai puține particule
+        color: ["#99c2ff", "#fdfdfd"],
+        minSize: 8,
+        maxSize: 12,
+        count: 50, // Mai puține particule pe mobil = performanță
         direction: "up",
-        speed: 1.5
-      } : {
-        color: ["#e0e0e0", "#99c2ff"],
-        minSize: 8,     // Mare pe desktop
-        maxSize: 16,
-        count: 200,
-        direction: "up",
-        speed: 2
-      };
-
-      // Setări pentru DECORAȚIUNI (Separatoare, zig-zag - Active mereu)
-      const decorSettings = isMobile ? {
-        color: ["#e0e0e0", "#99c2ff"], // Am pus rozul tău neon aici
-        minSize: 6,
-        maxSize: 10,
-        count: 60,
-        direction: "both",
         speed: 1
       } : {
-        color: ["#e0e0e0", "#99c2ff"],
-        minSize: 6,
+        color: ["#99c2ff", "#fdfdfd"],
+        minSize: 10,
+        maxSize: 16,
+        count: 80, // Redus de la 120 pentru a menține FPS constant
+        direction: "up",
+        speed: 1.5
+      };
+
+      const decorSettings = {
+        color: ["#99c2ff"],
+        minSize: 8,
+        maxSize: 12,
+        count: 20, // Redus pentru performanță
+        direction: "both",
+        speed: 1
+      };
+
+      const hoverSettings = {
+        color: ["#fdfdfd", "#99c2ff"],
+        minSize: 4,
         maxSize: 10,
-        count: 30,
+        count: 15,
         direction: "both",
         speed: 2
       };
 
-      // D. APLICĂM EFECTELE PE ELEMENTE
-
-      // MODIFICARE AICI: Țintim clasa nouă
+      // 2. APLICARE NOUĂ
       ($(".header-sparkles") as JQuery<HTMLElement>).sparkle_always(headerSettings);
-
-      // 2. Elemente Decorative (Zig-Zag, Separatoare - Always active)
-      // Am adăugat și clasele zig-zag pe care le ai în design
       ($(".sep1, .sep2") as JQuery<HTMLElement>).sparkle_hover(decorSettings);
+      ($(".btn, .sparkley") as JQuery<HTMLElement>).sparkle_hover(hoverSettings);
     };
 
-    // --- EXECUȚIE ---
-
-    // 1. Pornim imediat ce se încarcă (cu mică întârziere pentru siguranță)
+    // Inițializare
     const initTimer = setTimeout(applySparkles, 100);
 
-    // 2. Ascultăm Resize-ul ferestrei (Re-calculăm când tragi de browser)
+    // Resize Handler Debounced
     let resizeTimer: NodeJS.Timeout;
     const handleResize = () => {
       clearTimeout(resizeTimer);
-      // Așteptăm 300ms după ce termini de redimensionat ca să nu sacadeze
+      // Oprim totul imediat la resize ca să nu sacadeze
+      $(".sparkle-canvas").hide(); 
       resizeTimer = setTimeout(applySparkles, 300);
     };
 
     window.addEventListener('resize', handleResize);
 
-    // Cleanup la ieșirea din pagină
+    // --- CLEANUP FUNCTION (Foarte important) ---
+    // Asta rulează când pleci de pe pagină
     return () => {
       clearTimeout(initTimer);
       clearTimeout(resizeTimer);
       window.removeEventListener('resize', handleResize);
+      
+      // Distrugem explicit toate sclipiciurile pentru a elibera RAM-ul
+      $(".header-sparkles, .sep1, .sep2, .list-item, .btn, .sparkley").trigger('destroy.sparkle');
       $('.sparkle-canvas').remove();
     };
 

@@ -350,7 +350,7 @@ body {
   display: none;
   background: none;
   border: none;
-  color: var(--text-main);
+  color: var(--bg-paper);
   font-size: 28px;
   cursor: pointer;
   padding: 10px;
