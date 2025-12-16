@@ -78,7 +78,7 @@ export default function Contact() {
         <div className="navbar-left">
           {/* Asigura-te ca ai poza asta in folderul public */}
           <Image 
-            src="/pixelcat.png" 
+            src="/catpixeled.png" 
             className="image" 
             alt="Logo AZAX" 
             width={150}  // Asta e doar pentru rezoluție, CSS-ul decide mărimea vizuală
@@ -90,7 +90,7 @@ export default function Contact() {
               <Link href="/" onClick={() => setIsMenuOpen(false)}>Home</Link>
             </li>
             <li className="list-item">
-              <Link href="/articles" onClick={() => setIsMenuOpen(false)}>Articles</Link>
+              <Link href="/articles" onClick={() => setIsMenuOpen(false)}>Journal Entries</Link>
             </li>
             <li className="list-item">
               <Link href="/contact" onClick={() => setIsMenuOpen(false)}>Contact</Link>
@@ -117,7 +117,7 @@ export default function Contact() {
               /* React.Fragment tine loc de parinte, dar dispare in browser */
               <React.Fragment key={i}>
                 <div className="zig-zag-bottom zig-zag-top1"><p></p></div>
-                <div className="sep2"></div>
+                <div className="sep2"><p style={{ marginTop: '20%' }}></p></div>
               </React.Fragment>
             ))}
             
@@ -128,7 +128,7 @@ export default function Contact() {
         {/* COLOANA CENTRALA - Continut */}
         <div className="column2" ref={centerRef}>
           <div className="fade-in" style={{ width: '90%', maxWidth: '800px', margin: '0 auto', paddingTop: '20px' }}>
-            <h2 style={{ paddingLeft: '40px', marginBottom: '40px', borderBottom: '2px solid #fe98ff', paddingBottom: '10px' }}>
+            <h2 style={{ paddingLeft: '40px', marginBottom: '40px', borderBottom: '2px solid #99c2ff', paddingBottom: '10px' }}>
               Get in Touch
             </h2>
 
@@ -144,7 +144,7 @@ export default function Contact() {
               background: 'rgba(255,255,255,0.05)', 
               padding: '30px', 
               borderRadius: '15px', 
-              border: '1px dashed #fe98ff',
+              border: '1px dashed #99c2ff',
               textAlign: 'center',
               marginTop: '50px',
               marginBottom: '50px'
@@ -174,7 +174,7 @@ export default function Contact() {
                   onClick={handleCopy}
                   className="copy-btn"
                   style={{ 
-                    background: copied ? '#4caf50' : '#fe98ff', // Se face verde când e copiat
+                    background: copied ? '#4caf50' : '#99c2ff', // Se face verde când e copiat
                     color: '#1a1a1a',
                     border: 'none',
                     padding: '10px 25px',
@@ -201,7 +201,7 @@ export default function Contact() {
               /* React.Fragment tine loc de parinte, dar dispare in browser */
               <React.Fragment key={i}>
                 <div className="zig-zag-bottom zig-zag-top1"><p></p></div>
-                <div className="sep2"></div>
+                <div className="sep2"><p style={{ marginTop: '20%' }}></p></div>
               </React.Fragment>
             ))}
             

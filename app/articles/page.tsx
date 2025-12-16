@@ -95,7 +95,7 @@ export default function ArticlesPage() {
       <nav className="navbar">
         <div className="navbar-left">
           <Image 
-            src="/pixelcat.png" 
+            src="/catpixeled.png" 
             className="image" 
             alt="Logo AZAX" 
             width={150} height={150} priority
@@ -108,7 +108,7 @@ export default function ArticlesPage() {
               <Link href="/articles" onClick={() => {
                   setIsMenuOpen(false);
                   setSelectedArticle(null);
-                }}>Articles</Link>
+                }}>Journal Entries</Link>
             </li>
             <li className="list-item">
               <Link href="/contact" onClick={() => setIsMenuOpen(false)}>Contact</Link>
@@ -140,9 +140,35 @@ export default function ArticlesPage() {
           {!selectedArticle ? (
             // --- LISTĂ ---
             <div className="articles-list fade-in " style={{ maxWidth: '800px', margin: '0 auto', paddingTop: '20px' }}>
-              <h2 style={{ marginBottom: '40px', borderBottom: '2px solid #fe98ff', paddingBottom: '10px' }}>
-                Articles
+              <h2 style={{ marginBottom: '40px', borderBottom: '2px solid #99c2ff', paddingBottom: '10px' }}>
+                Journal Entries
               </h2>
+              {/* --- CRINGE ALERT START --- */}
+              <div style={{
+                  backgroundColor: 'rgba(255, 243, 205, 0.7)', // Galben pal (hârtie veche/warning)
+                  border: '1px dashed #ffa000',                // Contur întrerupt portocaliu (warning)
+                  borderLeft: '5px solid #ffa000',             // Accent puternic în stânga
+                  padding: '15px 20px',
+                  marginBottom: '40px',
+                  color: '#664d03',                            // Maro închis/Auriu pentru text
+                  fontFamily: 'monospace',
+                  fontSize: '0.95rem',
+                  display: 'flex',
+                  alignItems: 'start',
+                  gap: '15px',
+                  boxShadow: '2px 2px 5px rgba(0,0,0,0.05)'
+              }}>
+                  <span style={{ fontSize: '1.4rem', lineHeight: '1' }}>⚠️</span>
+                  <div>
+                      <strong style={{ display: 'block', marginBottom: '5px', textTransform: 'uppercase', letterSpacing: '1px' }}>
+                          Runtime Warning: High Emotional Voltage
+                      </strong>
+                      <span style={{ opacity: 0.9 }}>
+                          The following content contains unoptimized feelings, deprecated teenage angst, and raw data. Proceed with caution.
+                      </span>
+                  </div>
+              </div>
+              {/* --- CRINGE ALERT END --- */}
               {ARTICLES.map((art) => (
                <div
                     key={art.id}
@@ -156,7 +182,7 @@ export default function ArticlesPage() {
                       borderRadius: '10px'
                     }}
                   >
-                  <h3 style={{ color: '#fe98ff', fontSize: '1.5rem', marginBottom: '5px' }}>{art.title}</h3>
+                  <h3 style={{ color: '#99c2ff', fontSize: '1.5rem', marginBottom: '5px' }}>{art.title}</h3>
                   <span style={{ color: '#ccc', fontFamily: 'monospace', fontSize: '0.9rem' }}>{art.date}</span>
                   <p style={{ marginTop: '10px', color: '#ddd' }}>{art.preview} [Read more]</p>
                 </div>
@@ -169,7 +195,7 @@ export default function ArticlesPage() {
               <button 
                 onClick={() => setSelectedArticle(null)}
                 style={{
-                  background: 'transparent', border: '1px solid #fe98ff', color: '#fe98ff',
+                  background: 'transparent', border: '1px solid #99c2ff', color: '#99c2ff',
                   padding: '5px 15px', cursor: 'pointer', marginBottom: '20px',
                   fontFamily: 'monospace', fontSize: '1.1rem'
                 }}
@@ -177,7 +203,7 @@ export default function ArticlesPage() {
                 ← Back to list
               </button>
 
-              <h2 style={{ fontSize: '2.5rem', color: '#fe98ff', marginBottom: '10px' }}>{selectedArticle.title}</h2>
+              <h2 style={{ fontSize: '2.5rem', color: '#99c2ff', marginBottom: '10px' }}>{selectedArticle.title}</h2>
               <p style={{ fontFamily: 'monospace', color: '#ccc', marginBottom: '40px' }}>{selectedArticle.date}</p>
               
               <div style={{ lineHeight: '1.8', fontSize: '1.15rem', color: '#e0e0e0', letterSpacing: '0.02em' }}>

@@ -1,8 +1,19 @@
 :root {
-  --accent-main: #fd99ff;        /* Rozul tău pentru hover/linkuri */
-  --text-main: #e0e0e0;          /* Alb murdar pentru text */
-  --bg-dark: #050505;            /* Negru aproape absolut */
-  --bg-panel: #111111;           /* Negru panou */
+  /* SCHIMBARE: Albastru în loc de Roz */
+  --accent-main: #99c2ff;        /* Albastru tehnic (cerneală/pix) */
+  
+  /* Restul rămân la fel pentru tema de caiet */
+  --text-main: #222222;          
+  --text-sec: #555555;           
+  --bg-paper: #fdfdfd;           
+  --bg-desk: #e0e0e0;            
+  --grid-line: #e5e7eb;          
+}
+
+/* Modificăm și selecția textului (când dai dublu click) să fie albastră */
+::selection {
+  background: rgba(0, 86, 179, 0.2); /* Albastru transparent */
+  color: var(--text-main);
 }
 
 * {
@@ -66,8 +77,8 @@ body {
 
 #d-wrapper .zig-zag-top:before {
   background:
-    linear-gradient(-45deg, hsl(299deg 100% 80% / 0.75) 16px, red 16px, blue 16px, transparent 0),
-    linear-gradient(45deg, hsl(299deg 100% 80% / 0.75) 16px, transparent 0);
+    linear-gradient(-45deg, hsl(215deg 100% 80% / 0.75) 16px, red 16px, blue 16px, transparent 0),
+    linear-gradient(45deg, hsl(215deg 100% 80% / 0.75) 16px, transparent 0);
   background-position: left top;
   background-repeat: repeat-x;
   background-size: 22px 32px;
@@ -89,7 +100,7 @@ body {
 #d-wrapper .zig-zag-bottom {
   margin: 32px 0;
   margin-top: 0;
-  background: linear-gradient(to bottom, hsl(0deg 0% 7%), hsl(299deg 100% 80% / 0.95));
+  background: linear-gradient(to bottom, hsl(0deg 0% 7%), hsl(215deg 100% 80% / 0.95));
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
 }
@@ -97,35 +108,36 @@ body {
 #d-wrapper .zig-zag-top {
   margin: 32px 0;
   margin-bottom: 0;
-  background: linear-gradient(hsl(299deg 100% 80% / 0.95), hsl(0deg 0% 7%));
+  background: linear-gradient(hsl(215deg 100% 80% / 0.95), hsl(0deg 0% 7%));
 }
 
 #d-wrapper .zig-zag-top1 {
   margin: 32px 0;
   margin-bottom: 0;
   background-image: linear-gradient(180deg,
-      hsl(299deg 100% 80% / 0.95) 0%,
-hsl(299deg 85% 70%) 6%,
-hsl(299deg 65% 58%) 12%,
-hsl(299deg 45% 45%) 18%,
-hsl(299deg 30% 32%) 24%,
-hsl(299deg 18% 22%) 30%,
+      /* Start: Albastru deschis (Tech Blue) */
+  hsl(215deg 100% 80% / 0.95) 0%,
+  hsl(215deg 85% 70%) 6%,
+  hsl(215deg 65% 58%) 12%,
+  hsl(215deg 45% 45%) 18%,
+  hsl(215deg 30% 32%) 24%,
+  hsl(215deg 18% 22%) 30%,
 
-/* zona inchisa – strict #111111 */
-hsl(0deg 0% 12%) 36%,
-hsl(0deg 0% 9%) 42%,
-hsl(0deg 0% 7%) 48%,
-hsl(0deg 0% 7%) 52%,
-hsl(0deg 0% 9%) 58%,
-hsl(0deg 0% 12%) 64%,
+  /* Zona întunecată (Negru/Gri) - NEATINSĂ */
+  hsl(0deg 0% 12%) 36%,
+  hsl(0deg 0% 9%) 42%,
+  hsl(0deg 0% 7%) 48%,
+  hsl(0deg 0% 7%) 52%,
+  hsl(0deg 0% 9%) 58%,
+  hsl(0deg 0% 12%) 64%,
 
-/* revenire spre roz */
-hsl(299deg 18% 22%) 70%,
-hsl(299deg 30% 32%) 76%,
-hsl(299deg 45% 45%) 82%,
-hsl(299deg 65% 58%) 88%,
-hsl(299deg 85% 70%) 94%,
-hsl(299deg 100% 80% / 0.95) 100%
+  /* Revenire spre Albastru */
+  hsl(215deg 18% 22%) 70%,
+  hsl(215deg 30% 32%) 76%,
+  hsl(215deg 45% 45%) 82%,
+  hsl(215deg 65% 58%) 88%,
+  hsl(215deg 85% 70%) 94%,
+  hsl(215deg 100% 80% / 0.95) 100%
 );
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
@@ -133,8 +145,8 @@ hsl(299deg 100% 80% / 0.95) 100%
 
 #d-wrapper .zig-zag-top1:before {
   background:
-    linear-gradient(-45deg, hsl(299deg 100% 80% / 0.75) 16px, red 16px, blue 16px, transparent 0),
-    linear-gradient(45deg, hsl(299deg 100% 80% / 0.75) 16px, transparent 0);
+    linear-gradient(-45deg, hsl(215deg 100% 80% / 0.75) 16px, red 16px, blue 16px, transparent 0),
+    linear-gradient(45deg, hsl(215deg 100% 80% / 0.75) 16px, transparent 0);
   margin-bottom: 2%;
   background-position: left top;
   background-repeat: repeat-x;
@@ -194,8 +206,8 @@ hsl(299deg 100% 80% / 0.95) 100%
 
 #d-wrapper .zig-zag-bottom:after {
   background:
-    linear-gradient(-45deg, transparent 16px, hsl(299deg 100% 80% / 0.75) 0),
-    linear-gradient(45deg, transparent 16px, hsl(299deg 100% 80% / 0.75) 0);
+    linear-gradient(-45deg, transparent 16px, hsl(215deg 100% 80% / 0.75) 0),
+    linear-gradient(45deg, transparent 16px, hsl(215deg 100% 80% / 0.75) 0);
   background-repeat: repeat-x;
   background-position: left bottom;
   background-size: 22px 32px;
@@ -260,7 +272,7 @@ hsl(299deg 100% 80% / 0.95) 100%
   font-size: clamp(2rem, 5vw, 5rem);
   color: #ffffff;
   /* Glow Roz Neon fin adaptat la #fd99ff */
-  text-shadow: 0px 0px 15px rgba(253, 153, 255, 0.4);
+  text-shadow: 0px 0px 15px rgba(78, 138, 218, 0.4);
 }
 
 .image { 
@@ -301,7 +313,7 @@ hsl(299deg 100% 80% / 0.95) 100%
 
 .nav-list {
   display: flex;
-  gap: 30px;
+  gap: 50px;
   list-style-type: none;
   margin: 0;
   padding: 0;
@@ -326,7 +338,7 @@ hsl(299deg 100% 80% / 0.95) 100%
 .navbar a:hover {
   color: var(--accent-main); /* Roz la hover */
   /* Glow neon la text adaptat */
-  text-shadow: 0 0 8px rgba(253, 153, 255, 0.7);
+  text-shadow: 0 0 8px rgba(78, 138, 218, 0.7);
 }
 
 .nav-list .list-item { 
@@ -478,7 +490,7 @@ hsl(299deg 100% 80% / 0.95) 100%
 }
 
 .btn { 
-  background-color: #fe98ff; 
+  background-color: #99c2ff; 
   color: #1a1a1a; 
   margin-left: 30px; 
   border-radius: 20px; 
@@ -494,8 +506,8 @@ hsl(299deg 100% 80% / 0.95) 100%
 .copy-btn {
   /* Aspect implicit: Sticla transparenta cu bordura fina */
   background: rgba(254, 152, 255, 0.1); 
-  border: 1px solid #fe98ff;
-  color: #fe98ff;
+  border: 1px solid #99c2ff;
+  color: #99c2ff;
   padding: 12px 35px;
   font-size: 1rem;
   font-family: monospace; /* Pastram tema "din taste" */
@@ -509,11 +521,11 @@ hsl(299deg 100% 80% / 0.95) 100%
   transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   
   /* Glow subtil initial */
-  box-shadow: 0 0 5px rgba(254, 152, 255, 0.2);
+  box-shadow: 0 0 5px rgba(78, 138, 218, 0.2);
   position: relative;
   overflow: hidden;
 
-  background-color: #fe98ff; 
+  background-color: #99c2ff; 
   color: #1a1a1a; 
   margin-left: 30px; 
   border-radius: 20px; 
@@ -527,16 +539,16 @@ hsl(299deg 100% 80% / 0.95) 100%
 
 /* Efectul de Hover (se ridica putin) */
 .copy-btn:hover {
-    background: rgba(254, 152, 255, 0.2);
-    box-shadow: 0 0 15px rgba(254, 152, 255, 0.5);
-    text-shadow: 0 0 5px #fe98ff;
+    background: rgba(67, 131, 214, 0.2);
+    box-shadow: 0 0 15px rgba(78, 138, 218, 0.5);
+    text-shadow: 0 0 5px #99c2ff;
 }
 
 /* Efectul de Click (se apasa fizic) */
 .copy-btn:active {
   transform: scale(0.95); /* Se micsoreaza la 95% */
-  background: #fe98ff;    /* Se umple cu culoare */
-  box-shadow: 0 0 25px rgba(254, 152, 255, 0.8); /* Glow puternic */
+  background: #99c2ff;    /* Se umple cu culoare */
+  box-shadow: 0 0 25px rgba(78, 138, 218, 0.8); /* Glow puternic */
 }
 
 /* Starea cand e copiat (verde) */
@@ -561,7 +573,7 @@ hsl(299deg 100% 80% / 0.95) 100%
   color: #000;
   border-color: var(--accent-main);
   /* Glow adaptat */
-  box-shadow: 0px 0px 15px rgba(253, 153, 255, 0.5);
+  box-shadow: 0px 0px 15px rgba(78, 138, 218, 0.5);
 }
 
 footer {
@@ -583,7 +595,7 @@ footer {
 @media (hover: hover) {
   .article-preview-card:hover {
     transform: scale(1.02);
-    border-color: #fe98ff;
+    border-color: #99c2ff;
     background-color: rgba(255,255,255,0.08);
   }
 }

@@ -68,7 +68,7 @@ export default function Home() {
       <nav className="navbar">
         <div className="navbar-left">
           <Image 
-            src="/pixelcat.png" 
+            src="/catpixeled.png" 
             className="image" 
             alt="Logo AZAX" 
             width={150} 
@@ -80,7 +80,7 @@ export default function Home() {
               <Link href="/" onClick={() => setIsMenuOpen(false)}>Home</Link>
             </li>
             <li className="list-item">
-              <Link href="/articles" onClick={() => setIsMenuOpen(false)}>Articles</Link>
+              <Link href="/articles" onClick={() => setIsMenuOpen(false)}>Journal Entries</Link>
             </li>
             <li className="list-item">
               <Link href="/contact" onClick={() => setIsMenuOpen(false)}>Contact</Link>
@@ -101,9 +101,9 @@ export default function Home() {
         <div className="column1">
           <div id="d-wrapper">
               <div className="zig-zag-bottom"></div>
-              <div className="sep1"><p></p></div>
+              <div className="sep1"></div>
             
-              {[...Array(decorCount)].map((_, i) => (
+              {[...Array(decorCount + 2)].map((_, i) => (
               <React.Fragment key={i}>
                 <div className="zig-zag-bottom zig-zag-top1"><p></p></div>
                 <div className="sep2"><p style={{ marginTop: '20%' }}></p></div>
@@ -117,23 +117,30 @@ export default function Home() {
         {/* COLOANA CENTRALA - Continut */}
         <div className="column2" ref={centerRef}>
           <div className="fade-in" style={{width: '90%', maxWidth: '800px', margin: '0 auto', paddingTop: '20px' }}>
-            {/* SCHIMBAT: Border-bottom este acum #fe98ff (Rozul tau) */}
-            <h2 style={{ paddingLeft: '40px', marginBottom: '40px', borderBottom: '2px solid #fe98ff', paddingBottom: '10px', color: '#dcdcdc'}}> 
+            {/* SCHIMBAT: Border-bottom este acum #99c2ff */}
+            <h2 style={{ paddingLeft: '40px', marginBottom: '40px', borderBottom: '2px solid #99c2ff', paddingBottom: '10px', color: '#dcdcdc'}}> 
               About me 
             </h2> 
             <div style={{lineHeight: '1.8', fontSize: '1.15rem', color: '#dcdcdc', letterSpacing: '0.02em' }}> 
               <p style={{ marginBottom: '2%', fontSize: '1.2rem', textIndent: '40px' }}> 
-                Hello and welcome! I started this site with two goals in mind: to push my technical boundaries and to find my voice. What began as a &quot;built-from-scratch&quot; coding challenge quickly became my space of freedom. 
+                Hello and welcome! You have landed in the digital workspace of a <strong>Robotics Master’s student</strong>. What started as a coding challenge to push my technical boundaries has evolved into something much more personal.
               </p> 
+              
               <p style={{ marginBottom: '2%', fontSize: '1.2rem', textIndent: '40px' }}> 
-                It’s a space where my technical projects collide with my personal thoughts. Consider it an ongoing experiment in development: building a functional website, but also building myself. 
+                I recently found some interesting insights on <a href="https://www.journalinghabit.com/observing-journals-leonardo-da-vinci/" target="_blank" rel="noopener noreferrer" style={{ color: '#0056b3', textDecoration: 'underline' }}>Journaling Habit</a> regarding the chaotic beauty of <strong>Leonardo da Vinci’s notebooks</strong>. It struck a chord with me: in his pages, sketches of complex flying machines and anatomical studies sit right next to doodles and philosophical musings. He showed that the technical mind and the human soul are not separate compartments. They bleed into each other.
               </p> 
+
               <p style={{ marginBottom: '2%', fontSize: '1.2rem', textIndent: '40px' }}> 
-                Why &apos;Din Taste&apos;? It translates to &apos;From Keys&apos; in my native Romanian. It’s a reminder that everything here comes raw, straight from my keyboard to your screen. 
-              </p> 
+                <strong>This website is my version of that notebook.</strong> By day, I deal in rigid logic. But the engineer who builds the machine also has a heart that beats, breaks, and heals. 
+              </p>
+
               <p style={{ marginBottom: '2%', fontSize: '1.2rem', textIndent: '40px' }}> 
-                I hope reading this inspires you to start your own project, no matter what it is. 
+                Here, you will find my technical projects sitting side-by-side with my rawest thoughts. Why &apos;Din Taste&apos;? It translates to &apos;From Keys&apos; in my native Romanian. Whether I’m typing an algorithm for a robot or a journal entry about growing up, it all flows from the same keyboard. Consider it an ongoing experiment in development
               </p> 
+
+              <p style={{ marginBottom: '2%', fontSize: '1.2rem', textIndent: '40px' }}> 
+                I hope you find a bit of your own chaos reflected in these blog&apos;s lines. Maybe you’ll find that we are debugging the same errors. 
+              </p>
             </div> 
             <MapWidget />
           </div>
@@ -145,7 +152,7 @@ export default function Home() {
             <div className="zig-zag-bottom"></div>
             <div className="sep1"><p></p></div>
             
-            {[...Array(decorCount)].map((_, i) => (
+            {[...Array(decorCount + 2)].map((_, i) => (
               <React.Fragment key={i}>
                 <div className="zig-zag-bottom zig-zag-top1"><p></p></div>
                 <div className="sep2"><p style={{ marginTop: '20%' }}></p></div>

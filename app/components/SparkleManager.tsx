@@ -30,14 +30,14 @@ export default function SparkleManager() {
       
       // Setări pentru HEADER (Active mereu)
       const headerSettings = isMobile ? {
-        color: ["#e0e0e0", "#fe98ff"],
+        color: ["#e0e0e0", "#99c2ff"],
         minSize: 6,     // Mai mic pe mobil
         maxSize: 10,
         count: 150,      // Mai puține particule
         direction: "up",
         speed: 1.5
       } : {
-        color: ["#e0e0e0", "#fe98ff"],
+        color: ["#e0e0e0", "#99c2ff"],
         minSize: 8,     // Mare pe desktop
         maxSize: 16,
         count: 200,
@@ -47,27 +47,17 @@ export default function SparkleManager() {
 
       // Setări pentru DECORAȚIUNI (Separatoare, zig-zag - Active mereu)
       const decorSettings = isMobile ? {
-        color: ["#e0e0e0", "#fe98ff"], // Am pus rozul tău neon aici
+        color: ["#e0e0e0", "#99c2ff"], // Am pus rozul tău neon aici
         minSize: 6,
         maxSize: 10,
         count: 60,
         direction: "both",
         speed: 1
       } : {
-        color: ["#e0e0e0", "#fe98ff"],
+        color: ["#e0e0e0", "#99c2ff"],
         minSize: 6,
         maxSize: 10,
         count: 30,
-        direction: "both",
-        speed: 2
-      };
-
-      // Setări pentru HOVER (Meniu, Butoane)
-      const hoverSettings = {
-        color: ["#e0e0e0", "#fe98ff"],
-        minSize: isMobile ? 3 : 5,
-        maxSize: isMobile ? 6 : 9,
-        count: 20,
         direction: "both",
         speed: 2
       };
@@ -80,9 +70,6 @@ export default function SparkleManager() {
       // 2. Elemente Decorative (Zig-Zag, Separatoare - Always active)
       // Am adăugat și clasele zig-zag pe care le ai în design
       ($(".sep1, .sep2") as JQuery<HTMLElement>).sparkle_hover(decorSettings);
-
-      // 3. Elemente Interactive (Hover)
-      ($(".list-item, .btn, .sparkley") as JQuery<HTMLElement>).sparkle_hover(hoverSettings);
     };
 
     // --- EXECUȚIE ---
