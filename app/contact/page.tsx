@@ -88,13 +88,13 @@ export default function Contact() {
           />
           <ul className={`nav-list ${isMenuOpen ? 'active' : ''}`}>
             <li className="list-item">
-              <Link href="/" onClick={() => setIsMenuOpen(false)}>Home</Link>
+              <Link href="/" onClick={() => setIsMenuOpen(false)} scroll={false}>Home</Link>
             </li>
             <li className="list-item">
-              <Link href="/articles" onClick={() => setIsMenuOpen(false)}>Journal Entries</Link>
+              <Link href="/articles" onClick={() => setIsMenuOpen(false)} scroll={false}>Journal Entries</Link>
             </li>
             <li className="list-item">
-              <Link href="/contact" onClick={() => setIsMenuOpen(false)}>Contact</Link>
+              <Link href="/contact" onClick={() => setIsMenuOpen(false)} scroll={false}>Contact</Link>
             </li>
           </ul>
         </div>
