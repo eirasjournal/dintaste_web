@@ -104,37 +104,43 @@ export default function Home() {
               </h2> 
               
               <div style={{lineHeight: '1.8', fontSize: '1.15rem', color: '#dcdcdc', letterSpacing: '0.02em' }}> 
-                
+              
+                {/* --- PRIMUL POST-IT (Galben, Dreapta) --- */}
                 <div className="sticky-note yellow">
-                  📌 <strong>Reminder:</strong><br/>
+                  📌 <strong>Reminder:</strong>
+                  <br/>
                   You are not doing it wrong if no one knows what you are doing.
                 </div>
 
                 <p style={{ marginBottom: '2%', fontSize: '1.2rem', textIndent: '40px' }}> 
-                  Hello and welcome! You have landed in the digital workspace of a <strong>Robotics Master’s student</strong>...
-                  {/* ... restul textului tău ... */}
+                  Hello and welcome! You have landed in the digital workspace of a <strong>Robotics Master’s student</strong>. What started as a coding challenge to push my technical boundaries has evolved into something much more personal.
                 </p> 
-
-                {/* ... restul paragrafelor ... */}
-                <p style={{ marginBottom: '2%', fontSize: '1.2rem', textIndent: '40px' }}>
-                   He showed that the technical mind and the human soul are not separate compartments.
+                
+                <p style={{ marginBottom: '2%', fontSize: '1.2rem', textIndent: '40px' }}> 
+                  I recently found some interesting insights on <a href="https://www.journalinghabit.com/observing-journals-leonardo-da-vinci/" target="_blank" rel="noopener noreferrer" style={{ color: '#0056b3', textDecoration: 'underline' }}>Journaling Habit</a> regarding the chaotic beauty of <strong>Leonardo da Vinci’s notebooks</strong>. It struck a chord with me: in his pages, sketches of complex flying machines sit right next to doodles and philosophical musings.
                 </p>
 
+                <p style={{ marginBottom: '2%', fontSize: '1.2rem', textIndent: '40px' }}> 
+                  He showed that the technical mind and the human soul are not separate compartments. They bleed into each other.
+                </p>
+
+                {/* --- AL DOILEA POST-IT (Roz, Stânga) --- */}
                 <div className="sticky-note pink">
-                    📌 <strong>Note to self:</strong><br/>
+                  📌 <strong>Note to self:</strong>
+                  <br/>
                   Entropy isn&apos;t just a physics concept, it&apos;s my current mental state.
                 </div>
 
                 <p style={{ marginBottom: '2%', fontSize: '1.2rem', textIndent: '40px' }}>
-                  <span className="highlight-text">This website is my version of that notebook.</span> By day, I deal in rigid logic...
+                  <span className="highlight-text">This website is my version of that notebook.</span> By day, I deal in rigid logic. But the engineer who builds the machine also has a heart that beats, breaks, and heals. 
                 </p>
 
-                 <p style={{ marginBottom: '2%', fontSize: '1.2rem', textIndent: '40px' }}> 
-                  Here, you will find my technical projects sitting side-by-side with my rawest thoughts...
+                <p style={{ marginBottom: '2%', fontSize: '1.2rem', textIndent: '40px' }}> 
+                  Here, you will find my technical projects sitting side-by-side with my rawest thoughts. Why &apos;Din Taste&apos;? It translates to &apos;From Keys&apos; in my native Romanian. Whether I’m typing an algorithm for a robot or a journal entry about growing up, it all flows from the same keyboard. Consider it an ongoing experiment in development.
                 </p> 
 
                 <p style={{ marginBottom: '2%', fontSize: '1.2rem', textIndent: '40px' }}> 
-                  I hope you find a bit of your own chaos reflected in these blog&apos;s lines. 
+                  I hope you find a bit of your own chaos reflected in these blog&apos;s lines. Maybe you’ll find that we are debugging the same errors. 
                 </p>
               </div> 
               <MapWidget />
