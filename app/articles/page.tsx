@@ -118,7 +118,7 @@ export default function ArticlesPage() {
           <div className="d-wrapper" id="d-wrapper"> 
               <div className="zig-zag-bottom"></div>
               <div className="sep1"><p></p></div>
-              {[...Array(decorCount)].map((_, i) => (
+              {[...Array(decorCount + 2)].map((_, i) => (
               <React.Fragment key={i}>
                 <div className="zig-zag-bottom zig-zag-top1"><p></p></div>
                 <div className="sep2"><p style={{ marginTop: '20%' }}></p></div>
@@ -221,7 +221,7 @@ export default function ArticlesPage() {
           <div className="d-wrapper" id="d-wrapper">
             <div className="zig-zag-bottom"></div>
             <div className="sep1"><p></p></div>
-            {[...Array(decorCount)].map((_, i) => (
+            {[...Array(decorCount + 2)].map((_, i) => (
               <React.Fragment key={i}>
                 <div className="zig-zag-bottom zig-zag-top1"><p></p></div>
                 <div className="sep2"><p style={{ marginTop: '20%' }}></p></div>
