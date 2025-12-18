@@ -2,14 +2,14 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import React, { useState } from 'react'; // Am scos useEffect și useRef, nu mai avem nevoie de ele pentru decor
+import React, { useState } from 'react'; 
 import SparkleManager from '../components/SparkleManager'; 
 import Comments from '../components/Comments';
 
 // --- DATELE ARTICOLELOR ---
 const ARTICLES = [
   {
-    id: 1, // ID nou pentru articolul mai recent
+    id: 1, 
     title: "The Memory Box of 2023",
     date: "31 December, 2023",
     preview: "The last week of December has caught me feeling deeply nostalgic...",
@@ -71,14 +71,9 @@ And last but not least, you will be able to inspire the people around you, just 
 
 export default function ArticlesPage() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  // TRUC: Setăm un număr FIX și mare de decorațiuni (ex: 50).
-  // CSS-ul (overflow: hidden) va ascunde surplusul automat.
   const decorCount = 11; 
   
   const [selectedArticle, setSelectedArticle] = useState<typeof ARTICLES[number] | null>(null);
-
-  // Am șters complet useEffect-ul și useRef-urile complicate.
-  // Lăsăm CSS-ul să facă treaba grea.
 
   return (
     <main className="min-h-screen bg-[#341c74]">
@@ -86,7 +81,6 @@ export default function ArticlesPage() {
       
       {/* HEADER */}
       <div className="header">
-        {/* --- AICI: Containerul nou pentru stele --- */}
         <div className="header-sparkles"></div>
         <h1 className="typewriter-title">d i n<span className="word-space"></span>t a s t e</h1> 
       </div>
@@ -121,7 +115,7 @@ export default function ArticlesPage() {
       <div className="row">
         {/* COLOANA STÂNGA */}
         <div className="column1">
-          <div id="d-wrapper">
+          <div className="d-wrapper" id="d-wrapper"> 
               <div className="zig-zag-bottom"></div>
               <div className="sep1"><p></p></div>
               {[...Array(decorCount)].map((_, i) => (
@@ -138,19 +132,20 @@ export default function ArticlesPage() {
         <div className="column2">
           
           {!selectedArticle ? (
-            // --- LISTĂ ---
+            // --- LISTĂ ARTICOLE ---
             <div className="articles-list fade-in " style={{ maxWidth: '800px', margin: '0 auto', paddingTop: '20px' }}>
               <h2 style={{ marginBottom: '40px', borderBottom: '2px solid #99c2ff', paddingBottom: '10px' }}>
                 Journal Entries
               </h2>
-              {/* --- CRINGE ALERT START --- */}
+              
+              {/* --- SYSTEM LOG: CONTEXT SWITCH --- */}
               <div style={{
-                  backgroundColor: 'rgba(255, 243, 205, 0.7)', // Galben pal (hârtie veche/warning)
-                  border: '1px dashed #ffa000',                // Contur întrerupt portocaliu (warning)
-                  borderLeft: '5px solid #ffa000',             // Accent puternic în stânga
+                  backgroundColor: 'rgba(255, 243, 205, 0.7)', 
+                  border: '1px dashed #ffa000',                
+                  borderLeft: '5px solid #ffa000',             
                   padding: '15px 20px',
                   marginBottom: '40px',
-                  color: '#664d03',                            // Maro închis/Auriu pentru text
+                  color: '#664d03',                            
                   fontFamily: 'monospace',
                   fontSize: '0.95rem',
                   display: 'flex',
@@ -161,14 +156,15 @@ export default function ArticlesPage() {
                   <span style={{ fontSize: '1.4rem', lineHeight: '1' }}>⚠️</span>
                   <div>
                       <strong style={{ display: 'block', marginBottom: '5px', textTransform: 'uppercase', letterSpacing: '1px' }}>
-                          Runtime Warning: High Emotional Voltage
+                          Warning: Logic module is currently offline.
                       </strong>
                       <span style={{ opacity: 0.9 }}>
-                          The following content contains unoptimized feelings, deprecated teenage angst, and raw data. Proceed with caution.
+                          There are no circuit diagrams or algorithms here. The content below contains unoptimized feelings, irrational data, and high levels of cringe. Proceed at your own risk.
                       </span>
                   </div>
               </div>
-              {/* --- CRINGE ALERT END --- */}
+              {/* --- END LOG --- */}
+
               {ARTICLES.map((art) => (
                <div
                     key={art.id}
@@ -200,15 +196,15 @@ export default function ArticlesPage() {
                   fontFamily: 'monospace', fontSize: '1.1rem'
                 }}
               >
-                ← Back to list
+                ← Return to logs
               </button>
 
               <h2 style={{ fontSize: '2.5rem', color: '#99c2ff', marginBottom: '10px' }}>{selectedArticle.title}</h2>
-              <p style={{ fontFamily: 'monospace', color: '#ccc', marginBottom: '40px' }}>{selectedArticle.date}</p>
+              <p style={{ fontFamily: 'monospace', color: '#ccc', marginBottom: '40px' }}>Timestamp: {selectedArticle.date}</p>
               
               <div style={{ lineHeight: '1.8', fontSize: '1.15rem', color: '#e0e0e0', letterSpacing: '0.02em' }}>
                 {selectedArticle.content.split('\n\n').map((para: string, idx: number) => (
-                   <p key={idx} style={{ marginBottom: '20px', textIndent: '40px' }}>{para}</p>
+                    <p key={idx} style={{ marginBottom: '20px', textIndent: '40px' }}>{para}</p>
                 ))}
               </div>
 
@@ -222,7 +218,7 @@ export default function ArticlesPage() {
 
         {/* COLOANA DREAPTA */}
         <div className="column3">
-          <div id="d-wrapper">
+          <div className="d-wrapper" id="d-wrapper">
             <div className="zig-zag-bottom"></div>
             <div className="sep1"><p></p></div>
             {[...Array(decorCount)].map((_, i) => (

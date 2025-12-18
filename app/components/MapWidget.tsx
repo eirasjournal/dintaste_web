@@ -13,7 +13,7 @@ export default function MapWidget() {
 
     const script = document.createElement("script");
     script.id = "mapmyvisitors"; 
-    script.src = "https://mapmyvisitors.com/map.js?cl=ffffff&w=a&t=n&d=q6goPNzI_ouLI-M22B5dKzBaC_hdjd9R79wu2IxymG8&co=111111&cmn=#99c2ff&ct=ffffff&cmo=#99c2ff";
+    script.src = "https://mapmyvisitors.com/map.js?cl=fdfdfd&w=a&t=n&d=q6goPNzI_ouLI-M22B5dKzBaC_hdjd9R79wu2IxymG8&co=222222&cmo=555555&cmn=99c2ff";
     script.type = "text/javascript";
     script.async = true;
 

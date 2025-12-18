@@ -121,17 +121,37 @@ export default function Home() {
             <h2 style={{ paddingLeft: '40px', marginBottom: '40px', borderBottom: '2px solid #99c2ff', paddingBottom: '10px', color: '#dcdcdc'}}> 
               About me 
             </h2> 
+            
             <div style={{lineHeight: '1.8', fontSize: '1.15rem', color: '#dcdcdc', letterSpacing: '0.02em' }}> 
+              
+              {/* --- PRIMUL POST-IT (Galben, Dreapta) --- */}
+              <div className="sticky-note yellow">
+                📌 <strong>Reminder:</strong>
+                <br/>
+                You are not doing it wrong if no one knows what you are doing.
+              </div>
+
               <p style={{ marginBottom: '2%', fontSize: '1.2rem', textIndent: '40px' }}> 
                 Hello and welcome! You have landed in the digital workspace of a <strong>Robotics Master’s student</strong>. What started as a coding challenge to push my technical boundaries has evolved into something much more personal.
               </p> 
               
               <p style={{ marginBottom: '2%', fontSize: '1.2rem', textIndent: '40px' }}> 
-                I recently found some interesting insights on <a href="https://www.journalinghabit.com/observing-journals-leonardo-da-vinci/" target="_blank" rel="noopener noreferrer" style={{ color: '#0056b3', textDecoration: 'underline' }}>Journaling Habit</a> regarding the chaotic beauty of <strong>Leonardo da Vinci’s notebooks</strong>. It struck a chord with me: in his pages, sketches of complex flying machines sit right next to doodles and philosophical musings. He showed that the technical mind and the human soul are not separate compartments. They bleed into each other.
-              </p> 
+                I recently found some interesting insights on <a href="https://www.journalinghabit.com/observing-journals-leonardo-da-vinci/" target="_blank" rel="noopener noreferrer" style={{ color: '#0056b3', textDecoration: 'underline' }}>Journaling Habit</a> regarding the chaotic beauty of <strong>Leonardo da Vinci’s notebooks</strong>. It struck a chord with me: in his pages, sketches of complex flying machines sit right next to doodles and philosophical musings.
+              </p>
 
               <p style={{ marginBottom: '2%', fontSize: '1.2rem', textIndent: '40px' }}> 
-                <strong>This website is my version of that notebook.</strong> By day, I deal in rigid logic. But the engineer who builds the machine also has a heart that beats, breaks, and heals. 
+                He showed that the technical mind and the human soul are not separate compartments. They bleed into each other.
+              </p>
+
+              {/* --- AL DOILEA POST-IT (Roz, Stânga) --- */}
+              <div className="sticky-note pink">
+                 📌 <strong>Note to self:</strong>
+                <br/>
+                Entropy isn&apos;t just a physics concept, it&apos;s my current mental state.
+              </div>
+
+              <p style={{ marginBottom: '2%', fontSize: '1.2rem', textIndent: '40px' }}>
+                <span className="highlight-text">This website is my version of that notebook.</span> By day, I deal in rigid logic. But the engineer who builds the machine also has a heart that beats, breaks, and heals. 
               </p>
 
               <p style={{ marginBottom: '2%', fontSize: '1.2rem', textIndent: '40px' }}> 

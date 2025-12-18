@@ -609,3 +609,77 @@ footer {
 .article-preview-card {
   -webkit-tap-highlight-color: transparent;
 }
+
+/* --- STICKY NOTES STYLE --- */
+.handwritten-font {
+  font-family: "Segoe Print", "Bradley Hand", "Chilanka", cursive;
+  font-weight: bold;
+}
+
+.sticky-note {
+  width: 200px;
+  padding: 15px;
+  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.7);
+  color: #1a1a1a; /* Cerneală închisă pe post-it */
+  font-family: "Segoe Print", "Bradley Hand", "Chilanka", cursive; /* Font de mână */
+  font-size: 0.95rem;
+  line-height: 1.4;
+  position: relative;
+  z-index: 10;
+  margin-bottom: 20px;
+  transition: transform 0.2s ease;
+  cursor: default;
+}
+
+.sticky-note:hover {
+  transform: scale(1.05) rotate(0deg) !important; /* Se îndreaptă când pui mouse-ul */
+}
+
+/* Varianta Galbenă (Drreapta) */
+.sticky-note.yellow {
+  background-color: #ffeb3b;
+  float: right;           /* Textul curge în stânga lui */
+  margin-left: 25px;      /* Spațiu între text și notă */
+  transform: rotate(3deg);
+  /* Efect de bandă adezivă sus */
+  border-top: 1px solid rgba(255,255,255,0.4);
+}
+
+/* Varianta Roz/Magenta (Stânga) */
+.sticky-note.pink {
+  background-color: #ff80ab;
+  float: left;            /* Textul curge în dreapta lui */
+  margin-right: 25px;     /* Spațiu între notă și text */
+  transform: rotate(-4deg);
+  border-top: 1px solid rgba(255,255,255,0.4);
+}
+
+/* Pentru ecrane mici, scoatem float-ul ca să nu strice textul */
+@media screen and (max-width: 600px) {
+  .sticky-note {
+    float: none !important;
+    margin: 20px auto;
+    width: 90%;
+    transform: rotate(0deg) !important;
+  }
+}
+
+/* Adăugăm și o clasă pentru sublinieri "de mână" în textul principal */
+.highlight-text {
+  /* Modificare 1: Am crescut opacitatea finală la 0.8 (era 0.4) ca să fie mai clar */
+  /* Modificare 2: Începe de la 0.1 (nu 0) ca să se vadă puțin și începutul frazei */
+  background: linear-gradient(120deg, rgba(153, 194, 255, 0.5) 0%, rgba(153, 194, 255, 0.1) 100%);
+  
+  background-repeat: no-repeat;
+  
+  /* Modificare 3: Am crescut înălțimea la 60% (era 40%) - acoperă jumătatea de jos a literelor */
+  background-size: 100% 80%;
+  
+  background-position: 0 90%; /* Poziționat jos */
+  
+  color: #fff;
+  font-style: italic;
+  
+  /* Mic spațiu lateral ca să nu pară tăiat brusc markerul */
+  padding: 0 4px; 
+}
