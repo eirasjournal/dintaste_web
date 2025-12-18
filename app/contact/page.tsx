@@ -4,6 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import React, { useState, useEffect, useRef } from 'react';
 import SparkleManager from '../components/SparkleManager'; // <--- IMPORT AICI
+import PageTurn from '../components/PageTurn';
 
 export default function Contact() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -125,70 +126,75 @@ export default function Contact() {
           </div>
         </div>
 
-        {/* COLOANA CENTRALA - Continut */}
-        <div className="column2" ref={centerRef}>
-          <div className="fade-in" style={{ width: '90%', maxWidth: '800px', margin: '0 auto', paddingTop: '20px' }}>
-            <h2 style={{ paddingLeft: '40px', marginBottom: '40px', borderBottom: '2px solid #99c2ff', paddingBottom: '10px' }}>
-              Get in Touch
-            </h2>
+        {/* COLOANA CENTRALA - Aici aplicăm stilul de perspectivă și wrapper-ul */}
+        {/* 2. ADADUGĂ style={{ perspective: '2000px' }} PE CONTAINERUL PĂRINTE */}
+        <div className="column2" ref={centerRef} style={{ perspective: '2000px' }}>
+          <div className="spiral-binding"></div>
+          {/* 3. ÎNCONJOARĂ CONȚINUTUL CU <PageTurn> */}
+          <PageTurn>
+            <div className="fade-in" style={{ width: '90%', maxWidth: '800px', margin: '0 auto', paddingTop: '20px' }}>
+              <h2 style={{ paddingLeft: '40px', marginBottom: '40px', borderBottom: '2px solid #99c2ff', paddingBottom: '10px' }}>
+                Get in Touch
+              </h2>
 
-            <p style={{ fontSize: '1.2rem', lineHeight: '1.6', marginBottom: '30px', textIndent: '40px' }}>
-              Have something to share? A thought about an article, a song recommendation, or just want to say hi?
-            </p>
-            <p style={{ fontSize: '1.2rem', lineHeight: '1.6', marginBottom: '30px', textIndent: '40px' }}>
-              I&apos;m always open to reading emails from strangers. It reminds me that there are real people behind the screens.
-            </p>
-
-            {/* CUTIA DE EMAIL */}
-            <div style={{ 
-              background: 'rgba(255,255,255,0.05)', 
-              padding: '30px', 
-              borderRadius: '15px', 
-              border: '1px dashed #99c2ff',
-              textAlign: 'center',
-              marginTop: '50px',
-              marginBottom: '50px'
-            }}>
-              <p style={{fontFamily: 'monospace', 
-                              color: '#ccc', 
-                              marginBottom: '15px',
-                              textAlign: 'center'}}>
-                You can reach me at:
+              <p style={{ fontSize: '1.2rem', lineHeight: '1.6', marginBottom: '30px', textIndent: '40px' }}>
+                Have something to share? A thought about an article, a song recommendation, or just want to say hi?
               </p>
-              
+              <p style={{ fontSize: '1.2rem', lineHeight: '1.6', marginBottom: '30px', textIndent: '40px' }}>
+                I&apos;m always open to reading emails from strangers. It reminds me that there are real people behind the screens.
+              </p>
+
+              {/* CUTIA DE EMAIL */}
               <div style={{ 
-                fontSize: 'clamp(1rem, 4vw, 1.4rem)', 
-                color: '#fff', 
-                fontFamily: 'monospace', 
-                marginBottom: '25px',
+                background: 'rgba(255,255,255,0.05)', 
+                padding: '30px', 
+                borderRadius: '15px', 
+                border: '1px dashed #99c2ff',
                 textAlign: 'center',
-                wordBreak: 'break-word',
-                overflowWrap: 'anywhere' 
+                marginTop: '50px',
+                marginBottom: '50px'
               }}>
-                {email}
+                <p style={{fontFamily: 'monospace', 
+                                color: '#ccc', 
+                                marginBottom: '15px',
+                                textAlign: 'center'}}>
+                  You can reach me at:
+                </p>
+                
+                <div style={{ 
+                  fontSize: 'clamp(1rem, 4vw, 1.4rem)', 
+                  color: '#fff', 
+                  fontFamily: 'monospace', 
+                  marginBottom: '25px',
+                  textAlign: 'center',
+                  wordBreak: 'break-word',
+                  overflowWrap: 'anywhere' 
+                }}>
+                  {email}
+                </div>
+
+                <div style={{ display: 'flex', gap: '15px', justifyContent: 'center', flexWrap: 'wrap' }}>
+                  {/* Buton Copy */}
+                  <button 
+                    onClick={handleCopy}
+                    className="copy-btn"
+                    style={{ 
+                      background: copied ? '#4caf50' : '#99c2ff', // Se face verde când e copiat
+                      color: '#1a1a1a',
+                      border: 'none',
+                      padding: '10px 25px',
+                      fontSize: '1rem',
+                      fontWeight: 'bold',
+                      margin: 0
+                    }}
+                  >
+                    {copied ? "Copied! ✅" : "Copy Email"}
+                  </button>
+                </div>
               </div>
 
-              <div style={{ display: 'flex', gap: '15px', justifyContent: 'center', flexWrap: 'wrap' }}>
-                {/* Buton Copy */}
-                <button 
-                  onClick={handleCopy}
-                  className="copy-btn"
-                  style={{ 
-                    background: copied ? '#4caf50' : '#99c2ff', // Se face verde când e copiat
-                    color: '#1a1a1a',
-                    border: 'none',
-                    padding: '10px 25px',
-                    fontSize: '1rem',
-                    fontWeight: 'bold',
-                    margin: 0
-                  }}
-                >
-                  {copied ? "Copied! ✅" : "Copy Email"}
-                </button>
-              </div>
             </div>
-
-          </div>
+          </PageTurn>
         </div>
 
         {/* COLOANA DREAPTA - Decorativa */}

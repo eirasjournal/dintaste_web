@@ -683,3 +683,41 @@ footer {
   /* Mic spațiu lateral ca să nu pară tăiat brusc markerul */
   padding: 0 4px; 
 }
+
+.spiral-binding {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 40px; /* lățimea spiralei */
+  z-index: 10;
+
+  /* fundal combinat: găuri + sârmă verticală */
+  background-image:
+    /* 1️⃣ GĂURI */
+    radial-gradient(circle at 20px 20px, #050505 6px, transparent 7px),
+    
+    /* 2️⃣ SÂRMĂ METALICĂ VERTICALĂ */
+    linear-gradient(90deg,
+      transparent 0%,
+      transparent 45%,
+      #333 46%,
+      #777 48%,
+      #99c2ff 50%,  /* reflexie */
+      #777 52%,
+      #333 54%,
+      transparent 55%,
+      transparent 100%
+    );
+
+  /* fiecare pattern se repetă doar pe verticală, nu pe orizontală */
+  background-size:
+    40px 40px,   /* gaura: lățime 40px, pas vertical 40px */
+    40px 40px;   /* sârma: lățime 40px, pas vertical 40px */
+
+  background-repeat: repeat-y;
+
+  /* umbră pentru adâncime */
+  box-shadow: 5px 0 15px -5px rgba(0,0,0,0.5);
+  border-right: 1px solid rgba(0,0,0,0.1);
+}

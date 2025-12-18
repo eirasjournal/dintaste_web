@@ -5,6 +5,7 @@ import Link from 'next/link';
 import React, { useState } from 'react'; 
 import SparkleManager from '../components/SparkleManager'; 
 import Comments from '../components/Comments';
+import PageTurn from '../components/PageTurn';
 
 // --- DATELE ARTICOLELOR ---
 const ARTICLES = [
@@ -128,92 +129,97 @@ export default function ArticlesPage() {
           </div>
         </div>
 
-        {/* COLOANA CENTRALĂ */}
-        <div className="column2">
+        {/* COLOANA CENTRALA - Aici aplicăm stilul de perspectivă și wrapper-ul */}
+        {/* 2. ADADUGĂ style={{ perspective: '2000px' }} PE CONTAINERUL PĂRINTE */}
+        <div className="column2" style={{ perspective: '2000px' }}>
+          <div className="spiral-binding"></div>
+          {/* 3. ÎNCONJOARĂ CONȚINUTUL CU <PageTurn> */}
+          <PageTurn>
           
-          {!selectedArticle ? (
-            // --- LISTĂ ARTICOLE ---
-            <div className="articles-list fade-in " style={{ maxWidth: '800px', margin: '0 auto', paddingTop: '20px' }}>
-              <h2 style={{ marginBottom: '40px', borderBottom: '2px solid #99c2ff', paddingBottom: '10px' }}>
-                Journal Entries
-              </h2>
-              
-              {/* --- SYSTEM LOG: CONTEXT SWITCH --- */}
-              <div style={{
-                  backgroundColor: 'rgba(255, 243, 205, 0.7)', 
-                  border: '1px dashed #ffa000',                
-                  borderLeft: '5px solid #ffa000',             
-                  padding: '15px 20px',
-                  marginBottom: '40px',
-                  color: '#664d03',                            
-                  fontFamily: 'monospace',
-                  fontSize: '0.95rem',
-                  display: 'flex',
-                  alignItems: 'start',
-                  gap: '15px',
-                  boxShadow: '2px 2px 5px rgba(0,0,0,0.05)'
-              }}>
-                  <span style={{ fontSize: '1.4rem', lineHeight: '1' }}>⚠️</span>
-                  <div>
-                      <strong style={{ display: 'block', marginBottom: '5px', textTransform: 'uppercase', letterSpacing: '1px' }}>
-                          Warning: Logic module is currently offline.
-                      </strong>
-                      <span style={{ opacity: 0.9 }}>
-                          There are no circuit diagrams or algorithms here. The content below contains unoptimized feelings, irrational data, and high levels of cringe. Proceed at your own risk.
-                      </span>
-                  </div>
-              </div>
-              {/* --- END LOG --- */}
-
-              {ARTICLES.map((art) => (
-               <div
-                    key={art.id}
-                    onClick={() => setSelectedArticle(art)}
-                    className="article-preview-card"
-                    style={{
-                      marginBottom: '30px',
-                      cursor: 'pointer',
-                      padding: '20px',
-                      backgroundColor: 'rgba(255,255,255,0.05)',
-                      borderRadius: '10px'
-                    }}
-                  >
-                  <h3 style={{ color: '#99c2ff', fontSize: '1.5rem', marginBottom: '5px' }}>{art.title}</h3>
-                  <span style={{ color: '#ccc', fontFamily: 'monospace', fontSize: '0.9rem' }}>{art.date}</span>
-                  <p style={{ marginTop: '10px', color: '#ddd' }}>{art.preview} [Read more]</p>
+            {!selectedArticle ? (
+              // --- LISTĂ ARTICOLE ---
+              <div className="articles-list fade-in " style={{ maxWidth: '800px', margin: '0 auto', paddingTop: '20px' }}>
+                <h2 style={{ marginBottom: '40px', borderBottom: '2px solid #99c2ff', paddingBottom: '10px' }}>
+                  Journal Entries
+                </h2>
+                
+                {/* --- SYSTEM LOG: CONTEXT SWITCH --- */}
+                <div style={{
+                    backgroundColor: 'rgba(255, 243, 205, 0.7)', 
+                    border: '1px dashed #ffa000',                
+                    borderLeft: '5px solid #ffa000',             
+                    padding: '15px 20px',
+                    marginBottom: '40px',
+                    color: '#664d03',                            
+                    fontFamily: 'monospace',
+                    fontSize: '0.95rem',
+                    display: 'flex',
+                    alignItems: 'start',
+                    gap: '15px',
+                    boxShadow: '2px 2px 5px rgba(0,0,0,0.05)'
+                }}>
+                    <span style={{ fontSize: '1.4rem', lineHeight: '1' }}>⚠️</span>
+                    <div>
+                        <strong style={{ display: 'block', marginBottom: '5px', textTransform: 'uppercase', letterSpacing: '1px' }}>
+                            Warning: Logic module is currently offline.
+                        </strong>
+                        <span style={{ opacity: 0.9 }}>
+                            There are no circuit diagrams or algorithms here. The content below contains unoptimized feelings, irrational data, and high levels of cringe. Proceed at your own risk.
+                        </span>
+                    </div>
                 </div>
-              ))}
-            </div>
+                {/* --- END LOG --- */}
 
-          ) : (
-            // --- ARTICOL COMPLET ---
-            <div className="single-article fade-in" style={{ width: '90%', maxWidth: '800px', margin: '0 auto', paddingTop: '20px' }}>
-              <button 
-                onClick={() => setSelectedArticle(null)}
-                style={{
-                  background: 'transparent', border: '1px solid #99c2ff', color: '#99c2ff',
-                  padding: '5px 15px', cursor: 'pointer', marginBottom: '20px',
-                  fontFamily: 'monospace', fontSize: '1.1rem'
-                }}
-              >
-                ← Return to logs
-              </button>
-
-              <h2 style={{ fontSize: '2.5rem', color: '#99c2ff', marginBottom: '10px' }}>{selectedArticle.title}</h2>
-              <p style={{ fontFamily: 'monospace', color: '#ccc', marginBottom: '40px' }}>Timestamp: {selectedArticle.date}</p>
-              
-              <div style={{ lineHeight: '1.8', fontSize: '1.15rem', color: '#e0e0e0', letterSpacing: '0.02em' }}>
-                {selectedArticle.content.split('\n\n').map((para: string, idx: number) => (
-                    <p key={idx} style={{ marginBottom: '20px', textIndent: '40px' }}>{para}</p>
+                {ARTICLES.map((art) => (
+                <div
+                      key={art.id}
+                      onClick={() => setSelectedArticle(art)}
+                      className="article-preview-card"
+                      style={{
+                        marginBottom: '30px',
+                        cursor: 'pointer',
+                        padding: '20px',
+                        backgroundColor: 'rgba(255,255,255,0.05)',
+                        borderRadius: '10px'
+                      }}
+                    >
+                    <h3 style={{ color: '#99c2ff', fontSize: '1.5rem', marginBottom: '5px' }}>{art.title}</h3>
+                    <span style={{ color: '#ccc', fontFamily: 'monospace', fontSize: '0.9rem' }}>{art.date}</span>
+                    <p style={{ marginTop: '10px', color: '#ddd' }}>{art.preview} [Read more]</p>
+                  </div>
                 ))}
               </div>
 
-              <div style={{ marginTop: '50px', textAlign: 'center', opacity: 0.6 }}>***</div>
-              <div className="scroller">
-                <Comments />
+            ) : (
+              // --- ARTICOL COMPLET ---
+              <div className="single-article fade-in" style={{ width: '90%', maxWidth: '800px', margin: '0 auto', paddingTop: '20px' }}>
+                <button 
+                  onClick={() => setSelectedArticle(null)}
+                  style={{
+                    background: 'transparent', border: '1px solid #99c2ff', color: '#99c2ff',
+                    padding: '5px 15px', cursor: 'pointer', marginBottom: '20px',
+                    fontFamily: 'monospace', fontSize: '1.1rem'
+                  }}
+                >
+                  ← Return to logs
+                </button>
+
+                <h2 style={{ fontSize: '2.5rem', color: '#99c2ff', marginBottom: '10px' }}>{selectedArticle.title}</h2>
+                <p style={{ fontFamily: 'monospace', color: '#ccc', marginBottom: '40px' }}>Timestamp: {selectedArticle.date}</p>
+                
+                <div style={{ lineHeight: '1.8', fontSize: '1.15rem', color: '#e0e0e0', letterSpacing: '0.02em' }}>
+                  {selectedArticle.content.split('\n\n').map((para: string, idx: number) => (
+                      <p key={idx} style={{ marginBottom: '20px', textIndent: '40px' }}>{para}</p>
+                  ))}
+                </div>
+
+                <div style={{ marginTop: '50px', textAlign: 'center', opacity: 0.6 }}>***</div>
+                <div className="scroller">
+                  <Comments />
+                </div>
               </div>
-            </div>
-          )}
+            )}
+          </PageTurn>
         </div>
 
         {/* COLOANA DREAPTA */}
