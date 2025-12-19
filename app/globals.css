@@ -721,3 +721,18 @@ footer {
   box-shadow: 5px 0 15px -5px rgba(0,0,0,0.5);
   border-right: 1px solid rgba(0,0,0,0.1);
 }
+
+.fade-in {
+  width: 90%;
+  max-width: 800px;
+  margin: 0 auto;
+  padding-top: 20px;
+}
+
+/* Pentru ecrane mici, scoatem float-ul ca să nu strice textul */
+@media screen and (max-width: 600px) {
+  .fade-in {
+    margin-left: 45px; /* pentru a nu suprapune spirala */
+    width: 80%;
+  }
+}

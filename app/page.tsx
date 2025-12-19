@@ -4,7 +4,6 @@ import Image from 'next/image';
 import Link from 'next/link';
 import React, { useState, useEffect, useRef } from 'react';
 import SparkleManager from './components/SparkleManager'; 
-import MapWidget from './components/MapWidget';
 // 1. IMPORTĂ COMPONENTA
 import PageTurn from './components/PageTurn'; 
 
@@ -82,7 +81,7 @@ export default function Home() {
           <div id="d-wrapper">
               <div className="zig-zag-bottom"></div>
               <div className="sep1"></div>
-              {[...Array(decorCount + 2)].map((_, i) => (
+              {[...Array(decorCount)].map((_, i) => (
               <React.Fragment key={i}>
                 <div className="zig-zag-bottom zig-zag-top1"><p></p></div>
                 <div className="sep2"><p style={{ marginTop: '20%' }}></p></div>
@@ -98,7 +97,7 @@ export default function Home() {
           <div className="spiral-binding"></div>
           {/* 3. ÎNCONJOARĂ CONȚINUTUL CU <PageTurn> */}
           <PageTurn>
-            <div className="fade-in" style={{width: '90%', maxWidth: '800px', margin: '0 auto', paddingTop: '20px' }}>
+            <div className="fade-in">
               <h2 style={{ paddingLeft: '40px', marginBottom: '40px', borderBottom: '2px solid #99c2ff', paddingBottom: '10px', color: '#dcdcdc'}}> 
                 About me 
               </h2> 
@@ -143,7 +142,6 @@ export default function Home() {
                   I hope you find a bit of your own chaos reflected in these blog&apos;s lines. Maybe you’ll find that we are debugging the same errors. 
                 </p>
               </div> 
-              <MapWidget />
             </div>
           </PageTurn>
           
@@ -154,7 +152,7 @@ export default function Home() {
           <div id="d-wrapper" ref={rightRef}>
             <div className="zig-zag-bottom"></div>
             <div className="sep1"><p></p></div>
-            {[...Array(decorCount + 2)].map((_, i) => (
+            {[...Array(decorCount)].map((_, i) => (
               <React.Fragment key={i}>
                 <div className="zig-zag-bottom zig-zag-top1"><p></p></div>
                 <div className="sep2"><p style={{ marginTop: '20%' }}></p></div>
