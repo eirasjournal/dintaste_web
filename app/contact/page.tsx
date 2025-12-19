@@ -132,7 +132,7 @@ export default function Contact() {
           <div className="spiral-binding"></div>
           {/* 3. ÎNCONJOARĂ CONȚINUTUL CU <PageTurn> */}
           <PageTurn>
-            <div className="fade-in" style={{ width: '90%', maxWidth: '800px', margin: '0 auto', paddingTop: '20px' }}>
+            <div className="fade-in">
               <h2 style={{ paddingLeft: '40px', marginBottom: '40px', borderBottom: '2px solid #99c2ff', paddingBottom: '10px' }}>
                 Get in Touch
               </h2>

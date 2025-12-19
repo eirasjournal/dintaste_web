@@ -138,7 +138,7 @@ export default function ArticlesPage() {
           
             {!selectedArticle ? (
               // --- LISTĂ ARTICOLE ---
-              <div className="articles-list fade-in " style={{width: '90%', maxWidth: '800px', margin: '0 auto', paddingTop: '20px' }}>
+              <div className="fade-in">
                 <h2 style={{marginBottom: '40px', borderBottom: '2px solid #99c2ff', paddingBottom: '10px' }}>
                   Journal Entries
                 </h2>
