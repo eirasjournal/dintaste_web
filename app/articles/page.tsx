@@ -192,7 +192,7 @@ export default function ArticlesPage() {
 
             ) : (
               // --- ARTICOL COMPLET ---
-              <div className="single-article fade-in" style={{ width: '90%', maxWidth: '800px', margin: '0 auto', paddingTop: '20px' }}>
+              <div className="fade-in">
                 <button 
                   onClick={() => setSelectedArticle(null)}
                   style={{
