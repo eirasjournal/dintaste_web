@@ -65,6 +65,9 @@ export default function Home() {
               <Link href="/" onClick={() => setIsMenuOpen(false)} scroll={false}>Home</Link>
             </li>
             <li className="list-item">
+              <Link href="/palletizer" onClick={() => setIsMenuOpen(false)} scroll={false}>Robotics</Link>
+            </li>
+            <li className="list-item">
               <Link href="/articles" onClick={() => setIsMenuOpen(false)} scroll={false}>Journal Entries</Link>
             </li>
             <li className="list-item">
@@ -139,7 +142,7 @@ export default function Home() {
                 </p> 
 
                 <p style={{ marginBottom: '2%', fontSize: '1.2rem', textIndent: '40px' }}> 
-                  I hope you find a bit of your own chaos reflected in these blog&apos;s lines. Maybe you’ll find that we are debugging the same errors. 
+                  I hope you find a bit of your own chaos reflected in this blog&apos;s lines. Maybe you’ll find that we are debugging the same errors. 
                 </p>
               </div> 
             </div>

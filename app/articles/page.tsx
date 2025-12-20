@@ -100,6 +100,9 @@ export default function ArticlesPage() {
               <Link href="/" onClick={() => setIsMenuOpen(false)} scroll={false}>Home</Link>
             </li>
             <li className="list-item">
+              <Link href="/palletizer" onClick={() => setIsMenuOpen(false)} scroll={false}>Robotics</Link>
+            </li>
+            <li className="list-item">
               <Link href="/articles" onClick={() => {
                   setIsMenuOpen(false);
                   setSelectedArticle(null);
@@ -164,7 +167,7 @@ export default function ArticlesPage() {
                             Warning: Logic module is currently offline.
                         </strong>
                         <span style={{ opacity: 0.9 }}>
-                            There are no circuit diagrams or algorithms here. The content below contains unoptimized feelings, irrational data, and high levels of cringe. Proceed at your own risk.
+                            There are no algorithms here. The content below contains unoptimized feelings, irrational data, and high levels of cringe. Proceed at your own risk.
                         </span>
                     </div>
                 </div>

@@ -91,6 +91,9 @@ export default function Contact() {
               <Link href="/" onClick={() => setIsMenuOpen(false)} scroll={false}>Home</Link>
             </li>
             <li className="list-item">
+              <Link href="/palletizer" onClick={() => setIsMenuOpen(false)} scroll={false}>Robotics</Link>
+            </li>
+            <li className="list-item">
               <Link href="/articles" onClick={() => setIsMenuOpen(false)} scroll={false}>Journal Entries</Link>
             </li>
             <li className="list-item">
