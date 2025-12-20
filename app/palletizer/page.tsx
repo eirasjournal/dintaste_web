@@ -182,13 +182,11 @@ export default function Home() {
               <h2 style={{ paddingLeft: '40px', marginBottom: '20px', borderBottom: '2px solid #99c2ff', paddingBottom: '10px', color: '#dcdcdc'}}> 
                 Industrial Simulation 
               </h2> 
-              
-              <div style={{ paddingLeft: '40px', paddingRight: '20px', color: '#dcdcdc' }}> 
                 
                 {/* --- ROBOT CONTROLS & CANVAS UI --- */}
                 <div className="flex flex-col gap-6 relative">
 
-                    <p style={{ marginBottom: '2%', fontSize: '1.2rem', textIndent: '40px' }}> 
+                    <p style={{lineHeight: '1.8', fontSize: '1.15rem', color: '#dcdcdc', letterSpacing: '0.02em', marginBottom: '2%', textIndent: '40px' }}> 
                         This interactive sandbox bridges the gap between abstract math and mechanical motion. By defining custom formulas for the X, Y, and Z axes, you directly control the robot&apos;s palletizing logic, visualizing how algorithmic patterns translate into precise spatial coordinates in real-time.
                     </p>
 
@@ -270,9 +268,7 @@ export default function Home() {
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-
-                        </div>
+                          </div>
                     </div>
 
                     {/* --- 3D CANVAS & BUTTONS --- */}
