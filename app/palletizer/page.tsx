@@ -40,7 +40,7 @@ export default function Home() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const rightRef = useRef<HTMLDivElement | null>(null);
   const centerRef = useRef<HTMLDivElement | null>(null);
-  const decorCount = 4; 
+  const decorCount = 5; 
 
   // --- STATE ROBOT & LOGICĂ ---
   const [params, setParams] = useState({
@@ -298,6 +298,7 @@ export default function Home() {
 
                         {/* Canvas Container */}
                         <div className="h-[500px] border border-[#444] bg-[#151515] rounded relative overflow-hidden shadow-2xl">
+                          <div className="robot-stage">
                             <Canvas shadows camera={{ position: [10, 10, 10], fov: 35 }}>
                                 <color attach="background" args={['#151515']} />
                                 <ambientLight intensity={0.5} />
@@ -334,6 +335,7 @@ export default function Home() {
                                     return <Box key={boxData.id} position={boxData.position} size={[params.dx, params.dy, params.h]} />;
                                 })}
                             </Canvas>
+                            </div>
                             <div className="absolute bottom-2 left-2 text-[8px] text-gray-600 font-mono pointer-events-none">
                                 RENDER: THREE.JS FIBER
                             </div>

@@ -1073,3 +1073,17 @@ input[type=number] {
     flex-direction: column;
   }
 }
+
+.robot-stage {
+  height: 500px;
+  min-height: 500px;
+  max-height: 500px;
+
+  width: 100%;
+  position: relative;
+
+  border: 1px solid #444;
+  background: #151515;
+  border-radius: 6px;
+  overflow: hidden;
+}
