@@ -94,6 +94,24 @@ body {
   left: 0;
 }
 
+#d-wrapper .zig-zag-top2:before {
+  background:
+    linear-gradient(-45deg, hsl(215deg 100% 80% / 0.75) 16px, red 16px, blue 16px, transparent 0),
+    linear-gradient(45deg, hsl(215deg 100% 80% / 0.75) 16px, transparent 0);
+  background-position: left top;
+  background-repeat: repeat-x;
+  background-size: 22px 32px;
+  content: " ";
+  display: block;
+
+  height: 32px;
+  width: 100%;
+
+  position: relative;
+  bottom: 52px;
+  left: 0;
+}
+
 #d-wrapper div > * {
   margin: 0 0px;
 }
@@ -106,7 +124,21 @@ body {
   -webkit-backdrop-filter: blur(4px);
 }
 
+#d-wrapper .zig-zag-bottom2 {
+  margin: 32px 0;
+  margin-top: 0;
+  background: linear-gradient(to bottom, hsl(0deg 0% 7%), hsl(215deg 100% 80% / 0.95));
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
 #d-wrapper .zig-zag-top {
+  margin: 32px 0;
+  margin-bottom: 0;
+  background: linear-gradient(hsl(215deg 100% 80% / 0.95), hsl(0deg 0% 7%));
+}
+
+#d-wrapper .zig-zag-top2 {
   margin: 32px 0;
   margin-bottom: 0;
   background: linear-gradient(hsl(215deg 100% 80% / 0.95), hsl(0deg 0% 7%));
@@ -164,7 +196,9 @@ body {
 }
 
 #d-wrapper .zig-zag-bottom,
-#d-wrapper .zig-zag-top {
+#d-wrapper .zig-zag-top,
+#d-wrapper .zig-zag-top2,
+#d-wrapper .zig-zag-bottom2 {
   padding: 20px 0;
 }
 
@@ -206,6 +240,24 @@ body {
 }
 
 #d-wrapper .zig-zag-bottom:after {
+  background:
+    linear-gradient(-45deg, transparent 16px, hsl(215deg 100% 80% / 0.75) 0),
+    linear-gradient(45deg, transparent 16px, hsl(215deg 100% 80% / 0.75) 0);
+  background-repeat: repeat-x;
+  background-position: left bottom;
+  background-size: 22px 32px;
+  content: "";
+  display: block;
+
+  width: 100%;
+  height: 32px;
+
+  position: relative;
+  top: 52px;
+  left: 0px;
+}
+
+#d-wrapper .zig-zag-bottom2:after {
   background:
     linear-gradient(-45deg, transparent 16px, hsl(215deg 100% 80% / 0.75) 0),
     linear-gradient(45deg, transparent 16px, hsl(215deg 100% 80% / 0.75) 0);
@@ -449,13 +501,9 @@ body {
     width: 100%; 
     height: auto; 
   } 
-
-  #d-wrapper div.sep1 {
-    position: relative; 
-  }
   
   #d-wrapper div.sep1 { 
-    padding: 0 0; 
+    padding: 0; 
   } 
 
   #d-wrapper div.sep2 { 
@@ -463,7 +511,7 @@ body {
   } 
 
   #d-wrapper div.sep1{
-    min-height: 8vh;
+    min-height: 6vh;
   }
 
   .column1 { 
@@ -473,6 +521,14 @@ body {
   } 
 
   .column1 #d-wrapper .zig-zag-top1 { 
+    display: none; 
+  } 
+
+  .column1 #d-wrapper .zig-zag-bottom2 { 
+    display: none; 
+  } 
+
+  .column3 #d-wrapper .zig-zag-top2 { 
     display: none; 
   } 
 
@@ -487,6 +543,11 @@ body {
   } 
   .column3 #d-wrapper .zig-zag-top1 { 
     display: none; 
+  }
+  /* Ascundem paragrafele goale care fac padding inutil */
+  .column1 #d-wrapper p,
+  .column3 #d-wrapper p {
+    display: none;
   }
 }
 
