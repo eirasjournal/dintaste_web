@@ -6,6 +6,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import SparkleManager from './components/SparkleManager'; 
 // 1. IMPORTĂ COMPONENTA
 import PageTurn from './components/PageTurn'; 
+import MapWidget from './components/MapWidget';
 
 export default function Home() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -84,7 +85,7 @@ export default function Home() {
           <div id="d-wrapper">
               <div className="zig-zag-bottom2"></div>
               <div className="sep1"></div>
-              {[...Array(decorCount)].map((_, i) => (
+              {[...Array(decorCount + 2)].map((_, i) => (
               <React.Fragment key={i}>
                 <div className="zig-zag-bottom zig-zag-top1"><p></p></div>
                 <div className="sep2"><p style={{ marginTop: '20%' }}></p></div>
@@ -145,6 +146,7 @@ export default function Home() {
                   I hope you find a bit of your own chaos reflected in this blog&apos;s lines. Maybe you’ll find that we are debugging the same errors. 
                 </p>
               </div> 
+              <MapWidget />
             </div>
           </PageTurn>
           
@@ -155,7 +157,7 @@ export default function Home() {
           <div id="d-wrapper" ref={rightRef}>
             <div className="zig-zag-bottom"></div>
             <div className="sep1"><p></p></div>
-            {[...Array(decorCount)].map((_, i) => (
+            {[...Array(decorCount + 2)].map((_, i) => (
               <React.Fragment key={i}>
                 <div className="zig-zag-bottom zig-zag-top1"><p></p></div>
                 <div className="sep2"><p style={{ marginTop: '20%' }}></p></div>
