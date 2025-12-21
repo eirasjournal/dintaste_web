@@ -114,7 +114,7 @@ export default function Contact() {
         {/* COLOANA STANGA - Decorativa */}
         <div className="column1">
           <div id="d-wrapper">
-              <div className="zig-zag-bottom"></div>
+              <div className="zig-zag-bottom2"></div>
               <div className="sep1"><p></p></div>
             
               {[...Array(decorCount)].map((_, i) => (
@@ -214,7 +214,7 @@ export default function Contact() {
               </React.Fragment>
             ))}
             
-            <div className="zig-zag-top"></div>
+            <div className="zig-zag-top2"></div>
           </div>
         </div>
       </div>

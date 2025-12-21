@@ -120,7 +120,7 @@ export default function ArticlesPage() {
         {/* COLOANA STÂNGA */}
         <div className="column1">
           <div className="d-wrapper" id="d-wrapper"> 
-              <div className="zig-zag-bottom"></div>
+              <div className="zig-zag-bottom2"></div>
               <div className="sep1"><p></p></div>
               {[...Array(decorCount + 2)].map((_, i) => (
               <React.Fragment key={i}>
@@ -236,7 +236,7 @@ export default function ArticlesPage() {
                 <div className="sep2"><p style={{ marginTop: '20%' }}></p></div>
               </React.Fragment>
             ))}
-            <div className="zig-zag-top"></div>
+            <div className="zig-zag-top2"></div>
           </div>
         </div>
       </div>
