@@ -135,15 +135,17 @@ export default function Home() {
                 <div className="sticky-note yellow">
                   📌 <strong>Reminder:</strong>
                   <br/>
-                  If it works on the first try, something is definitely wrong.
+                  In theory, there is no difference between theory and practice.
+                  <br/>
+                  In practice, there is.
                 </div>
 
                 <p style={{ marginBottom: '2%', fontSize: '1.2rem', textIndent: '40px' }}> 
-                  Hello and welcome! You have landed in the digital workspace of a <strong>Robotics Master’s student</strong>. This platform serves as a living documentation of my academic and practical journey into the world of automation.
+                  Hello! You&apos;ve landed in the workspace of a <strong>Robotics Master’s student</strong>. This isn&apos;t just a portfolio. It&apos;s a documentation of my academic journey into the world of robotics and automation.
                 </p> 
                 
                 <p style={{ marginBottom: '2%', fontSize: '1.2rem', textIndent: '40px' }}> 
-                  My goal is to bridge the gap between theory and physical motion. I treat this website as an <strong>open-source lab notebook</strong>. I use this space to document the process of turning mathematical models into working machines.
+                  This platform is an <strong>open-source lab notebook</strong>. I use this space to document the process of turning mathematical models into working machines.
                 </p>
 
                 {/* --- AL DOILEA POST-IT (Roz, Stânga) - Focus pe Proces --- */}
@@ -160,7 +162,7 @@ export default function Home() {
                 </p>
 
                 <p style={{ marginBottom: '2%', fontSize: '1.2rem', textIndent: '40px' }}> 
-                  Why &apos;Din Taste&apos;? It translates to &apos;From Keys&apos; in my native Romanian. It represents the modern roboticist&apos;s workflow: taking lines of code written on a keyboard and translating them into precise, physical action. Whether it&apos;s simulation or hardware implementation, everything starts &apos;from keys&apos;.
+                  Why &apos;Din Taste&apos;? It translates to &apos;From Keys&apos; in my native Romanian. It represents the modern roboticist&apos;s workflow: taking lines of code written on a keyboard and translating them into physical action. Whether it&apos;s simulation or hardware implementation, everything starts &apos;from keys&apos;.
                 </p> 
               </div> 
               <MapWidget />
