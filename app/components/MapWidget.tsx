@@ -38,7 +38,7 @@ export default function MapWidget() {
         justifyContent: 'center', 
         alignItems: 'center',
         marginTop: '30px',
-        marginBottom: '30px',
+        marginBottom: '10px',
         overflow: 'hidden' // Important pentru a tăia excesul dacă CSS-ul nu prinde instant
       }} 
     >

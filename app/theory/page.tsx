@@ -1,10 +1,10 @@
 "use client";
 
-import Image from 'next/image';
 import Link from 'next/link';
 import React, { useState } from 'react';
-import SparkleManager from '../components/SparkleManager'; 
 import PageTurn from '../components/PageTurn'; 
+// 1. IMPORTĂM NOUL LAYOUT
+import PageLayout from '../components/PageLayout';
 
 // =========================================================
 // 1. ZONA COMPONENTE "NOTEBOOK THEORY" (NEMODIFICATĂ)
@@ -233,7 +233,6 @@ const THEORY_ARTICLES = [
     title: "Pallet Position Calculation",
     date: "Core Module 1.1",
     preview: "In industrial robotics, palletizing means computing the exact position of every single object using math.",
-    // AICI ESTE CHEIA: Acest articol are o componentă specială, nu doar text
     component: <NotebookTheory />,
     hasSimulationLink: true
   },
@@ -242,7 +241,6 @@ const THEORY_ARTICLES = [
     title: "Understanding Coordinate Systems",
     date: "Core Module 1.0",
     preview: "Before a robot moves, it must know where 'here' and 'there' are. A look into World vs Tool coordinates.",
-    // Acesta este un articol text standard
     content: `In industrial robotics, the concept of "position" is meaningless without a reference frame. A point defined as (10, 20, 30) implies a distance from an Origin (0,0,0).
 
 
@@ -263,251 +261,154 @@ The math we visualize in the "Simulation" tab effectively translates the linear 
 // =========================================================
 
 export default function TheoryPage() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [mobileSubmenuOpen, setMobileSubmenuOpen] = useState(false);
-  const decorCount = 6;
-
   // State pentru articolul selectat
   const [selectedArticle, setSelectedArticle] = useState<typeof THEORY_ARTICLES[number] | null>(null);
 
   return (
-    <main className="min-h-screen bg-[#050505]">
-      <SparkleManager />
-      {/* HEADER */}
-      <div className="header">
-        <div className="header-sparkles"></div>
-        <h1 className="typewriter-title">d i n<span className="word-space"></span>t a s t e</h1> 
-      </div>
+    // FOLOSIM PAGELAYOUT AICI, cu 6 elemente de decor (pentru ca pagina e lunga)
+    <PageLayout decorCount={6}>
+      <PageTurn>
+        <div className="fade-in">
 
-      {/* NAVBAR */}
-      <nav className="navbar">
-        <div className="navbar-left">
-          <Image src="/catpixeled.png" className="image" alt="Logo AZAX" width={150} height={150} priority />
-          <ul className={`nav-list ${isMenuOpen ? 'active' : ''}`}>
-            
-            <li className="list-item">
-              <Link href="/" onClick={() => setIsMenuOpen(false)} scroll={false}>Home</Link>
-            </li>
+          {!selectedArticle ? (
+            // ---------------------------------------------
+            // VIEW A: LISTA DE ARTICOLE
+            // ---------------------------------------------
+            <>
+              <h2 style={{ paddingLeft: '40px', marginBottom: '20px', borderBottom: '2px solid #99c2ff', paddingBottom: '10px', color: '#dcdcdc'}}> 
+                Theoretical Concepts
+              </h2> 
 
-            {/* --- DROPDOWN ROBOTICS --- */}
-            <li className={`list-item dropdown-parent ${mobileSubmenuOpen ? 'active' : ''}`}>
-              <span 
-                className="nav-link cursor-pointer" 
-                style={{ color: '#99c2ff' }}
-                onClick={(e) => {
-                  e.preventDefault();
-                  setMobileSubmenuOpen(!mobileSubmenuOpen);
-                }}
-              >
-                Robotics <span style={{ fontSize: '0.6em', verticalAlign: 'middle' }}>
-                  {mobileSubmenuOpen ? '▲' : '▼'}
-                </span>
-              </span>
-              
-              <ul className="dropdown-menu">
-                <li>
-                  <Link href="/theory" onClick={() => {
-                      setIsMenuOpen(false);
-                      setSelectedArticle(null); // Reset la listă dacă dai click pe Theory din meniu
-                  }}>Theory</Link>
-                </li>
-                <li>
-                  <Link href="/palletizer" onClick={() => setIsMenuOpen(false)}>Simulation</Link>
-                </li>
-              </ul>
-            </li>
-
-            <li className="list-item">
-              <Link href="/contact" onClick={() => setIsMenuOpen(false)} scroll={false}>Contact</Link>
-            </li>
-          </ul>
-        </div>
-        <button className="menu-toggle" onClick={() => setIsMenuOpen(!isMenuOpen)} aria-label="Toggle menu">☰</button>
-      </nav>
-
-      <div className="row">
-        {/* COLOANA STANGA */}
-        <div className="column1">
-          <div id="d-wrapper">
-              <div className="zig-zag-bottom2"></div>
-              <div className="sep1"></div>
-              {[...Array(decorCount)].map((_, i) => (
-              <React.Fragment key={i}>
-                <div className="zig-zag-bottom zig-zag-top1"><p></p></div>
-                <div className="sep2"><p style={{ marginTop: '20%' }}></p></div>
-              </React.Fragment>
-            ))}
-            <div className="zig-zag-top"></div>
-          </div>
-        </div>
-
-        {/* COLOANA CENTRALA */}
-        <div className="column2" style={{ perspective: '2000px' }}>
-          <div className="spiral-binding"></div>
-          
-          <PageTurn>
-            <div className="fade-in">
-
-              {!selectedArticle ? (
-                // ---------------------------------------------
-                // VIEW A: LISTA DE ARTICOLE
-                // ---------------------------------------------
-                <>
-                  <h2 style={{ paddingLeft: '40px', marginBottom: '20px', borderBottom: '2px solid #99c2ff', paddingBottom: '10px', color: '#dcdcdc'}}> 
-                    Theoretical Concepts
-                  </h2> 
-
-                   {/* --- SYSTEM LOG: ONLINE --- */}
-                    <div style={{
-                        backgroundColor: 'rgba(5, 20, 5, 0.7)', 
-                        border: '1px dashed #00ff9d',                
-                        borderLeft: '5px solid #00ff9d',             
-                        padding: '15px 20px',
-                        marginBottom: '40px',
-                        color: '#00ff9d',                                
-                        fontFamily: 'monospace',
-                        fontSize: '0.95rem',
-                        display: 'flex',
-                        alignItems: 'start',
-                        gap: '15px',
-                    }}>
-                        <span style={{ fontSize: '1.4rem', lineHeight: '1' }}>💠</span>
-                        <div>
-                            <strong style={{ display: 'block', marginBottom: '5px', textTransform: 'uppercase', letterSpacing: '1px' }}>
-                                System Status: Online
-                            </strong>
-                            <span style={{ opacity: 0.9, color: '#a0a0a0' }}>
-                                Accessing logic database. Select a module to initialize data stream.
-                            </span>
-                        </div>
+                {/* --- SYSTEM LOG: ONLINE --- */}
+                <div style={{
+                    backgroundColor: 'rgba(5, 20, 5, 0.7)', 
+                    border: '1px dashed #00ff9d',                
+                    borderLeft: '5px solid #00ff9d',             
+                    padding: '15px 20px',
+                    marginBottom: '40px',
+                    color: '#00ff9d',                                
+                    fontFamily: 'monospace',
+                    fontSize: '0.95rem',
+                    display: 'flex',
+                    alignItems: 'start',
+                    gap: '15px',
+                }}>
+                    <span style={{ fontSize: '1.4rem', lineHeight: '1' }}>💠</span>
+                    <div>
+                        <strong style={{ display: 'block', marginBottom: '5px', textTransform: 'uppercase', letterSpacing: '1px' }}>
+                            System Status: Online
+                        </strong>
+                        <span style={{ opacity: 0.9, color: '#a0a0a0' }}>
+                            Accessing logic database. Select a module to initialize data stream.
+                        </span>
                     </div>
+                </div>
 
-                  {/* LISTAREA */}
-                  {THEORY_ARTICLES.map((art) => (
-                    <div
-                      key={art.id}
-                      onClick={() => setSelectedArticle(art)}
-                      className="article-preview-card"
-                      style={{
-                        marginBottom: '30px',
-                        cursor: 'pointer',
-                        padding: '20px',
-                        backgroundColor: 'rgba(255,255,255,0.03)',
-                        borderRadius: '10px',
-                        transition: 'all 0.2s ease'
-                      }}
-                    >
-                      <h3 style={{ color: '#99c2ff', fontSize: '1.4rem', marginBottom: '5px', fontFamily: 'Courier New' }}>
-                          {art.title}
-                      </h3>
-                      <span style={{ color: '#666', fontFamily: 'monospace', fontSize: '0.8rem', textTransform: 'uppercase' }}>
-                          {art.date}
-                      </span>
-                      <p style={{ marginTop: '10px', color: '#aaa', fontSize: '0.95rem' }}>
-                          {art.preview} <span style={{color: '#99c2ff'}}>[Read_Data]</span>
-                      </p>
-                    </div>
-                  ))}
-                </>
-
-              ) : (
-                // ---------------------------------------------
-                // VIEW B: ARTICOL SELECTAT
-                // ---------------------------------------------
-                <>
-                  {/* Buton Înapoi */}
-                  <button 
-                    onClick={() => setSelectedArticle(null)}
-                    style={{
-                      background: 'transparent', 
-                      border: '1px solid #99c2ff', 
-                      color: '#99c2ff',
-                      padding: '8px 20px', 
-                      cursor: 'pointer', 
-                      marginBottom: '30px',
-                      marginLeft: '40px',
-                      fontFamily: 'monospace', 
-                      fontSize: '0.9rem',
-                      textTransform: 'uppercase',
-                      letterSpacing: '1px'
-                    }}
-                    className="hover:bg-[#99c2ff] hover:text-black transition-colors"
-                  >
-                    ← Return to Index
-                  </button>
-
-                  <h2 style={{ paddingLeft: '40px', marginBottom: '10px', color: '#dcdcdc', fontSize: '2rem'}}> 
-                    {selectedArticle.title}
-                  </h2> 
-                  <p style={{ paddingLeft: '40px', fontFamily: 'monospace', color: '#555', marginBottom: '40px', fontSize: '0.8rem' }}>
-                        UID: {selectedArticle.date} / ID: {selectedArticle.id}
+              {/* LISTAREA */}
+              {THEORY_ARTICLES.map((art) => (
+                <div
+                  key={art.id}
+                  onClick={() => setSelectedArticle(art)}
+                  className="article-preview-card"
+                  style={{
+                    marginBottom: '30px',
+                    cursor: 'pointer',
+                    padding: '20px',
+                    backgroundColor: 'rgba(255,255,255,0.03)',
+                    borderRadius: '10px',
+                    transition: 'all 0.2s ease'
+                  }}
+                >
+                  <h3 style={{ color: '#99c2ff', fontSize: '1.4rem', marginBottom: '5px', fontFamily: 'Courier New' }}>
+                      {art.title}
+                  </h3>
+                  <span style={{ color: '#666', fontFamily: 'monospace', fontSize: '0.8rem', textTransform: 'uppercase' }}>
+                      {art.date}
+                  </span>
+                  <p style={{ marginTop: '10px', color: '#aaa', fontSize: '0.95rem' }}>
+                      {art.preview} <span style={{color: '#99c2ff'}}>[Read_Data]</span>
                   </p>
+                </div>
+              ))}
+            </>
 
-                  {/* --- LOGICA DE AFIȘARE --- */}
-                  {selectedArticle.component ? (
-                    // CAZ 1: Randează componenta specială (Notebook)
-                    <div className="w-full">
-                        {selectedArticle.component}
-                        
-                        {/* Butonul CTA pentru simulare (dacă e setat flag-ul) */}
-                        {selectedArticle.hasSimulationLink && (
-                            <div className="text-center my-8">
-                                <Link href="/palletizer">
-                                    <button className="cyber-btn start px-8 py-4">
-                                        <span className="btn-icon" style={{marginBottom: '2%'}}>▶</span>
-                                        Test Logic in Simulator
-                                    </button>
-                                </Link>
-                            </div>
-                        )}
-                    </div>
-                  ) : (
-                    // CAZ 2: Randează text standard
-                    <div style={{ lineHeight: '1.7', fontSize: '1.05rem', color: '#d0d0d0', letterSpacing: '0.01em' }}>
-                        {selectedArticle.content?.split('\n\n').map((para, idx) => (
-                             <p key={idx} style={{ marginBottom: '20px', textIndent: '40px' }}>
-                             {/* Verificare simplă pentru imagini sau formule (opțional) */}
-                             {para.startsWith('[Image') ? (
-                                 <span style={{display: 'block', padding: '40px', border: '1px dashed #444', textAlign: 'center', color: '#555', margin: '20px 0', fontSize: '0.8rem', fontStyle: 'italic'}}>
-                                     {para}
-                                 </span>
-                             ) : (
-                                 para
-                             )}
-                         </p>
-                        ))}
-                    </div>
-                  )}
+          ) : (
+            // ---------------------------------------------
+            // VIEW B: ARTICOL SELECTAT
+            // ---------------------------------------------
+            <>
+              {/* Buton Înapoi */}
+              <button 
+                onClick={() => setSelectedArticle(null)}
+                style={{
+                  background: 'transparent', 
+                  border: '1px solid #99c2ff', 
+                  color: '#99c2ff',
+                  padding: '8px 20px', 
+                  cursor: 'pointer', 
+                  marginBottom: '30px',
+                  marginLeft: '40px',
+                  fontFamily: 'monospace', 
+                  fontSize: '0.9rem',
+                  textTransform: 'uppercase',
+                  letterSpacing: '1px'
+                }}
+                className="hover:bg-[#99c2ff] hover:text-black transition-colors"
+              >
+                ← Return to Index
+              </button>
 
-                  <div style={{ marginTop: '50px', borderTop: '1px solid #222', paddingTop: '20px', textAlign: 'center', opacity: 0.6, fontFamily: 'monospace', color: '#444' }}>
-                        / END OF FILE
-                  </div>
-                </>
+              <h2 style={{ paddingLeft: '40px', marginBottom: '10px', color: '#dcdcdc', fontSize: '2rem'}}> 
+                {selectedArticle.title}
+              </h2> 
+              <p style={{ paddingLeft: '40px', fontFamily: 'monospace', color: '#555', marginBottom: '40px', fontSize: '0.8rem' }}>
+                    UID: {selectedArticle.date} / ID: {selectedArticle.id}
+              </p>
+
+              {/* --- LOGICA DE AFIȘARE --- */}
+              {selectedArticle.component ? (
+                // CAZ 1: Randează componenta specială (Notebook)
+                <div className="w-full">
+                    {selectedArticle.component}
+                    
+                    {/* Butonul CTA pentru simulare (dacă e setat flag-ul) */}
+                    {selectedArticle.hasSimulationLink && (
+                        <div className="text-center my-8">
+                            <Link href="/palletizer">
+                                <button className="cyber-btn start px-8 py-4">
+                                    <span className="btn-icon" style={{marginBottom: '2%'}}>▶</span>
+                                    Test Logic in Simulator
+                                </button>
+                            </Link>
+                        </div>
+                    )}
+                </div>
+              ) : (
+                // CAZ 2: Randează text standard
+                <div style={{ lineHeight: '1.7', fontSize: '1.05rem', color: '#d0d0d0', letterSpacing: '0.01em' }}>
+                    {selectedArticle.content?.split('\n\n').map((para, idx) => (
+                          <p key={idx} style={{ marginBottom: '20px', textIndent: '40px' }}>
+                          {/* Verificare simplă pentru imagini sau formule (opțional) */}
+                          {para.startsWith('[Image') ? (
+                              <span style={{display: 'block', padding: '40px', border: '1px dashed #444', textAlign: 'center', color: '#555', margin: '20px 0', fontSize: '0.8rem', fontStyle: 'italic'}}>
+                                  {para}
+                              </span>
+                          ) : (
+                              para
+                          )}
+                       </p>
+                    ))}
+                </div>
               )}
 
-            </div>
-          </PageTurn>
-        </div>
+              <div style={{ marginTop: '50px', borderTop: '1px solid #222', paddingTop: '20px', textAlign: 'center', opacity: 0.6, fontFamily: 'monospace', color: '#444' }}>
+                    / END OF FILE
+              </div>
+            </>
+          )}
 
-        {/* COLOANA DREAPTA */}
-        <div className="column3">
-          <div id="d-wrapper">
-            <div className="zig-zag-bottom"></div>
-            <div className="sep1"><p></p></div>
-            {[...Array(decorCount)].map((_, i) => (
-              <React.Fragment key={i}>
-                <div className="zig-zag-bottom zig-zag-top1"><p></p></div>
-                <div className="sep2"><p style={{ marginTop: '20%' }}></p></div>
-              </React.Fragment>
-            ))}
-            <div className="zig-zag-top2"></div>
-          </div>
         </div>
-      </div>
-
-      <footer>
-        <p>Ⓒ 2025 din taste</p>
-      </footer>
-    </main>
+      </PageTurn>
+    </PageLayout>
   );
 }

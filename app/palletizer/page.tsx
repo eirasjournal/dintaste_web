@@ -1,10 +1,9 @@
 "use client";
 
-import Image from 'next/image';
-import Link from 'next/link';
-import React, { useState, useEffect, useRef, useMemo, useCallback } from 'react';
-import SparkleManager from '../components/SparkleManager'; 
+import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import PageTurn from '../components/PageTurn'; 
+// 1. IMPORTĂM NOUL LAYOUT
+import PageLayout from '../components/PageLayout';
 
 // --- IMPORTS PENTRU ROBOT ---
 import { Canvas } from '@react-three/fiber';
@@ -14,10 +13,9 @@ import * as THREE from 'three';
 import Robot from '../components/Robot'; 
 
 // =========================================================
-// 1. COMPONENTE & HELPERE PENTRU SIMULARE
+// 1. COMPONENTE & HELPERE PENTRU SIMULARE (RĂMÂN NESCHIMBATE)
 // =========================================================
 
-// Componenta locală Box pentru vizualizare
 const Box = ({ position, size, color }: { position: [number, number, number], size: [number, number, number], color?: string }) => {
   return (
     <group position={position}>
@@ -38,7 +36,6 @@ interface PlacedBoxData {
     position: [number, number, number];
 }
 
-// --- COMPONENTA MARE: PALLETIZER SANDBOX (Extrasă din main) ---
 const PalletizerSandbox = () => {
     // --- STATE ROBOT & LOGICĂ ---
     const [params, setParams] = useState({
@@ -57,7 +54,6 @@ const PalletizerSandbox = () => {
     const [robotHasBox, setRobotHasBox] = useState(false); 
     const [isSimulating, setIsSimulating] = useState(false); 
 
-    // 1. Reset Handler
     const handleReset = useCallback(() => {
         setIsSimulating(false);
         setPlacedBoxes([]); 
@@ -65,7 +61,6 @@ const PalletizerSandbox = () => {
         setRobotHasBox(false);
     }, []);
 
-    // 2. Calcul Coordonate (Memoized)
     const generatedBoxes = useMemo(() => {
         try {
             const newBoxes = [];
@@ -89,18 +84,15 @@ const PalletizerSandbox = () => {
         }
     }, [params, formulas]);
 
-    // 3. Reset Trigger
     useEffect(() => {
         const t = setTimeout(() => handleReset(), 100);
         return () => clearTimeout(t);
     }, [params, formulas, handleReset]);
 
-    // 4. Callbacks Robot
     const handleGrab = () => setRobotHasBox(true);
 
     const handlePlace = () => {
         setRobotHasBox(false);
-        
         const boxPosition = generatedBoxes[currentBoxIndex] as [number, number, number];
         if (boxPosition) {
             const newBox: PlacedBoxData = {
@@ -109,7 +101,6 @@ const PalletizerSandbox = () => {
             };
             setPlacedBoxes(prev => [...prev, newBox]);
         }
-
         if (currentBoxIndex < generatedBoxes.length - 1) {
             setCurrentBoxIndex(prev => prev + 1);
         } else {
@@ -298,101 +289,27 @@ const SIMULATIONS_DATA = [
   }
 ];
 
-
 // =========================================================
 // 3. PAGINA PRINCIPALA (ROBOTICS/SIMULATION PAGE)
 // =========================================================
 
 export default function Robotics() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [mobileSubmenuOpen, setMobileSubmenuOpen] = useState(false);
-  const rightRef = useRef<HTMLDivElement | null>(null);
-  const centerRef = useRef<HTMLDivElement | null>(null);
-  const decorCount = 6; 
-
   // State pentru simularea selectată
   const [selectedSimulation, setSelectedSimulation] = useState<typeof SIMULATIONS_DATA[number] | null>(null);
 
   return (
-    <main className="min-h-screen bg-[#050505]">
-      <SparkleManager />
-      {/* HEADER */}
-      <div className="header">
-        <div className="header-sparkles"></div>
-        <h1 className="typewriter-title">d i n<span className="word-space"></span>t a s t e</h1> 
-      </div>
+    // FOLOSIM PAGELAYOUT AICI, cu 5 elemente de decor
+    <PageLayout decorCount={5}>
+      <PageTurn>
+        <div className="fade-in">
+          <h2 style={{ paddingLeft: '40px', marginBottom: '20px', borderBottom: '2px solid #99c2ff', paddingBottom: '10px', color: '#dcdcdc'}}> 
+            Industrial Simulations
+          </h2> 
 
-      {/* NAVBAR */}
-      <nav className="navbar">
-        <div className="navbar-left">
-          <Image src="/catpixeled.png" className="image" alt="Logo AZAX" width={150} height={150} priority />
-          <ul className={`nav-list ${isMenuOpen ? 'active' : ''}`}>
-            <li className="list-item"><Link href="/" onClick={() => setIsMenuOpen(false)} scroll={false}>Home</Link></li>
-            
-            {/* DROPDOWN */}
-            <li className={`list-item dropdown-parent ${mobileSubmenuOpen ? 'active' : ''}`}>
-              <span 
-                className="nav-link cursor-pointer" 
-                style={{ color: '#99c2ff' }}
-                onClick={(e) => {
-                  e.preventDefault(); 
-                  setMobileSubmenuOpen(!mobileSubmenuOpen);
-                }}
-              >
-                Robotics <span style={{ fontSize: '0.6em', verticalAlign: 'middle' }}>
-                  {mobileSubmenuOpen ? '▲' : '▼'} 
-                </span>
-              </span>
-              <ul className="dropdown-menu">
-                <li>
-                  <Link href="/theory" onClick={() => setIsMenuOpen(false)}>Theory</Link>
-                </li>
-                <li>
-                  <Link href="/palletizer" onClick={() => {
-                      setIsMenuOpen(false);
-                      setSelectedSimulation(null); // Reset la listă
-                  }}>Simulation</Link>
-                </li>
-              </ul>
-            </li>
-
-            <li className="list-item"><Link href="/contact" onClick={() => setIsMenuOpen(false)} scroll={false}>Contact</Link></li>
-          </ul>
-        </div>
-        <button className="menu-toggle" onClick={() => setIsMenuOpen(!isMenuOpen)} aria-label="Toggle menu">☰</button>
-      </nav>
-
-      <div className="row">
-        {/* COLOANA STANGA */}
-        <div className="column1">
-          <div id="d-wrapper">
-              <div className="zig-zag-bottom2"></div>
-              <div className="sep1"></div>
-              {[...Array(decorCount)].map((_, i) => (
-              <React.Fragment key={i}>
-                <div className="zig-zag-bottom zig-zag-top1"><p></p></div>
-                <div className="sep2"><p style={{ marginTop: '20%' }}></p></div>
-              </React.Fragment>
-            ))}
-            <div className="zig-zag-top"></div>
-          </div>
-        </div>
-
-        {/* COLOANA CENTRALA */}
-        <div className="column2" ref={centerRef} style={{ perspective: '2000px' }}>
-          <div className="spiral-binding"></div>
-          
-          <PageTurn>
-            <div className="fade-in">
-              <h2 style={{ paddingLeft: '40px', marginBottom: '20px', borderBottom: '2px solid #99c2ff', paddingBottom: '10px', color: '#dcdcdc'}}> 
-                Industrial Simulations
-              </h2> 
-
-
-              {!selectedSimulation ? (
-                // --- VIEW A: LISTA SIMULĂRI ---
-                <div>
-                  {/* --- SYSTEM LOG: READY --- */}
+          {!selectedSimulation ? (
+            // --- VIEW A: LISTA SIMULĂRI ---
+            <div>
+              {/* --- SYSTEM LOG: READY --- */}
                <div style={{
                     backgroundColor: 'rgba(5, 20, 5, 0.7)', 
                     border: '1px dashed #00ff9d',                
@@ -417,91 +334,71 @@ export default function Robotics() {
                         </span>
                     </div>
                 </div>
-                    {SIMULATIONS_DATA.map((sim) => (
-                         <div
-                         key={sim.id}
-                         onClick={() => setSelectedSimulation(sim)}
-                         className="article-preview-card"
-                         style={{
-                           marginBottom: '30px',
-                           cursor: 'pointer',
-                           padding: '20px',
-                           backgroundColor: 'rgba(255,255,255,0.03)',
-                           borderRadius: '10px',
-                           transition: 'all 0.2s ease'
-                         }}
-                       >
-                         <h3 style={{ color: '#99c2ff', fontSize: '1.4rem', marginBottom: '5px', fontFamily: 'Courier New' }}>
-                             {sim.title}
-                         </h3>
-                         <span style={{ color: '#666', fontFamily: 'monospace', fontSize: '0.8rem', textTransform: 'uppercase' }}>
-                             {sim.version}
-                         </span>
-                         <p style={{ marginTop: '10px', color: '#aaa', fontSize: '0.95rem' }}>
-                             {sim.preview} <span style={{color: '#99c2ff'}}>[Launch_System]</span>
-                         </p>
-                       </div>
-                    ))}
-                </div>
-              ) : (
-                // --- VIEW B: SIMULARE ACTIVĂ ---
-                <div>
-                     <button 
-                        onClick={() => setSelectedSimulation(null)}
-                        style={{
-                            background: 'transparent', 
-                            border: '1px solid #99c2ff', 
-                            color: '#99c2ff',
-                            padding: '8px 20px', 
-                            cursor: 'pointer', 
-                            marginBottom: '30px',
-                            marginLeft: '40px',
-                            fontFamily: 'monospace', 
-                            fontSize: '0.9rem',
-                            textTransform: 'uppercase',
-                            letterSpacing: '1px'
-                        }}
-                        className="hover:bg-[#99c2ff] hover:text-black transition-colors"
+
+                {SIMULATIONS_DATA.map((sim) => (
+                      <div
+                      key={sim.id}
+                      onClick={() => setSelectedSimulation(sim)}
+                      className="article-preview-card"
+                      style={{
+                        marginBottom: '30px',
+                        cursor: 'pointer',
+                        padding: '20px',
+                        backgroundColor: 'rgba(255,255,255,0.03)',
+                        borderRadius: '10px',
+                        transition: 'all 0.2s ease'
+                      }}
                     >
-                        ← Terminate Session
-                    </button>
-
-                    <h2 style={{ paddingLeft: '40px', marginBottom: '10px', color: '#dcdcdc', fontSize: '2rem'}}> 
-                        {selectedSimulation.title}
-                    </h2> 
-                    <p style={{ paddingLeft: '40px', fontFamily: 'monospace', color: '#555', marginBottom: '40px', fontSize: '0.8rem' }}>
-                            Build: {selectedSimulation.version}
-                    </p>
-
-                    <div className="w-full">
-                        {selectedSimulation.component}
+                      <h3 style={{ color: '#99c2ff', fontSize: '1.4rem', marginBottom: '5px', fontFamily: 'Courier New' }}>
+                          {sim.title}
+                      </h3>
+                      <span style={{ color: '#666', fontFamily: 'monospace', fontSize: '0.8rem', textTransform: 'uppercase' }}>
+                          {sim.version}
+                      </span>
+                      <p style={{ marginTop: '10px', color: '#aaa', fontSize: '0.95rem' }}>
+                          {sim.preview} <span style={{color: '#99c2ff'}}>[Launch_System]</span>
+                      </p>
                     </div>
+                ))}
+            </div>
+          ) : (
+            // --- VIEW B: SIMULARE ACTIVĂ ---
+            <div>
+                  <button 
+                    onClick={() => setSelectedSimulation(null)}
+                    style={{
+                        background: 'transparent', 
+                        border: '1px solid #99c2ff', 
+                        color: '#99c2ff',
+                        padding: '8px 20px', 
+                        cursor: 'pointer', 
+                        marginBottom: '30px',
+                        marginLeft: '40px',
+                        fontFamily: 'monospace', 
+                        fontSize: '0.9rem',
+                        textTransform: 'uppercase',
+                        letterSpacing: '1px'
+                    }}
+                    className="hover:bg-[#99c2ff] hover:text-black transition-colors"
+                >
+                    ← Terminate Session
+                </button>
+
+                <h2 style={{ paddingLeft: '40px', marginBottom: '10px', color: '#dcdcdc', fontSize: '2rem'}}> 
+                    {selectedSimulation.title}
+                </h2> 
+                <p style={{ paddingLeft: '40px', fontFamily: 'monospace', color: '#555', marginBottom: '40px', fontSize: '0.8rem' }}>
+                        Build: {selectedSimulation.version}
+                </p>
+
+                <div className="w-full">
+                    {selectedSimulation.component}
                 </div>
-              )}
-              
-            </div> 
-          </PageTurn>
-        </div>
-
-        {/* COLOANA DREAPTA */}
-        <div className="column3">
-          <div id="d-wrapper" ref={rightRef}>
-            <div className="zig-zag-bottom"></div>
-            <div className="sep1"><p></p></div>
-            {[...Array(decorCount)].map((_, i) => (
-              <React.Fragment key={i}>
-                <div className="zig-zag-bottom zig-zag-top1"><p></p></div>
-                <div className="sep2"><p style={{ marginTop: '20%' }}></p></div>
-              </React.Fragment>
-            ))}
-            <div className="zig-zag-top2"></div>
-          </div>
-        </div>
-      </div>
-
-      <footer>
-        <p>Ⓒ 2025 din taste</p>
-      </footer>
-    </main>
+            </div>
+          )}
+          
+        </div> 
+      </PageTurn>
+    </PageLayout>
   );
 }

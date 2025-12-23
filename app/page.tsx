@@ -1,93 +1,19 @@
 "use client";
 
-import Image from 'next/image';
-import Link from 'next/link';
-import React, { useState } from 'react';
-import SparkleManager from './components/SparkleManager'; 
-// 1. IMPORTĂ COMPONENTA
+import React from 'react';
+// Importă noul layout
+import PageLayout from './components/PageLayout';
 import PageTurn from './components/PageTurn'; 
 import MapWidget from './components/MapWidget';
 
 export default function Home() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  // 1. ADĂUGĂM ACEST STATE NOU
-  const [mobileSubmenuOpen, setMobileSubmenuOpen] = useState(false);
-  const decorCount = 4;
-
+  // Aici stabilești câte decorațiuni vrei pentru Home
+  const decorForHome = 3;
+  
   return (
-    <main className="min-h-screen bg-[#050505]">
-      <SparkleManager />
-      {/* HEADER */}
-      <div className="header">
-        <div className="header-sparkles"></div>
-        <h1 className="typewriter-title">d i n<span className="word-space"></span>t a s t e</h1> 
-      </div>
-
-      {/* NAVBAR */}
-      <nav className="navbar">
-        <div className="navbar-left">
-          <Image src="/catpixeled.png" className="image" alt="Logo AZAX" width={150} height={150} priority />
-          <ul className={`nav-list ${isMenuOpen ? 'active' : ''}`}>
-            <li className="list-item">
-              <Link href="/" onClick={() => setIsMenuOpen(false)} scroll={false}>Home</Link>
-            </li>
-            {/* --- MODIFICARE DROPDOWN ROBOTICS --- */}
-            {/* Adăugăm clasa 'active' dacă submeniul este deschis */}
-            <li className={`list-item dropdown-parent ${mobileSubmenuOpen ? 'active' : ''}`}>
-              
-              {/* Adăugăm onClick pentru a comuta starea (Open/Close) */}
-              <span 
-                className="nav-link cursor-pointer" 
-                onClick={(e) => {
-                  e.preventDefault(); // Previne comportamentul default
-                  setMobileSubmenuOpen(!mobileSubmenuOpen); // Comută Deschis/Închis
-                }}
-              >
-                Robotics <span style={{ fontSize: '0.6em', verticalAlign: 'middle' }}>
-                  {mobileSubmenuOpen ? '▲' : '▼'} {/* Schimbăm săgeata */}
-                </span>
-              </span>
-              
-              <ul className="dropdown-menu">
-                <li>
-                  <Link href="/theory" onClick={() => setIsMenuOpen(false)}>Theory</Link>
-                </li>
-                <li>
-                  <Link href="/palletizer" onClick={() => setIsMenuOpen(false)}>Simulation</Link>
-                </li>
-              </ul>
-            </li>
-            {/* --- END MODIFICARE --- */}
-            <li className="list-item">
-              <Link href="/contact" onClick={() => setIsMenuOpen(false)} scroll={false}>Contact</Link>
-            </li>
-          </ul>
-        </div>
-        <button className="menu-toggle" onClick={() => setIsMenuOpen(!isMenuOpen)} aria-label="Toggle menu">☰</button>
-      </nav>
-
-      <div className="row">
-        {/* COLOANA STANGA */}
-        <div className="column1">
-          <div id="d-wrapper">
-              <div className="zig-zag-bottom2"></div>
-              <div className="sep1"></div>
-              {[...Array(decorCount)].map((_, i) => (
-              <React.Fragment key={i}>
-                <div className="zig-zag-bottom zig-zag-top1"><p></p></div>
-                <div className="sep2"><p style={{ marginTop: '20%' }}></p></div>
-              </React.Fragment>
-            ))}
-            <div className="zig-zag-top"></div>
-          </div>
-        </div>
-
-        {/* COLOANA CENTRALA - Aici aplicăm stilul de perspectivă și wrapper-ul */}
-        {/* 2. ADADUGĂ style={{ perspective: '2000px' }} PE CONTAINERUL PĂRINTE */}
-        <div className="column2" style={{ perspective: '2000px' }}>
-          <div className="spiral-binding"></div>
-          {/* 3. ÎNCONJOARĂ CONȚINUTUL CU <PageTurn> */}
-          <PageTurn>
+    <PageLayout decorCount={decorForHome}>
+       {/* Tot ce pui aici va apărea automat în coloana centrală */}
+       <PageTurn>
             <div className="fade-in">
               <h2 style={{ paddingLeft: '40px', marginBottom: '40px', borderBottom: '2px solid #99c2ff', paddingBottom: '10px', color: '#dcdcdc'}}> 
                 About me 
@@ -127,29 +53,7 @@ export default function Home() {
               </div> 
               <MapWidget />
             </div>
-          </PageTurn>
-          
-        </div>
-
-        {/* COLOANA DREAPTA */}
-        <div className="column3">
-          <div id="d-wrapper">
-            <div className="zig-zag-bottom"></div>
-            <div className="sep1"><p></p></div>
-            {[...Array(decorCount)].map((_, i) => (
-              <React.Fragment key={i}>
-                <div className="zig-zag-bottom zig-zag-top1"><p></p></div>
-                <div className="sep2"><p style={{ marginTop: '20%' }}></p></div>
-              </React.Fragment>
-            ))}
-            <div className="zig-zag-top2"></div>
-          </div>
-        </div>
-      </div>
-
-      <footer>
-        <p>Ⓒ 2025 din taste</p>
-      </footer>
-    </main>
+       </PageTurn>
+    </PageLayout>
   );
 }

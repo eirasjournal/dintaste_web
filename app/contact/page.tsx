@@ -1,24 +1,14 @@
 "use client";
 
-import Image from 'next/image';
-import Link from 'next/link';
-import React, { useState, useEffect, useRef } from 'react';
-import SparkleManager from '../components/SparkleManager'; // <--- IMPORT AICI
+import React, { useState } from 'react';
 import PageTurn from '../components/PageTurn';
+// 1. IMPORTĂM NOUL LAYOUT
+import PageLayout from '../components/PageLayout';
 
 export default function Contact() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  // 1. ADĂUGĂM ACEST STATE NOU
-  const [mobileSubmenuOpen, setMobileSubmenuOpen] = useState(false);
-  const [decorCount, setDecorCount] = useState(3);
-  const leftRef = useRef<HTMLDivElement | null>(null);
-  const rightRef = useRef<HTMLDivElement | null>(null);
-  const centerRef = useRef<HTMLDivElement | null>(null);
-  const MAX_DECOR = 30; // safety cap to avoid infinite repetition on extremely tall screens
-
   // State pentru efectul de "Copied!"
   const [copied, setCopied] = useState(false);
-  const email = "eirasjournal@gmail.com"; // <-- PUNE ADRESA TA AICI (chiar dacă nu ai domeniul încă, poți pune gmail)
+  const email = "eirasjournal@gmail.com"; 
 
   const handleCopy = () => {
     navigator.clipboard.writeText(email);
@@ -26,228 +16,78 @@ export default function Contact() {
     setTimeout(() => setCopied(false), 2000); // Resetează mesajul după 2 secunde
   };
 
-  useEffect(() => {
-    let t: number | null = null;
-    const compute = () => {
-      try {
-        const center = centerRef.current;
-        const left = leftRef.current;
-        if (!center || !left) return;
-
-        const centerHeight = center.offsetHeight;
-
-        // Try to measure one pattern block: a zig + sep2
-        const oneZig = left.querySelector('.zig-zag-top1') || left.querySelector('.zig-zag-bottom');
-        const oneSep = left.querySelector('.sep2');
-        const zigH = oneZig ? (oneZig as HTMLElement).offsetHeight : 1;
-        const sepH = oneSep ? (oneSep as HTMLElement).offsetHeight : 1;
-        const patternH = zigH + sepH;
-
-        if (patternH <= 0) return;
-
-        let needed = Math.max(3, Math.ceil(centerHeight / patternH));
-        if (MAX_DECOR && needed > MAX_DECOR) needed = MAX_DECOR;
-        if (needed !== decorCount) setDecorCount(needed);
-      } catch {
-        // ignore measurement errors
-      }
-    };
-
-    const debounced = () => {
-      if (t) clearTimeout(t);
-      t = window.setTimeout(() => compute(), 120);
-    };
-
-    compute();
-    window.addEventListener('resize', debounced);
-    return () => {
-      window.removeEventListener('resize', debounced);
-      if (t) clearTimeout(t);
-    };
-  }, [decorCount]);
-
   return (
-    <main className="min-h-screen bg-[#341c74]">
-      <SparkleManager />
-      {/* HEADER */}
-      <div className="header">
-        {/* --- AICI: Containerul nou pentru stele --- */}
-        <div className="header-sparkles"></div>
-        <h1 className="typewriter-title">d i n<span className="word-space"></span>t a s t e</h1> 
-      </div>
+    // Folosim PageLayout cu un decorCount mai mic, pagina fiind scurtă
+    <PageLayout decorCount={1}>
+      <PageTurn>
+        <div className="fade-in">
+          
+          <h2 style={{ paddingLeft: '40px', marginBottom: '40px', borderBottom: '2px solid #99c2ff', paddingBottom: '10px', color: '#dcdcdc' }}>
+            Get in Touch
+          </h2>
 
-      {/* NAVBAR */}
-      <nav className="navbar">
-        <div className="navbar-left">
-          {/* Asigura-te ca ai poza asta in folderul public */}
-          <Image 
-            src="/catpixeled.png" 
-            className="image" 
-            alt="Logo AZAX" 
-            width={150}  // Asta e doar pentru rezoluție, CSS-ul decide mărimea vizuală
-            height={150} // Asta e doar pentru rezoluție
-            priority
-          />
-          <ul className={`nav-list ${isMenuOpen ? 'active' : ''}`}>
-            <li className="list-item">
-              <Link href="/" onClick={() => setIsMenuOpen(false)} scroll={false}>Home</Link>
-            </li>
-            {/* --- MODIFICARE DROPDOWN ROBOTICS --- */}
-            {/* Adăugăm clasa 'active' dacă submeniul este deschis */}
-            <li className={`list-item dropdown-parent ${mobileSubmenuOpen ? 'active' : ''}`}>
-              
-              {/* Adăugăm onClick pentru a comuta starea (Open/Close) */}
-              <span 
-                className="nav-link cursor-pointer" 
-                onClick={(e) => {
-                  e.preventDefault(); // Previne comportamentul default
-                  setMobileSubmenuOpen(!mobileSubmenuOpen); // Comută Deschis/Închis
+          <p style={{ fontSize: '1.2rem', lineHeight: '1.6', marginBottom: '30px', textIndent: '40px', color: '#dcdcdc' }}>
+            Have something to share? A thought about an article or just want to say hi?
+          </p>
+
+          <p style={{ fontSize: '1.2rem', lineHeight: '1.6', marginBottom: '30px', textIndent: '40px', color: '#dcdcdc' }}>
+            I&apos;m always open to reading emails from strangers!
+          </p>
+
+          {/* CUTIA DE EMAIL */}
+          <div style={{ 
+            background: 'rgba(255,255,255,0.05)', 
+            padding: '30px', 
+            borderRadius: '15px', 
+            border: '1px dashed #99c2ff',
+            textAlign: 'center',
+            marginTop: '50px',
+            marginBottom: '50px'
+          }}>
+            <p style={{fontFamily: 'monospace', 
+                        color: '#ccc', 
+                        marginBottom: '15px',
+                        textAlign: 'center'}}>
+                  You can reach me at:
+            </p>
+            
+            <div style={{ 
+              fontSize: 'clamp(1rem, 4vw, 1.4rem)', 
+              color: '#fff', 
+              fontFamily: 'monospace', 
+              marginBottom: '25px',
+              textAlign: 'center',
+              wordBreak: 'break-word',
+              overflowWrap: 'anywhere' 
+            }}>
+              {email}
+            </div>
+
+            <div style={{ display: 'flex', gap: '15px', justifyContent: 'center', flexWrap: 'wrap' }}>
+              {/* Buton Copy */}
+              <button 
+                onClick={handleCopy}
+                className="copy-btn"
+                style={{ 
+                  background: copied ? '#4caf50' : '#99c2ff', // Se face verde când e copiat
+                  color: '#1a1a1a',
+                  border: 'none',
+                  padding: '10px 25px',
+                  fontSize: '1rem',
+                  fontWeight: 'bold',
+                  margin: 0,
+                  cursor: 'pointer',
+                  borderRadius: '5px',
+                  transition: 'background 0.3s ease'
                 }}
               >
-                Robotics <span style={{ fontSize: '0.6em', verticalAlign: 'middle' }}>
-                  {mobileSubmenuOpen ? '▲' : '▼'} {/* Schimbăm săgeata */}
-                </span>
-              </span>
-              
-              <ul className="dropdown-menu">
-                <li>
-                  <Link href="/theory" onClick={() => setIsMenuOpen(false)}>Theory</Link>
-                </li>
-                <li>
-                  <Link href="/palletizer" onClick={() => setIsMenuOpen(false)}>Simulation</Link>
-                </li>
-              </ul>
-            </li>
-            {/* --- END MODIFICARE --- */}
-            <li className="list-item">
-              <Link href="/contact" onClick={() => setIsMenuOpen(false)} scroll={false}>Contact</Link>
-            </li>
-          </ul>
-        </div>
-        <button 
-          className="menu-toggle"
-          onClick={() => setIsMenuOpen(!isMenuOpen)}
-          aria-label="Toggle menu"
-        >
-          ☰
-        </button>
-      </nav>
-
-      <div className="row">
-        {/* COLOANA STANGA - Decorativa */}
-        <div className="column1">
-          <div id="d-wrapper">
-              <div className="zig-zag-bottom2"></div>
-              <div className="sep1"><p></p></div>
-            
-              {[...Array(decorCount)].map((_, i) => (
-              /* React.Fragment tine loc de parinte, dar dispare in browser */
-              <React.Fragment key={i}>
-                <div className="zig-zag-bottom zig-zag-top1"><p></p></div>
-                <div className="sep2"><p style={{ marginTop: '20%' }}></p></div>
-              </React.Fragment>
-            ))}
-            
-            <div className="zig-zag-top"></div>
-          </div>
-        </div>
-
-        {/* COLOANA CENTRALA - Aici aplicăm stilul de perspectivă și wrapper-ul */}
-        {/* 2. ADADUGĂ style={{ perspective: '2000px' }} PE CONTAINERUL PĂRINTE */}
-        <div className="column2" ref={centerRef} style={{ perspective: '2000px' }}>
-          <div className="spiral-binding"></div>
-          {/* 3. ÎNCONJOARĂ CONȚINUTUL CU <PageTurn> */}
-          <PageTurn>
-            <div className="fade-in">
-              <h2 style={{ paddingLeft: '40px', marginBottom: '40px', borderBottom: '2px solid #99c2ff', paddingBottom: '10px' }}>
-                Get in Touch
-              </h2>
-
-              <p style={{ fontSize: '1.2rem', lineHeight: '1.6', marginBottom: '30px', textIndent: '40px' }}>
-                Have something to share? A thought about an article or just want to say hi?
-              </p>
-
-              <p style={{ fontSize: '1.2rem', lineHeight: '1.6', marginBottom: '30px', textIndent: '40px' }}>
-                I&apos;m always open to reading emails from strangers!
-              </p>
-
-              {/* CUTIA DE EMAIL */}
-              <div style={{ 
-                background: 'rgba(255,255,255,0.05)', 
-                padding: '30px', 
-                borderRadius: '15px', 
-                border: '1px dashed #99c2ff',
-                textAlign: 'center',
-                marginTop: '50px',
-                marginBottom: '50px'
-              }}>
-                <p style={{fontFamily: 'monospace', 
-                                color: '#ccc', 
-                                marginBottom: '15px',
-                                textAlign: 'center'}}>
-                  You can reach me at:
-                </p>
-                
-                <div style={{ 
-                  fontSize: 'clamp(1rem, 4vw, 1.4rem)', 
-                  color: '#fff', 
-                  fontFamily: 'monospace', 
-                  marginBottom: '25px',
-                  textAlign: 'center',
-                  wordBreak: 'break-word',
-                  overflowWrap: 'anywhere' 
-                }}>
-                  {email}
-                </div>
-
-                <div style={{ display: 'flex', gap: '15px', justifyContent: 'center', flexWrap: 'wrap' }}>
-                  {/* Buton Copy */}
-                  <button 
-                    onClick={handleCopy}
-                    className="copy-btn"
-                    style={{ 
-                      background: copied ? '#4caf50' : '#99c2ff', // Se face verde când e copiat
-                      color: '#1a1a1a',
-                      border: 'none',
-                      padding: '10px 25px',
-                      fontSize: '1rem',
-                      fontWeight: 'bold',
-                      margin: 0
-                    }}
-                  >
-                    {copied ? "Copied! ✅" : "Copy Email"}
-                  </button>
-                </div>
-              </div>
-
+                {copied ? "Copied! ✅" : "Copy Email"}
+              </button>
             </div>
-          </PageTurn>
-        </div>
-
-        {/* COLOANA DREAPTA - Decorativa */}
-        <div className="column3">
-          <div id="d-wrapper" ref={rightRef}>
-            <div className="zig-zag-bottom"></div>
-            <div className="sep1"><p></p></div>
-            
-            {[...Array(decorCount)].map((_, i) => (
-              /* React.Fragment tine loc de parinte, dar dispare in browser */
-              <React.Fragment key={i}>
-                <div className="zig-zag-bottom zig-zag-top1"><p></p></div>
-                <div className="sep2"><p style={{ marginTop: '20%' }}></p></div>
-              </React.Fragment>
-            ))}
-            
-            <div className="zig-zag-top2"></div>
           </div>
-        </div>
-      </div>
 
-      {/* FOOTER */}
-      <footer>
-        {/* Am scos linkurile reale pentru anonimitate. Poti pune linkuri catre Github-ul tau anonim */}
-        <p>Ⓒ 2025 din taste</p>
-      </footer>
-    </main>
+        </div>
+      </PageTurn>
+    </PageLayout>
   );
 }
