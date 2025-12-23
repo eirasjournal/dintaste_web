@@ -445,7 +445,7 @@ export default function Robotics() {
                 </div>
               ) : (
                 // --- VIEW B: SIMULARE ACTIVĂ ---
-                <div className="fade-in">
+                <div>
                      <button 
                         onClick={() => setSelectedSimulation(null)}
                         style={{
