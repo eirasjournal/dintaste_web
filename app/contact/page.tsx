@@ -8,6 +8,8 @@ import PageTurn from '../components/PageTurn';
 
 export default function Contact() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  // 1. ADĂUGĂM ACEST STATE NOU
+  const [mobileSubmenuOpen, setMobileSubmenuOpen] = useState(false);
   const [decorCount, setDecorCount] = useState(3);
   const leftRef = useRef<HTMLDivElement | null>(null);
   const rightRef = useRef<HTMLDivElement | null>(null);
@@ -90,12 +92,33 @@ export default function Contact() {
             <li className="list-item">
               <Link href="/" onClick={() => setIsMenuOpen(false)} scroll={false}>Home</Link>
             </li>
-            <li className="list-item">
-              <Link href="/palletizer" onClick={() => setIsMenuOpen(false)} scroll={false}>Robotics</Link>
+            {/* --- MODIFICARE DROPDOWN ROBOTICS --- */}
+            {/* Adăugăm clasa 'active' dacă submeniul este deschis */}
+            <li className={`list-item dropdown-parent ${mobileSubmenuOpen ? 'active' : ''}`}>
+              
+              {/* Adăugăm onClick pentru a comuta starea (Open/Close) */}
+              <span 
+                className="nav-link cursor-pointer" 
+                onClick={(e) => {
+                  e.preventDefault(); // Previne comportamentul default
+                  setMobileSubmenuOpen(!mobileSubmenuOpen); // Comută Deschis/Închis
+                }}
+              >
+                Robotics <span style={{ fontSize: '0.6em', verticalAlign: 'middle' }}>
+                  {mobileSubmenuOpen ? '▲' : '▼'} {/* Schimbăm săgeata */}
+                </span>
+              </span>
+              
+              <ul className="dropdown-menu">
+                <li>
+                  <Link href="/theory" onClick={() => setIsMenuOpen(false)}>Theory</Link>
+                </li>
+                <li>
+                  <Link href="/palletizer" onClick={() => setIsMenuOpen(false)}>Simulation</Link>
+                </li>
+              </ul>
             </li>
-            <li className="list-item">
-              <Link href="/articles" onClick={() => setIsMenuOpen(false)} scroll={false}>Journal Entries</Link>
-            </li>
+            {/* --- END MODIFICARE --- */}
             <li className="list-item">
               <Link href="/contact" onClick={() => setIsMenuOpen(false)} scroll={false}>Contact</Link>
             </li>
@@ -141,10 +164,11 @@ export default function Contact() {
               </h2>
 
               <p style={{ fontSize: '1.2rem', lineHeight: '1.6', marginBottom: '30px', textIndent: '40px' }}>
-                Have something to share? A thought about an article, a song recommendation, or just want to say hi?
+                Have something to share? A thought about an article or just want to say hi?
               </p>
+
               <p style={{ fontSize: '1.2rem', lineHeight: '1.6', marginBottom: '30px', textIndent: '40px' }}>
-                I&apos;m always open to reading emails from strangers. It reminds me that there are real people behind the screens.
+                I&apos;m always open to reading emails from strangers!
               </p>
 
               {/* CUTIA DE EMAIL */}

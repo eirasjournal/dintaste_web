@@ -11,6 +11,8 @@ import MapWidget from './components/MapWidget';
 export default function Home() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [decorCount, setDecorCount] = useState(3);
+  // 1. ADĂUGĂM ACEST STATE NOU
+  const [mobileSubmenuOpen, setMobileSubmenuOpen] = useState(false);
   const leftRef = useRef<HTMLDivElement | null>(null);
   const rightRef = useRef<HTMLDivElement | null>(null);
   const centerRef = useRef<HTMLDivElement | null>(null);
@@ -65,12 +67,33 @@ export default function Home() {
             <li className="list-item">
               <Link href="/" onClick={() => setIsMenuOpen(false)} scroll={false}>Home</Link>
             </li>
-            <li className="list-item">
-              <Link href="/palletizer" onClick={() => setIsMenuOpen(false)} scroll={false}>Robotics</Link>
+            {/* --- MODIFICARE DROPDOWN ROBOTICS --- */}
+            {/* Adăugăm clasa 'active' dacă submeniul este deschis */}
+            <li className={`list-item dropdown-parent ${mobileSubmenuOpen ? 'active' : ''}`}>
+              
+              {/* Adăugăm onClick pentru a comuta starea (Open/Close) */}
+              <span 
+                className="nav-link cursor-pointer" 
+                onClick={(e) => {
+                  e.preventDefault(); // Previne comportamentul default
+                  setMobileSubmenuOpen(!mobileSubmenuOpen); // Comută Deschis/Închis
+                }}
+              >
+                Robotics <span style={{ fontSize: '0.6em', verticalAlign: 'middle' }}>
+                  {mobileSubmenuOpen ? '▲' : '▼'} {/* Schimbăm săgeata */}
+                </span>
+              </span>
+              
+              <ul className="dropdown-menu">
+                <li>
+                  <Link href="/theory" onClick={() => setIsMenuOpen(false)}>Theory</Link>
+                </li>
+                <li>
+                  <Link href="/palletizer" onClick={() => setIsMenuOpen(false)}>Simulation</Link>
+                </li>
+              </ul>
             </li>
-            <li className="list-item">
-              <Link href="/articles" onClick={() => setIsMenuOpen(false)} scroll={false}>Journal Entries</Link>
-            </li>
+            {/* --- END MODIFICARE --- */}
             <li className="list-item">
               <Link href="/contact" onClick={() => setIsMenuOpen(false)} scroll={false}>Contact</Link>
             </li>
@@ -108,43 +131,37 @@ export default function Home() {
               
               <div style={{lineHeight: '1.8', fontSize: '1.15rem', color: '#dcdcdc', letterSpacing: '0.02em' }}> 
               
-                {/* --- PRIMUL POST-IT (Galben, Dreapta) --- */}
+                {/* --- PRIMUL POST-IT (Galben, Dreapta) - Focus Tehnic --- */}
                 <div className="sticky-note yellow">
                   📌 <strong>Reminder:</strong>
                   <br/>
-                  You are not doing it wrong if no one knows what you are doing.
+                  If it works on the first try, something is definitely wrong.
                 </div>
 
                 <p style={{ marginBottom: '2%', fontSize: '1.2rem', textIndent: '40px' }}> 
-                  Hello and welcome! You have landed in the digital workspace of a <strong>Robotics Master’s student</strong>. What started as a coding challenge to push my technical boundaries has evolved into something much more personal.
+                  Hello and welcome! You have landed in the digital workspace of a <strong>Robotics Master’s student</strong>. This platform serves as a living documentation of my academic and practical journey into the world of automation.
                 </p> 
                 
                 <p style={{ marginBottom: '2%', fontSize: '1.2rem', textIndent: '40px' }}> 
-                  I recently found some interesting insights on <a href="https://www.journalinghabit.com/observing-journals-leonardo-da-vinci/" target="_blank" rel="noopener noreferrer" style={{ color: '#0056b3', textDecoration: 'underline' }}>Journaling Habit</a> regarding the chaotic beauty of <strong>Leonardo da Vinci’s notebooks</strong>. It struck a chord with me: in his pages, sketches of complex flying machines sit right next to doodles and philosophical musings.
+                  My goal is to bridge the gap between theory and physical motion. I treat this website as an <strong>open-source lab notebook</strong>. I use this space to document the process of turning mathematical models into working machines.
                 </p>
 
-                <p style={{ marginBottom: '2%', fontSize: '1.2rem', textIndent: '40px' }}> 
-                  He showed that the technical mind and the human soul are not separate compartments. They bleed into each other.
-                </p>
-
-                {/* --- AL DOILEA POST-IT (Roz, Stânga) --- */}
+                {/* --- AL DOILEA POST-IT (Roz, Stânga) - Focus pe Proces --- */}
                 <div className="sticky-note pink">
-                  📌 <strong>Note to self:</strong>
+                  ⚙️ <strong>Current Status:</strong>
+                 <br/>
+                  It does exactly what
                   <br/>
-                  Entropy isn&apos;t just a physics concept, it&apos;s my current mental state.
+                  I told it to (sadly).
                 </div>
 
                 <p style={{ marginBottom: '2%', fontSize: '1.2rem', textIndent: '40px' }}>
-                  <span className="highlight-text">This website is my version of that notebook.</span> By day, I deal in rigid logic. But the engineer who builds the machine also has a heart that beats, breaks, and heals. 
+                  <span className="highlight-text">This blog is dedicated to the engineering behind the robots.</span> From kinematics to computer vision, I explore the technologies that drive the industry.
                 </p>
 
                 <p style={{ marginBottom: '2%', fontSize: '1.2rem', textIndent: '40px' }}> 
-                  Here, you will find my technical projects sitting side-by-side with my rawest thoughts. Why &apos;Din Taste&apos;? It translates to &apos;From Keys&apos; in my native Romanian. Whether I’m typing an algorithm for a robot or a journal entry about growing up, it all flows from the same keyboard. Consider it an ongoing experiment in development.
+                  Why &apos;Din Taste&apos;? It translates to &apos;From Keys&apos; in my native Romanian. It represents the modern roboticist&apos;s workflow: taking lines of code written on a keyboard and translating them into precise, physical action. Whether it&apos;s simulation or hardware implementation, everything starts &apos;from keys&apos;.
                 </p> 
-
-                <p style={{ marginBottom: '2%', fontSize: '1.2rem', textIndent: '40px' }}> 
-                  I hope you find a bit of your own chaos reflected in this blog&apos;s lines. Maybe you’ll find that we are debugging the same errors. 
-                </p>
               </div> 
               <MapWidget />
             </div>

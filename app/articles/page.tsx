@@ -72,6 +72,8 @@ And last but not least, you will be able to inspire the people around you, just 
 
 export default function ArticlesPage() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  // 1. ADĂUGĂM ACEST STATE NOU
+  const [mobileSubmenuOpen, setMobileSubmenuOpen] = useState(false);
   const decorCount = 11; 
   
   const [selectedArticle, setSelectedArticle] = useState<typeof ARTICLES[number] | null>(null);
@@ -99,9 +101,33 @@ export default function ArticlesPage() {
             <li className="list-item">
               <Link href="/" onClick={() => setIsMenuOpen(false)} scroll={false}>Home</Link>
             </li>
-            <li className="list-item">
-              <Link href="/palletizer" onClick={() => setIsMenuOpen(false)} scroll={false}>Robotics</Link>
+            {/* --- MODIFICARE DROPDOWN ROBOTICS --- */}
+            {/* Adăugăm clasa 'active' dacă submeniul este deschis */}
+            <li className={`list-item dropdown-parent ${mobileSubmenuOpen ? 'active' : ''}`}>
+              
+              {/* Adăugăm onClick pentru a comuta starea (Open/Close) */}
+              <span 
+                className="nav-link cursor-pointer" 
+                onClick={(e) => {
+                  e.preventDefault(); // Previne comportamentul default
+                  setMobileSubmenuOpen(!mobileSubmenuOpen); // Comută Deschis/Închis
+                }}
+              >
+                Robotics <span style={{ fontSize: '0.6em', verticalAlign: 'middle' }}>
+                  {mobileSubmenuOpen ? '▲' : '▼'} {/* Schimbăm săgeata */}
+                </span>
+              </span>
+              
+              <ul className="dropdown-menu">
+                <li>
+                  <Link href="/theory" onClick={() => setIsMenuOpen(false)}>Theory</Link>
+                </li>
+                <li>
+                  <Link href="/palletizer" onClick={() => setIsMenuOpen(false)}>Simulation</Link>
+                </li>
+              </ul>
             </li>
+            {/* --- END MODIFICARE --- */}
             <li className="list-item">
               <Link href="/articles" onClick={() => {
                   setIsMenuOpen(false);
