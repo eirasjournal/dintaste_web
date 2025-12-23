@@ -391,7 +391,7 @@ export default function Robotics() {
 
               {!selectedSimulation ? (
                 // --- VIEW A: LISTA SIMULĂRI ---
-                <div className="fade-in">
+                <div>
                   {/* --- SYSTEM LOG: READY --- */}
                <div style={{
                     backgroundColor: 'rgba(5, 20, 5, 0.7)', 

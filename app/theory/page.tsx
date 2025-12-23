@@ -232,7 +232,7 @@ const THEORY_ARTICLES = [
     id: 1, 
     title: "Pallet Position Calculation",
     date: "Core Module 1.1",
-    preview: "In industrial robotics, palletizing means computing the exact position of every single object using math...",
+    preview: "In industrial robotics, palletizing means computing the exact position of every single object using math.",
     // AICI ESTE CHEIA: Acest articol are o componentă specială, nu doar text
     component: <NotebookTheory />,
     hasSimulationLink: true
@@ -241,7 +241,7 @@ const THEORY_ARTICLES = [
     id: 2, 
     title: "Understanding Coordinate Systems",
     date: "Core Module 1.0",
-    preview: "Before a robot moves, it must know where 'here' and 'there' are. A look into World vs Tool coordinates...",
+    preview: "Before a robot moves, it must know where 'here' and 'there' are. A look into World vs Tool coordinates.",
     // Acesta este un articol text standard
     content: `In industrial robotics, the concept of "position" is meaningless without a reference frame. A point defined as (10, 20, 30) implies a distance from an Origin (0,0,0).
 
@@ -346,7 +346,7 @@ export default function TheoryPage() {
           <div className="spiral-binding"></div>
           
           <PageTurn>
-            <div className="fade-in pb-10">
+            <div className="fade-in">
 
               {!selectedArticle ? (
                 // ---------------------------------------------
@@ -370,9 +370,6 @@ export default function TheoryPage() {
                         display: 'flex',
                         alignItems: 'start',
                         gap: '15px',
-                        boxShadow: '0 0 10px rgba(0, 255, 157, 0.1)',
-                        marginLeft: '40px',
-                        marginRight: '20px'
                     }}>
                         <span style={{ fontSize: '1.4rem', lineHeight: '1' }}>💠</span>
                         <div>
@@ -393,8 +390,6 @@ export default function TheoryPage() {
                       className="article-preview-card"
                       style={{
                         marginBottom: '30px',
-                        marginLeft: '40px',
-                        marginRight: '20px',
                         cursor: 'pointer',
                         padding: '20px',
                         backgroundColor: 'rgba(255,255,255,0.03)',

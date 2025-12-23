@@ -12,54 +12,66 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-// --- AICI AM SCHIMBAT METADATELE ---
 export const metadata: Metadata = {
   // 1. Titlul Site-ului
   title: {
-    default: "Din Taste",
-    template: "%s | Din Taste" // Asta ajută pe viitor dacă avem pagini cu titlu dinamic
+    default: "Din Taste | Robotics Engineering",
+    template: "%s | Din Taste" 
   },
 
-  // 2. Descrierea (ce apare sub titlu pe Google)
-  description: "A digital space for raw inputs. Code, broken hearts, and late-night thoughts. A personal aesthetic journal.",
+  // 2. Descrierea (SEO - Ce apare pe Google)
+  // Am schimbat-o să reflecte statutul tău de student la master și focusul tehnic
+  description: "A digital lab notebook by a Robotics Master's student. Bridging abstract theory and physical motion through simulation, kinematics, and control algorithms.",
 
-  // 3. Cuvinte cheie (pentru SEO)
-  keywords: ["blog", "programming", "journal", "tech", "aesthetic", "Next.js", "personal blog", "romania", "dark aesthetic"],
+  // 3. Cuvinte cheie (SEO)
+  // Am adăugat termeni tehnici relevanți pentru portofoliul tău
+  keywords: [
+    "robotics", 
+    "engineering", 
+    "master student", 
+    "kinematics", 
+    "industrial automation", 
+    "simulation", 
+    "three.js", 
+    "palletizing algorithms", 
+    "Next.js portfolio", 
+    "romania"
+  ],
 
   // 4. Autor
-  authors: [{ name: "eira" }],
+  authors: [{ name: "Din Taste" }],
 
-  // 5. Open Graph (Cum arată când dai Share pe WhatsApp/Facebook/LinkedIn)
+  // 5. Open Graph (Share pe LinkedIn/WhatsApp/Facebook)
   openGraph: {
-    title: "Din Taste",
-    description: "Code, broken hearts, and late-night thoughts.",
-    url: "https://dintaste.me", // Chiar dacă nu ai domeniul încă, e bine să fie setat
-    siteName: "Din Taste",
+    title: "Din Taste | Robotics & Simulation",
+    description: "Documentation of an engineering journey. From lines of code to mechanical motion.",
+    url: "https://dintaste.me", 
+    siteName: "Din Taste Lab",
     images: [
       {
-        url: "/pixelcat.png", // Asigură-te că faci o imagine cu numele ăsta în folderul 'public'
+        url: "/catpixeled.png", // ATENȚIE: În codul anterior foloseai 'catpixeled.png', aici era 'pixelcat.png'. Am pus varianta din Navbar.
         width: 1200,
         height: 630,
-        alt: "Din Taste Blog Cover",
+        alt: "Din Taste Robotics Logo",
       },
     ],
     locale: "en_US",
     type: "website",
   },
 
-  // 6. Twitter Card (Cum arată pe X/Twitter)
+  // 6. Twitter Card (Share pe X)
   twitter: {
     card: "summary_large_image",
-    title: "Din Taste",
-    description: "Code, broken hearts, and late-night thoughts.",
-    images: ["/pixelcat.png"],
+    title: "Din Taste | Robotics Engineering",
+    description: "Exploring the math behind motion. A Robotics Master's digital notebook.",
+    images: ["/catpixeled.png"],
   },
 
   // 7. Iconița din tab (Favicon)
   icons: {
-    icon: "/pixelcat.png", // Folosim pisica ta pixelată
-    shortcut: "/pixelcat.png",
-    apple: "/pixelcat.png",
+    icon: "/catpixeled.png",
+    shortcut: "/catpixeled.png",
+    apple: "/catpixeled.png",
   },
 };
 
