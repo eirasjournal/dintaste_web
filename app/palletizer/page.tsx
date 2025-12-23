@@ -406,8 +406,6 @@ export default function Robotics() {
                     alignItems: 'start',
                     gap: '15px',
                     boxShadow: '0 0 10px rgba(0, 255, 157, 0.1)',
-                    marginLeft: '40px',
-                    marginRight: '20px'
                 }}>
                     <span style={{ fontSize: '1.4rem', lineHeight: '1' }}>⚡</span>
                     <div>
@@ -426,8 +424,6 @@ export default function Robotics() {
                          className="article-preview-card"
                          style={{
                            marginBottom: '30px',
-                           marginLeft: '40px',
-                           marginRight: '20px',
                            cursor: 'pointer',
                            padding: '20px',
                            backgroundColor: 'rgba(255,255,255,0.03)',
