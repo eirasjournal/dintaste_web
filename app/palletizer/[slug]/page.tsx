@@ -7,6 +7,15 @@ import PageTurn from '../../components/PageTurn';
 import PageLayout from '../../components/PageLayout'; 
 import { SIMULATIONS } from '../data'; 
 
+// --- ADĂUGAREA NECESARĂ PENTRU EXPORT STATIC ---
+// Această funcție spune Next.js ce pagini să construiască la build time
+export async function generateStaticParams() {
+  return SIMULATIONS.map((sim) => ({
+    slug: sim.slug,
+  }));
+}
+// ----------------------------------------------
+
 // Definim tipul props corect pentru Next.js 15
 interface PageProps {
   params: Promise<{

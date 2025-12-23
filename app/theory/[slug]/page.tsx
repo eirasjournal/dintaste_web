@@ -7,6 +7,14 @@ import PageTurn from '../../components/PageTurn';
 import PageLayout from '../../components/PageLayout'; 
 import { THEORY_ARTICLES } from '../data'; 
 
+// --- ADĂUGAREA NECESARĂ PENTRU EXPORT STATIC ---
+export async function generateStaticParams() {
+  return THEORY_ARTICLES.map((article) => ({
+    slug: article.slug,
+  }));
+}
+// ----------------------------------------------
+
 // 1. Definim props fără a descompune params direct
 interface PageProps {
   params: Promise<{
@@ -20,7 +28,6 @@ export default function ArticlePage(props: PageProps) {
   // Asta previne eroarea de acces direct
   const params = use(props.params);
   const slug = params.slug;
-
   // Acum căutăm articolul
   const selectedArticle = THEORY_ARTICLES.find((a) => a.slug === slug);
 
