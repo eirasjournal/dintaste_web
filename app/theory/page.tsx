@@ -463,7 +463,7 @@ export default function TheoryPage() {
                     </div>
                   ) : (
                     // CAZ 2: Randează text standard
-                    <div style={{ paddingLeft: '40px', paddingRight: '20px', lineHeight: '1.7', fontSize: '1.05rem', color: '#d0d0d0', letterSpacing: '0.01em' }}>
+                    <div style={{ lineHeight: '1.7', fontSize: '1.05rem', color: '#d0d0d0', letterSpacing: '0.01em' }}>
                         {selectedArticle.content?.split('\n\n').map((para, idx) => (
                              <p key={idx} style={{ marginBottom: '20px', textIndent: '40px' }}>
                              {/* Verificare simplă pentru imagini sau formule (opțional) */}
