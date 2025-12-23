@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import PageTurn from '../components/PageTurn';
 // 1. IMPORTĂM NOUL LAYOUT
 import PageLayout from '../components/PageLayout';
+import Comments from '../components/Comments';
 
 export default function Contact() {
   // State pentru efectul de "Copied!"
@@ -18,7 +19,7 @@ export default function Contact() {
 
   return (
     // Folosim PageLayout cu un decorCount mai mic, pagina fiind scurtă
-    <PageLayout decorCount={1}>
+    <PageLayout decorCount={4}>
       <PageTurn>
         <div className="fade-in">
           
@@ -86,6 +87,12 @@ export default function Contact() {
             </div>
           </div>
 
+          <p style={{ fontSize: '1.2rem', lineHeight: '1.6', marginBottom: '30px', textIndent: '40px', color: '#dcdcdc' }}>
+            Or reach out via GitHub!
+          </p>
+          <div className="scroller">
+            <Comments />
+          </div>
         </div>
       </PageTurn>
     </PageLayout>
