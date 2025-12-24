@@ -40,10 +40,10 @@ export default function Navbar() {
             
             <ul className="dropdown-menu">
               <li>
-                <Link href="/theory" onClick={() => setIsMenuOpen(false)}>Theory</Link>
+                <Link href="/theory" onClick={() => setIsMenuOpen(false)} scroll={false}>Theory</Link>
               </li>
               <li>
-                <Link href="/palletizer" onClick={() => setIsMenuOpen(false)}>Simulation</Link>
+                <Link href="/palletizer" onClick={() => setIsMenuOpen(false)} scroll={false}>Simulation</Link>
               </li>
             </ul>
           </li>
