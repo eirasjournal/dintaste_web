@@ -76,7 +76,7 @@ export default function Home() {
                     updates from the lab.
                 </p>
 
-                <div style={{ marginTop: '40px', marginLeft: '40px' }}>
+                <div style={{ marginTop: '40px'}}>
                   <button
                     className="cyber-btn start"
                     onClick={() => setShowNewsletter(prev => !prev)}
