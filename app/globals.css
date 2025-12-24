@@ -1,0 +1,1338 @@
+:root {
+  /* SCHIMBARE: Albastru în loc de Roz */
+  --accent-main: #99c2ff;        /* Albastru tehnic (cerneală/pix) */
+  --accent-glow: rgba(153, 194, 255, 0.3);
+  
+  /* Restul rămân la fel pentru tema de caiet */
+  --text-main: #222222;          
+  --text-sec: #555555;           
+  --bg-paper: #fdfdfd;           
+  --bg-desk: #e0e0e0;            
+  --grid-line: #e5e7eb;          
+}
+
+/* Modificăm și selecția textului (când dai dublu click) să fie albastră */
+::selection {
+  background: rgba(0, 86, 179, 0.2); /* Albastru transparent */
+  color: var(--text-main);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background-color: var(--bg-dark);
+  color: var(--text-main);
+  font-family: 'Courier New', Courier, monospace;
+}
+
+#d-wrapper {
+  background-image:
+    repeating-linear-gradient(45deg, #000 25%, transparent 25%, transparent 75%, #000 75%, #000),
+    repeating-linear-gradient(45deg, #000 25%, #0a0a0a 25%, #0a0a0a 75%, #000 75%, #000);
+  background-position: 0 0, 10px 10px;
+  background-size: 20px 20px;
+  z-index: 0;
+}
+
+#d-wrapper * {
+  margin: 0;
+  padding: 0;
+}
+
+/* --- CONFIGURARE ZONE SEP1 ȘI SEP2 --- */
+
+#d-wrapper div.sep1,
+#d-wrapper div.sep2 {
+  min-height: 15vh;
+  position: relative;
+}
+
+#d-wrapper div.sep1::after,
+#d-wrapper div.sep2::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-repeat: repeat-y;
+  z-index: -1;
+}
+
+#d-wrapper div.sep1::after {
+  background-position-y: -200px;
+}
+
+#d-wrapper div.sep2 canvas.sparkle-canvas {
+  top: 5px !important;
+}
+
+/* Opțional: Aliniere text paragrafe */
+#d-wrapper div.sep1 p,
+#d-wrapper div.sep2 p {
+  margin-top: 5%;
+}
+
+#d-wrapper .zig-zag-top:before {
+  background:
+    linear-gradient(-45deg, hsl(215deg 100% 80% / 0.75) 16px, red 16px, blue 16px, transparent 0),
+    linear-gradient(45deg, hsl(215deg 100% 80% / 0.75) 16px, transparent 0);
+  background-position: left top;
+  background-repeat: repeat-x;
+  background-size: 22px 32px;
+  content: " ";
+  display: block;
+
+  height: 32px;
+  width: 100%;
+
+  position: relative;
+  bottom: 52px;
+  left: 0;
+}
+
+#d-wrapper .zig-zag-top2:before {
+  background:
+    linear-gradient(-45deg, hsl(215deg 100% 80% / 0.75) 16px, red 16px, blue 16px, transparent 0),
+    linear-gradient(45deg, hsl(215deg 100% 80% / 0.75) 16px, transparent 0);
+  background-position: left top;
+  background-repeat: repeat-x;
+  background-size: 22px 32px;
+  content: " ";
+  display: block;
+
+  height: 32px;
+  width: 100%;
+
+  position: relative;
+  bottom: 52px;
+  left: 0;
+}
+
+#d-wrapper div > * {
+  margin: 0 0px;
+}
+
+#d-wrapper .zig-zag-bottom {
+  margin: 32px 0;
+  margin-top: 0;
+  background: linear-gradient(to bottom, hsl(0deg 0% 7%), hsl(215deg 100% 80% / 0.95));
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+#d-wrapper .zig-zag-bottom2 {
+  margin: 32px 0;
+  margin-top: 0;
+  background: linear-gradient(to bottom, hsl(0deg 0% 7%), hsl(215deg 100% 80% / 0.95));
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+#d-wrapper .zig-zag-top {
+  margin: 32px 0;
+  margin-bottom: 0;
+  background: linear-gradient(hsl(215deg 100% 80% / 0.95), hsl(0deg 0% 7%));
+}
+
+#d-wrapper .zig-zag-top2 {
+  margin: 32px 0;
+  margin-bottom: 0;
+  background: linear-gradient(hsl(215deg 100% 80% / 0.95), hsl(0deg 0% 7%));
+}
+
+#d-wrapper .zig-zag-top1 {
+  margin: 32px 0;
+  margin-bottom: 0;
+  background-image: linear-gradient(180deg,
+      /* Start: Albastru deschis (Tech Blue) */
+  hsl(215deg 100% 80% / 0.95) 0%,
+  hsl(215deg 85% 70%) 6%,
+  hsl(215deg 65% 58%) 12%,
+  hsl(215deg 45% 45%) 18%,
+  hsl(215deg 30% 32%) 24%,
+  hsl(215deg 18% 22%) 30%,
+
+  /* Zona întunecată (Negru/Gri) - NEATINSĂ */
+  hsl(0deg 0% 12%) 36%,
+  hsl(0deg 0% 9%) 42%,
+  hsl(0deg 0% 7%) 48%,
+  hsl(0deg 0% 7%) 52%,
+  hsl(0deg 0% 9%) 58%,
+  hsl(0deg 0% 12%) 64%,
+
+  /* Revenire spre Albastru */
+  hsl(215deg 18% 22%) 70%,
+  hsl(215deg 30% 32%) 76%,
+  hsl(215deg 45% 45%) 82%,
+  hsl(215deg 65% 58%) 88%,
+  hsl(215deg 85% 70%) 94%,
+  hsl(215deg 100% 80% / 0.95) 100%
+);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+#d-wrapper .zig-zag-top1:before {
+  background:
+    linear-gradient(-45deg, hsl(215deg 100% 80% / 0.75) 16px, red 16px, blue 16px, transparent 0),
+    linear-gradient(45deg, hsl(215deg 100% 80% / 0.75) 16px, transparent 0);
+  margin-bottom: 2%;
+  background-position: left top;
+  background-repeat: repeat-x;
+  background-size: 22px 32px;
+  content: " ";
+  display: block;
+
+  height: 32px;
+  width: 100%;
+
+  position: relative;
+  bottom: 52px;
+  left: 0;
+}
+
+#d-wrapper .zig-zag-bottom,
+#d-wrapper .zig-zag-top,
+#d-wrapper .zig-zag-top2,
+#d-wrapper .zig-zag-bottom2 {
+  padding: 20px 0;
+}
+
+#d-wrapper p,
+#d-wrapper h1 {
+  padding-top: 5%;
+  padding-bottom: 5%;
+  font-size: 1.5vw;
+  text-align: center;
+  color: #e0e0e0; /* MODIFICAT */
+  font-family: "PT Sans Narrow", "Fjalla One", sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.5vw;
+  animation: mymove 5s infinite;
+  text-shadow: 1px 1px 0 #18032c, 2px 2px 0 #18032c, 3px 3px 0 #18032c, 4px 4px 0 #18032c, 5px 5px 0 #18032c;
+}
+
+@keyframes mymove {
+  50% {
+    letter-spacing: 0.7vw;
+  }
+}
+
+#d-wrapper div.sep1 p,
+#d-wrapper div.sep1 h1 {
+  text-shadow: 1px 1px 0 #18032c, 2px 2px 0 #18032c, 3px 3px 0 #18032c, 4px 4px 0 #18032c, 5px 5px 0 #18032c;
+  color: #e0e0e0; /* MODIFICAT */
+}
+
+#d-wrapper div.sep2 p,
+#d-wrapper div.sep2 h1 {
+  text-shadow: 1px 1px 0 #18032c, 2px 2px 0 #18032c, 3px 3px 0 #18032c, 4px 4px 0 #18032c, 5px 5px 0 #18032c;
+  color: #e0e0e0; /* MODIFICAT */
+}
+
+
+#d-wrapper h1 {
+  font-size: 4em;
+}
+
+#d-wrapper .zig-zag-bottom:after {
+  background:
+    linear-gradient(-45deg, transparent 16px, hsl(215deg 100% 80% / 0.75) 0),
+    linear-gradient(45deg, transparent 16px, hsl(215deg 100% 80% / 0.75) 0);
+  background-repeat: repeat-x;
+  background-position: left bottom;
+  background-size: 22px 32px;
+  content: "";
+  display: block;
+
+  width: 100%;
+  height: 32px;
+
+  position: relative;
+  top: 52px;
+  left: 0px;
+}
+
+#d-wrapper .zig-zag-bottom2:after {
+  background:
+    linear-gradient(-45deg, transparent 16px, hsl(215deg 100% 80% / 0.75) 0),
+    linear-gradient(45deg, transparent 16px, hsl(215deg 100% 80% / 0.75) 0);
+  background-repeat: repeat-x;
+  background-position: left bottom;
+  background-size: 22px 32px;
+  content: "";
+  display: block;
+
+  width: 100%;
+  height: 32px;
+
+  position: relative;
+  top: 52px;
+  left: 0px;
+}
+
+#d-wrapper p {
+  text-align: center;
+}
+
+#d-wrapper p:not(:last-child) {
+  margin-bottom: 20px;
+}
+
+
+/* --- HEADER --- */
+.header {
+  position: relative;
+  /* Fundal negru profund */
+  background: radial-gradient(circle at center, #1c1c1c 0%, #000000 100%);
+  width: 100%;
+  min-height: 45vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 100px;
+  overflow: hidden;
+  color: #f0f0f0;
+  text-shadow: 2px 2px 10px rgba(0,0,0,0.8);
+}
+
+.header h1 { font-size: clamp(1.3rem, 4vw, 3rem); }
+
+.word-space { 
+  display: inline-block;
+  width: 2em; 
+}
+
+.header-sparkles {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.typewriter-title {
+  font-family: "Courier New", monospace;
+  letter-spacing: 0.3em;
+  font-weight: 900;
+  font-size: clamp(2rem, 5vw, 5rem);
+  color: #ffffff;
+  /* Glow Roz Neon fin adaptat la #fd99ff */
+  text-shadow: 0px 0px 15px rgba(78, 138, 218, 0.4);
+}
+
+.image { 
+  height: 4vw; 
+  min-height: 40px; 
+  width: auto; 
+  object-fit: contain; 
+}
+
+/* --- NAVBAR --- */
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 40px;
+  min-height: 80px;
+  width: 100%;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  margin-top: -100px;
+  min-height: 100px; 
+  padding-top: 10px;
+  padding-bottom: 10px;
+
+  /* Sticla fumurie */
+  background: rgba(5, 5, 5, 0.9);
+  opacity: 0.98;
+  border-bottom: 1px solid #333;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
+}
+
+.navbar-left {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+
+.nav-list {
+  display: flex;
+  gap: 50px;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+
+.menu-toggle:hover {
+  color: var(--accent-main);
+}
+
+.navbar a {
+  font-family: "Courier New", monospace;
+  font-size: clamp(1rem, 1.4vw, 1.5rem);
+  color: #a0a0a0; 
+  text-decoration: none;
+  font-weight: 900;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.navbar a:hover {
+  color: var(--accent-main); /* Roz la hover */
+  /* Glow neon la text adaptat */
+  text-shadow: 0 0 8px rgba(78, 138, 218, 0.7);
+}
+
+.nav-list .list-item { 
+  padding: 0; 
+  display: block; 
+}
+
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--bg-paper);
+  font-size: 28px;
+  cursor: pointer;
+  padding: 10px;
+}
+
+@media screen and (max-width: 820px) { 
+  .nav-list { 
+    position: absolute; 
+    top: 100%; 
+    left: 0; 
+    right: 0; 
+    flex-direction: column; 
+    background: rgba(10, 10, 10, 0.95); 
+    gap: 0; 
+    max-height: 0; 
+    overflow: hidden; 
+    transition: max-height 0.3s ease; 
+    z-index: 1000; 
+  } 
+
+  .nav-list.active { 
+    max-height: 300px; 
+  }
+
+  .header { 
+    padding-bottom: 80px !important; 
+  } 
+
+  .navbar { 
+    margin-top: -80px !important; 
+    min-height: 80px !important; 
+    padding: 0 20px !important; 
+    flex-wrap: wrap;
+  } 
+
+  .menu-toggle { 
+    display: block; 
+  }
+
+  .nav-list .list-item { 
+    padding: 15px 40px; 
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05); 
+    width: 100%; } 
+    
+  .nav-list .list-item:last-child { 
+    border-bottom: none; 
+  } 
+  
+  .navbar a { 
+    font-size: 16px; 
+  }
+}
+
+/* --- LAYOUT COLOANE --- */
+.row {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  width: 100%;
+}
+
+.column1 {
+  width: 10%;
+  border-right: 1px solid #222;
+  background-color: #080808;
+  overflow: hidden;
+  box-shadow: inset -10px 0 20px rgba(0,0,0,0.8);
+}
+
+.column2 {
+  width: 80%;
+  padding: 15px;
+  background-color: #0c0c0c; 
+  color: #d0d0d0;
+  /* Grid subtil */
+  background-image: linear-gradient(#1a1a1a 1px, transparent 1px), linear-gradient(90deg, #1a1a1a 1px, transparent 1px);
+  background-size: 30px 30px; 
+}
+
+.column3 {
+  width: 10%;
+  border-left: 1px solid #222;
+  background-color: #080808;
+  overflow: hidden;
+  box-shadow: inset 10px 0 20px rgba(0,0,0,0.8);
+}
+
+/* --- RESPONSIVE --- */
+@media screen and (max-width: 820px) {
+  .row { 
+    flex-direction: column; 
+  } 
+
+  .column1, .column2, .column3 { 
+    width: 100%; 
+    height: auto; 
+  } 
+  
+  #d-wrapper div.sep1 { 
+    padding: 0; 
+  } 
+
+  #d-wrapper div.sep2 { 
+    display: none; 
+  } 
+
+  #d-wrapper div.sep1{
+    min-height: 6vh;
+  }
+
+  .column1 { 
+    width: 100%; 
+    border-left: none; 
+    border-right: none; 
+  } 
+
+  .column1 #d-wrapper .zig-zag-top1 { 
+    display: none; 
+  } 
+
+  .column1 #d-wrapper .zig-zag-bottom2 { 
+    display: none; 
+  } 
+
+  .column3 #d-wrapper .zig-zag-top2 { 
+    display: none; 
+  } 
+
+  .column2 { 
+    width: 100%; 
+  } 
+
+  .column3 { 
+    width: 100%; 
+    border-left: none; 
+    border-right: none; 
+  } 
+  .column3 #d-wrapper .zig-zag-top1 { 
+    display: none; 
+  }
+  /* Ascundem paragrafele goale care fac padding inutil */
+  .column1 #d-wrapper p,
+  .column3 #d-wrapper p {
+    display: none;
+  }
+}
+
+.btn { 
+  background-color: #99c2ff; 
+  color: #1a1a1a; 
+  margin-left: 30px; 
+  border-radius: 20px; 
+  margin-bottom: 10px; 
+  padding-top: 1%; 
+  padding-left: 1%; 
+  padding-right: 1%; 
+  padding-bottom: 1%; 
+  cursor: pointer; 
+}
+
+/* Butonul Retro-Tactil */
+.copy-btn {
+  /* Aspect implicit: Sticla transparenta cu bordura fina */
+  background: rgba(254, 152, 255, 0.1); 
+  border: 1px solid #99c2ff;
+  color: #99c2ff;
+  padding: 12px 35px;
+  font-size: 1rem;
+  font-family: monospace; /* Pastram tema "din taste" */
+  font-weight: bold;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  border-radius: 8px; /* Colturi usor rotunjite */
+  cursor: pointer;
+  
+  /* Tranzitii rapide pentru senzatia de electricitate */
+  transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  
+  /* Glow subtil initial */
+  box-shadow: 0 0 5px rgba(78, 138, 218, 0.2);
+  position: relative;
+  overflow: hidden;
+
+  background-color: #99c2ff; 
+  color: #1a1a1a; 
+  margin-left: 30px; 
+  border-radius: 20px; 
+  margin-bottom: 10px; 
+  padding-top: 1%; 
+  padding-left: 1%; 
+  padding-right: 1%; 
+  padding-bottom: 1%; 
+  cursor: pointer; 
+}
+
+/* Efectul de Hover (se ridica putin) */
+.copy-btn:hover {
+    background: rgba(67, 131, 214, 0.2);
+    box-shadow: 0 0 15px rgba(78, 138, 218, 0.5);
+    text-shadow: 0 0 5px #99c2ff;
+}
+
+/* Efectul de Click (se apasa fizic) */
+.copy-btn:active {
+  transform: scale(0.95); /* Se micsoreaza la 95% */
+  background: #99c2ff;    /* Se umple cu culoare */
+  box-shadow: 0 0 25px rgba(78, 138, 218, 0.8); /* Glow puternic */
+}
+
+/* Starea cand e copiat (verde) */
+.copy-btn.success {
+  background-color: #4caf50;
+  border-color: #4caf50;
+  color: white;
+  box-shadow: 6px 6px 0px rgba(76, 175, 80, 0.4);
+}
+
+/* --- BUTTONS & FOOTER --- */
+.sparkley {
+  background: #1a1a1a;
+  color: var(--accent-main); /* Foloseste variabila actualizata */
+  border: 1px solid #333;
+  box-shadow: 0px 0px 10px rgba(0,0,0,0.5); 
+  transition: all 0.3s ease;
+}
+
+.sparkley:hover {
+  background: var(--accent-main); 
+  color: #000;
+  border-color: var(--accent-main);
+  /* Glow adaptat */
+  box-shadow: 0px 0px 15px rgba(78, 138, 218, 0.5);
+}
+
+footer {
+  text-align: center;
+  padding: 30px 0;
+  background-color: #000;
+  color: #444; 
+  border-top: 1px solid #111;
+  font-family: monospace;
+  font-size: 0.8rem;
+}
+
+.article-preview-card {
+  transition: transform 0.15s ease, background-color 0.15s ease, border-color 0.15s ease;
+  border: 1px solid transparent;
+}
+
+/* Desktop hover */
+@media (hover: hover) {
+  .article-preview-card:hover {
+    transform: scale(1.02);
+    border-color: #99c2ff;
+    background-color: rgba(255,255,255,0.08);
+  }
+}
+
+/* Mobile tap feedback */
+.article-preview-card:active {
+  transform: scale(0.97);
+  background-color: rgba(254, 152, 255, 0.15);
+}
+
+.article-preview-card {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* --- STICKY NOTES STYLE --- */
+.handwritten-font {
+  font-family: "Segoe Print", "Bradley Hand", "Chilanka", cursive;
+  font-weight: bold;
+}
+
+.sticky-note {
+  width: 200px;
+  padding: 15px;
+  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.7);
+  color: #1a1a1a; /* Cerneală închisă pe post-it */
+  font-family: "Segoe Print", "Bradley Hand", "Chilanka", cursive; /* Font de mână */
+  font-size: 0.95rem;
+  line-height: 1.4;
+  position: relative;
+  z-index: 10;
+  margin-bottom: 20px;
+  transition: transform 0.2s ease;
+  cursor: default;
+}
+
+.sticky-note:hover {
+  transform: scale(1.05) rotate(0deg) !important; /* Se îndreaptă când pui mouse-ul */
+}
+
+/* Varianta Galbenă (Drreapta) */
+.sticky-note.yellow {
+  background-color: #ffeb3b;
+  float: right;           /* Textul curge în stânga lui */
+  margin-left: 25px;      /* Spațiu între text și notă */
+  transform: rotate(3deg);
+  /* Efect de bandă adezivă sus */
+  border-top: 1px solid rgba(255,255,255,0.4);
+}
+
+/* Varianta Roz/Magenta (Stânga) */
+.sticky-note.pink {
+  background-color: #ff80ab;
+  float: left;            /* Textul curge în dreapta lui */
+  margin-right: 25px;     /* Spațiu între notă și text */
+  transform: rotate(-4deg);
+  border-top: 1px solid rgba(255,255,255,0.4);
+}
+
+/* Pentru ecrane mici, scoatem float-ul ca să nu strice textul */
+@media screen and (max-width: 600px) {
+  .sticky-note {
+    float: none !important;
+    margin: 20px auto;
+    width: 90%;
+    transform: rotate(0deg) !important;
+  }
+}
+
+/* Adăugăm și o clasă pentru sublinieri "de mână" în textul principal */
+.highlight-text {
+  /* Modificare 1: Am crescut opacitatea finală la 0.8 (era 0.4) ca să fie mai clar */
+  /* Modificare 2: Începe de la 0.1 (nu 0) ca să se vadă puțin și începutul frazei */
+  background: linear-gradient(120deg, rgba(153, 194, 255, 0.5) 0%, rgba(153, 194, 255, 0.1) 100%);
+  
+  background-repeat: no-repeat;
+  
+  /* Modificare 3: Am crescut înălțimea la 60% (era 40%) - acoperă jumătatea de jos a literelor */
+  background-size: 100% 80%;
+  
+  background-position: 0 90%; /* Poziționat jos */
+  
+  color: #fff;
+  font-style: italic;
+  
+  /* Mic spațiu lateral ca să nu pară tăiat brusc markerul */
+  padding: 0 4px; 
+}
+
+.spiral-binding {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 40px; /* lățimea spiralei */
+  z-index: 10;
+
+  /* fundal combinat: găuri + sârmă verticală */
+  background-image:
+    /* 1️⃣ GĂURI */
+    radial-gradient(circle at 20px 20px, #050505 6px, transparent 7px),
+    
+    /* 2️⃣ SÂRMĂ METALICĂ VERTICALĂ */
+    linear-gradient(90deg,
+      transparent 0%,
+      transparent 45%,
+      #333 46%,
+      #777 48%,
+      #99c2ff 50%,  /* reflexie */
+      #777 52%,
+      #333 54%,
+      transparent 55%,
+      transparent 100%
+    );
+
+  /* fiecare pattern se repetă doar pe verticală, nu pe orizontală */
+  background-size:
+    40px 40px,   /* gaura: lățime 40px, pas vertical 40px */
+    40px 40px;   /* sârma: lățime 40px, pas vertical 40px */
+
+  background-repeat: repeat-y;
+
+  /* umbră pentru adâncime */
+  box-shadow: 5px 0 15px -5px rgba(0,0,0,0.5);
+  border-right: 1px solid rgba(0,0,0,0.1);
+}
+
+.fade-in {
+  width: 90%;
+  max-width: 800px;
+  margin: 0 auto;
+  padding-top: 20px;
+}
+
+/* Pentru ecrane mici, scoatem float-ul ca să nu strice textul */
+@media screen and (max-width: 600px) {
+  .fade-in {
+    margin-left: 45px; /* pentru a nu suprapune spirala */
+    width: 80%;
+  }
+}
+
+/* ========================================= */
+/* --- UI ELEMENTS (INPUTS & BUTTONS) --- */
+/* ========================================= */
+
+/* Ascunde săgețile (spin buttons) de la input type number */
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+input[type=number] {
+  appearance: textfield;
+  -moz-appearance: textfield;
+}
+
+/* Stil general pentru input-uri din coloana centrală */
+.column2 input[type="number"],
+.column2 input[type="text"] {
+  background-color: #111; /* Foarte închis */
+  border: 1px solid #333;
+  color: var(--accent-main); /* #99c2ff */
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: bold;
+  font-size: 0.85rem;
+  border-radius: 3px;
+  padding: 4px 8px;
+  transition: all 0.2s ease;
+  outline: none;
+  /* Efect de încastrare (inner shadow) */
+  box-shadow: inset 2px 2px 5px rgba(0,0,0,0.8), inset -1px -1px 2px rgba(255,255,255,0.05);
+}
+
+/* Hover Input */
+.column2 input:hover {
+  border-color: #555;
+  background-color: #161616;
+}
+
+/* Focus Input (Glow) */
+.column2 input:focus {
+  border-color: var(--accent-main);
+  background-color: #0f0f0f;
+  box-shadow: 0 0 10px rgba(153, 194, 255, 0.15), inset 2px 2px 5px rgba(0,0,0,0.9);
+}
+
+/* Butoanele de Start/Pause și Reset */
+.column2 button {
+  font-family: 'Courier New', Courier, monospace;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.1s ease;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+}
+
+/* Efect de apăsare (Click) */
+.column2 button:active {
+  transform: translateY(2px);
+  box-shadow: 0 1px 2px rgba(0,0,0,0.3);
+}
+
+/* Opțional: Labels */
+.column2 label {
+  font-family: 'Courier New', monospace;
+  font-size: 0.75rem;
+  color: #aaa;
+  font-weight: bold;
+}
+
+/* --- STILURI AVANSATE PENTRU PANOU DE CONTROL --- */
+
+/* Containerul principal al panoului */
+.tech-panel {
+  background-color: #141414; /* Puțin mai deschis decât fundalul paginii */
+  border: 1px solid #333;
+  border-left: 4px solid #99c2ff; /* Accent albastru tehnic în stânga */
+  padding: 25px;
+  border-radius: 6px;
+  box-shadow: inset 0 0 20px rgba(0,0,0,0.5);
+  margin-bottom: 20px;
+}
+
+/* Layout-ul Responsiv (Definit anterior, dar rafinat) */
+.inputs-layout {
+  display: flex;
+  flex-direction: row;
+  gap: 40px; /* Spațiu generos între cele două coloane mari */
+  width: 100%;
+}
+
+.inputs-column {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+/* Titlurile secțiunilor (Configuration / Formulas) */
+.section-title {
+  color: #99c2ff;
+  font-family: 'Courier New', monospace;
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  border-bottom: 1px solid #333;
+  padding-bottom: 8px;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  opacity: 0.9;
+}
+
+/* Grupul Label + Input */
+.control-group {
+  margin-bottom: 15px;
+  display: flex;
+  flex-direction: column;
+}
+
+.control-group label {
+  font-family: 'Courier New', monospace;
+  font-size: 0.75rem;
+  color: #888;
+  margin-bottom: 6px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+/* Stil Input Personalizat */
+.tech-input {
+  background-color: #050505; /* Foarte închis pentru contrast */
+  border: 1px solid #333;
+  color: #e0e0e0;
+  font-family: 'Courier New', monospace;
+  font-size: 0.95rem;
+  padding: 10px 12px; /* Padding interior generos pentru a nu fi înghesuit */
+  border-radius: 4px;
+  outline: none;
+  transition: all 0.2s ease;
+  width: 100%;
+  box-shadow: inset 2px 2px 5px rgba(0,0,0,0.8); /* Umbră interioară */
+}
+
+/* Input Focus State (Glow Effect) */
+.tech-input:focus {
+  border-color: #99c2ff;
+  background-color: #0a0a0a;
+  box-shadow: 0 0 8px rgba(153, 194, 255, 0.2), inset 2px 2px 5px rgba(0,0,0,0.8);
+  color: #fff;
+}
+
+/* Inputuri speciale pentru formule (Text Verde) */
+.tech-input.formula {
+  color: #4ade80; /* Verde matrix */
+  letter-spacing: 1px;
+}
+.tech-input.formula:focus {
+  border-color: #4ade80;
+  box-shadow: 0 0 8px rgba(74, 222, 128, 0.2);
+}
+
+/* Grid-ul intern pentru Configurație (2 coloane pe Desktop) */
+.config-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Două coloane egale */
+  gap: 20px; /* Spațiu între input-uri */
+}
+
+/* RESPONSIVE: Mobil */
+@media screen and (max-width: 820px) {
+  .inputs-layout {
+    flex-direction: column; /* Coloane una sub alta */
+    gap: 30px;
+  }
+  
+  .tech-panel {
+    padding: 15px; /* Padding mai mic pe mobil */
+  }
+
+  /* Pe ecrane foarte mici, facem și grid-ul de configurare o singură coloană */
+  @media (max-width: 450px) {
+    .config-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+}
+
+/* --- BUTOANE CYBER-INDUSTRIAL --- */
+
+/* Stilul de bază */
+.cyber-btn {
+  font-family: 'Courier New', monospace;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: 0.85rem;
+  padding: 14px 24px;
+  border: 1px solid;
+  background: rgba(10, 10, 10, 0.8); /* Ușor transparent */
+  cursor: pointer;
+  position: relative;
+  transition: all 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  
+  /* Umbra de "adâncime" */
+  box-shadow: 0 4px 0 rgba(0,0,0,0.5); 
+  transform: translateY(0);
+}
+
+/* Efectul de apăsare (Click fizic) */
+.cyber-btn:active {
+  transform: translateY(3px); /* Se lasă în jos */
+  box-shadow: 0 1px 0 rgba(0,0,0,0.5); /* Umbra dispare */
+}
+
+/* --- VARIANTA 1: START (Verde Neon) --- */
+.cyber-btn.start {
+  border-color: #00ff9d;
+  color: #00ff9d;
+}
+
+.cyber-btn.start:hover {
+  background: rgba(0, 255, 157, 0.1);
+  box-shadow: 0 0 15px rgba(0, 255, 157, 0.4), 0 4px 0 rgba(0,0,0,0.5);
+  text-shadow: 0 0 8px #00ff9d;
+}
+
+/* --- VARIANTA 2: PAUSE (Roșu Alertă) --- */
+.cyber-btn.pause {
+  border-color: #ff3366;
+  color: #ff3366;
+  background: rgba(255, 51, 102, 0.05);
+}
+
+.cyber-btn.pause:hover {
+  background: rgba(255, 51, 102, 0.15);
+  box-shadow: 0 0 15px rgba(255, 51, 102, 0.4), 0 4px 0 rgba(0,0,0,0.5);
+  text-shadow: 0 0 8px #ff3366;
+}
+
+/* --- VARIANTA 3: RESET (Gri -> Galben) --- */
+.cyber-btn.reset {
+  border-color: #444;
+  color: #888;
+}
+
+.cyber-btn.reset:hover {
+  border-color: #ffcc00;
+  color: #ffcc00;
+  background: rgba(255, 204, 0, 0.05);
+  box-shadow: 0 0 10px rgba(255, 204, 0, 0.3), 0 4px 0 rgba(0,0,0,0.5);
+}
+
+/* Iconițe în butoane (opțional, pentru aliniere) */
+.btn-icon {
+  margin-right: 8px;
+  font-size: 1.1em;
+  vertical-align: middle;
+}
+
+/* --- CONTAINER BUTOANE --- */
+.buttons-container {
+  display: flex;
+  flex-direction: row; /* Desktop: Unul lângă altul */
+  gap: 15px;
+  margin-bottom: 15px;
+}
+
+/* RESPONSIVE: Pe mobil le punem unul sub altul */
+@media screen and (max-width: 820px) {
+  .buttons-container {
+    flex-direction: column;
+  }
+}
+
+.robot-stage {
+  height: 500px;
+  min-height: 500px;
+  max-height: 500px;
+
+  width: 100%;
+  position: relative;
+
+  border: 1px solid #444;
+  background: #151515;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+/* --- NAV DROPDOWN STYLES --- */
+
+/* Părintele butonului Robotics */
+.dropdown-parent {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 100%;
+  cursor: pointer;
+}
+
+/* Stilul textului "Robotics" ca să arate ca restul link-urilor */
+.nav-link {
+  font-family: "Courier New", monospace;
+  font-size: clamp(1rem, 1.4vw, 1.5rem);
+  color: #a0a0a0;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  transition: all 0.3s ease;
+}
+
+.dropdown-parent:hover .nav-link {
+  color: var(--accent-main);
+  text-shadow: 0 0 8px rgba(78, 138, 218, 0.7);
+}
+
+/* Meniul care cade (Dropdown-ul propriu-zis) */
+.dropdown-menu {
+  position: absolute;
+  top: 100%; /* Imediat sub navbar */
+  left: 0;
+  background: rgba(5, 5, 5, 0.90); /* Fundal închis ca navbar-ul */
+  border: 1px solid #333;
+  border-top: none; /* Să pară unit cu navbar-ul */
+  list-style: none;
+  padding: 10px 0;
+  min-width: 100%;
+  
+  /* Ascuns implicit */
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: all 0.3s ease;
+  
+  box-shadow: 0 10px 20px rgba(0,0,0,0.8);
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+/* Afișare la Hover (Desktop) */
+.dropdown-parent:hover .dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+/* Link-urile din interiorul dropdown-ului */
+.dropdown-menu li {
+  padding: 0;
+  display: block;
+}
+
+.dropdown-menu a {
+  display: block;
+  padding: 10px 20px;
+  font-size: 0.9rem !important; /* Puțin mai mic decât meniul principal */
+  color: #888;
+  white-space: nowrap;
+}
+
+.dropdown-menu a:hover {
+  background: rgba(153, 194, 255, 0.1);
+  color: var(--accent-main);
+  padding-left: 25px; /* Mică animație la hover */
+}
+
+/* --- RESPONSIVE MOBILE FIX --- */
+@media screen and (max-width: 820px) {
+  .dropdown-parent {
+    flex-direction: column;
+    align-items: flex-start;
+    height: auto;
+    width: 100%;
+  }
+
+  /* 1. ASCUNDEM IMPLICIT MENIUL PE MOBIL */
+  .dropdown-menu {
+    display: none; /* Nu se vede */
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    padding: 0;
+    margin-top: 10px;
+    padding-left: 20px;
+    border-left: 2px solid #333;
+  }
+
+  /* 2. ÎL AFIȘĂM DOAR CÂND PĂRINTELE ARE CLASA 'ACTIVE' (DUPA CLICK) */
+  .dropdown-parent.active .dropdown-menu {
+    display: flex; /* Se afișează */
+    flex-direction: column;
+    animation: slideDown 0.3s ease forwards; /* Opțional: animație fină */
+  }
+
+  .dropdown-menu a {
+    font-size: 14px !important;
+    padding: 10px 0;
+  }
+  
+  .nav-list.active {
+    max-height: 600px; /* Mărim spațiul să încapă tot */
+    overflow-y: auto;  /* Scroll dacă e prea înalt */
+  }
+}
+
+/* Opțional: Animație de deschidere pe mobil */
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* =============================== */
+/* NOTEBOOK THEORY CONTENT */
+/* =============================== */
+
+.notebook-page {
+  color: var(--bg-desk);
+  position: relative;
+}
+
+.notebook-title {
+  font-size: 1.8rem;
+  font-weight: 900;
+  margin-bottom: 0.6rem;
+}
+
+.notebook-subtitle {
+  font-size: 1.3rem;
+  font-weight: 800;
+  margin-bottom: 10px;
+  margin-top: 1%;
+}
+
+.notebook-paragraph {
+  font-size: 1rem;
+  line-height: 1.7;
+  margin-bottom: 14px;
+}
+
+.notebook-list {
+  margin-left: 20px;
+  margin-bottom: 20px;
+}
+
+.notebook-list li {
+  margin-bottom: 6px;
+}
+
+
+/* Containerul principal */
+.explanation-row {
+  display: flex;
+  align-items: center; /* Aliniere verticală pe centru */
+  gap: 20px;
+  width: 100%;
+  margin-bottom: 30px;
+  flex-wrap: wrap; /* Permite elementelor să cadă pe rândul următor dacă nu e loc */
+}
+
+/* Blocul de cod */
+.notebook-code {
+  background: #f3f4f6;
+  border-left: 4px solid var(--accent-main);
+  padding: 12px 16px;
+  font-family: "Courier New", monospace;
+  font-size: 0.9rem;
+  color: #111;
+  box-shadow: inset 0 0 5px rgba(0,0,0,0.1);
+  margin: 0;
+  white-space: pre; 
+  
+  /* --- MODIFICĂRI CHEIE AICI --- */
+  width: fit-content;  /* Se mulează exact pe lungimea textului din el */
+  flex-shrink: 0;      /* Nu lăsa codul să fie strivit de textul lung */
+}
+
+/* Grupul Săgeată + Text */
+.annotation-group {
+  display: flex;
+  align-items: center; /* Săgeata centrată cu textul */
+  gap: 10px;
+  
+  /* --- PENTRU TEXTE LUNGI --- */
+  flex: 1;             /* Ocupă tot spațiul rămas disponibil */
+  min-width: 200px;    /* Dacă spațiul e mai mic de 200px, mută tot grupul sub cod */
+}
+
+.handwritten-text {
+  font-family: "Segoe Print", "Bradley Hand", cursive;
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: var(--accent-main);
+  line-height: 1.3;    /* Puțin mai aerisit pentru texte lungi */
+  
+  /* --- IMPORTANT PENTRU TEXTE LUNGI --- */
+  white-space: normal; /* Permite textului să treacă pe rândul următor */
+  max-width: 600px;    /* Limită opțională ca să nu fie prea lat pe ecrane uriașe */
+}
+
+.annotation-group svg {
+  flex-shrink: 0;       /* Săgeata nu se turtește */
+  transition: transform 0.3s ease;
+}
+
+/* --- RESPONSIVE / MOBILE --- */
+@media (max-width: 768px) {
+  .explanation-row {
+    flex-direction: column; /* Vertical */
+    align-items: flex-start; /* Aliniat la stânga */
+    gap: 5px;
+  }
+
+  .notebook-code {
+    width: 100%;       /* Pe mobil e ok să fie lat cât ecranul */
+    overflow-x: auto;  /* Scroll dacă numerele sunt prea multe */
+  }
+
+  .annotation-group {
+    width: 100%;
+    padding-left: 10px;
+    margin-top: 5px;
+  }
+  
+  /* Rotim săgeata să arate spre codul de sus */
+  .annotation-group svg {
+    transform: rotate(-90deg);
+    width: 30px; 
+  }
+}
