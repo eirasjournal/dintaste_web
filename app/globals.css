@@ -466,7 +466,7 @@ body {
 }
 
 .column1 {
-  width: 10%;
+  width: 7.5%;
   border-right: 1px solid #222;
   background-color: #080808;
   overflow: hidden;
@@ -474,7 +474,7 @@ body {
 }
 
 .column2 {
-  width: 80%;
+  width: 85%;
   padding: 15px;
   background-color: #0c0c0c; 
   color: #d0d0d0;
@@ -484,7 +484,7 @@ body {
 }
 
 .column3 {
-  width: 10%;
+  width: 7.5%;
   border-left: 1px solid #222;
   background-color: #080808;
   overflow: hidden;
@@ -511,7 +511,7 @@ body {
   } 
 
   #d-wrapper div.sep1{
-    min-height: 6vh;
+    min-height: 4vh;
   }
 
   .column1 { 
@@ -786,7 +786,7 @@ footer {
 
 .fade-in {
   width: 90%;
-  max-width: 800px;
+  max-width: 900px;
   margin: 0 auto;
   padding-top: 20px;
 }

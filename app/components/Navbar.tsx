@@ -47,6 +47,10 @@ export default function Navbar() {
               </li>
             </ul>
           </li>
+
+          <li className="list-item">
+            <Link href="/aboutme" onClick={() => setIsMenuOpen(false)} scroll={false}>About Me</Link>
+          </li>
           
           <li className="list-item">
             <Link href="/contact" onClick={() => setIsMenuOpen(false)} scroll={false}>Contact</Link>
