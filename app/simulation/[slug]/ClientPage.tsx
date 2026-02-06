@@ -28,7 +28,7 @@ export default function ClientPage({ slug }: { slug: string }) {
     <PageLayout decorCount={6}>
       <PageTurn>
         <div className="fade-in">
-             <Link href="/palletizer">
+             <Link href="/simulation" scroll={false}>
                   <button 
                     style={{
                         background: 'transparent', border: '1px solid #99c2ff', color: '#99c2ff', padding: '8px 20px', cursor: 'pointer', marginBottom: '30px', marginLeft: '40px', fontFamily: 'monospace', fontSize: '0.9rem', textTransform: 'uppercase', letterSpacing: '1px'

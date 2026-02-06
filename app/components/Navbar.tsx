@@ -43,7 +43,7 @@ export default function Navbar() {
                 <Link href="/theory" onClick={() => setIsMenuOpen(false)} scroll={false}>Theory</Link>
               </li>
               <li>
-                <Link href="/palletizer" onClick={() => setIsMenuOpen(false)} scroll={false}>Simulation</Link>
+                <Link href="/simulation" onClick={() => setIsMenuOpen(false)} scroll={false}>Simulation</Link>
               </li>
             </ul>
           </li>

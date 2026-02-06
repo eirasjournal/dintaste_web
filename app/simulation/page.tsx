@@ -45,7 +45,7 @@ export default function SimulationListPage() {
           {SIMULATIONS.map((sim) => (
             <Link 
                 key={sim.id} 
-                href={`/palletizer/${sim.slug}`} 
+                href={`/simulation/${sim.slug}`} 
                 scroll={false} 
                 style={{ textDecoration: 'none', color: 'inherit' }}
             >
