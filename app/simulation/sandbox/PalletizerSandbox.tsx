@@ -221,7 +221,7 @@ export default function PalletizerSandbox() {
                         <spotLight position={[-5, 15, 0]} angle={0.3} penumbra={1} intensity={2} castShadow />
 
                         <OrbitControls makeDefault target={[0, 2, 0]} />
-                        <Grid infiniteGrid fadeDistance={40} sectionColor={'#444'} cellColor={'#222'} position={[0, -0.01, 0]} />
+                        <Grid infiniteGrid fadeDistance={100} sectionColor={'#444'} cellColor={'#222'} position={[0, -0.01, 0]} />
                         <Plane args={[100, 100]} rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.02, 0]}><meshBasicMaterial color="#0a0a0a" /></Plane>
 
                         <Robot 
