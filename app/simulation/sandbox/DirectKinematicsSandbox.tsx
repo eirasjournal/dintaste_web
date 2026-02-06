@@ -22,7 +22,7 @@ export default function DirectKinematicsSandbox() {
     };
 
     return (
-        <div className="fade-in w-full">
+        <div className="flex flex-col gap-6 relative animate-fade-in">
             
             {/* Header Secțiune */}
             <div className="mb-6 border-b border-[#333] pb-4">
