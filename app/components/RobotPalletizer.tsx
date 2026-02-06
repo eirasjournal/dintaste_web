@@ -48,7 +48,7 @@ interface RobotProps {
   boxSize: [number, number, number];
 }
 
-export default function Robot({
+export default function RobotPalletizer({
   boxTarget, onGrab, onPlace, hasBox, boxSize,
 }: RobotProps) {
   // REFS

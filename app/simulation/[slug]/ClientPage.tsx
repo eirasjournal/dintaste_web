@@ -8,6 +8,7 @@ import PageLayout from '../../components/PageLayout';
 import { SIMULATIONS } from '../data'; 
 // 👇 Importăm componenta AICI
 import PalletizerSandbox from '../sandbox/PalletizerSandbox';
+import DirectKinematicsSandbox from '../sandbox/DirectKinematicsSandbox';
 
 export default function ClientPage({ slug }: { slug: string }) {
   const selectedSimulation = SIMULATIONS.find((s) => s.slug === slug);
@@ -18,8 +19,11 @@ export default function ClientPage({ slug }: { slug: string }) {
 
   // 👇 LOGICA DE RANDARE
   const renderSimulation = () => {
-      if (selectedSimulation.slug === 'sandbox') {
+      if (selectedSimulation.slug === 'palletizer') {
           return <PalletizerSandbox />;
+      }
+      if (selectedSimulation.slug === 'directkinematics') {
+          return <DirectKinematicsSandbox />;
       }
       return <div>Simulation not found component.</div>;
   };

@@ -5,7 +5,7 @@ import { Canvas } from '@react-three/fiber';
 import { OrbitControls, Grid, Plane } from '@react-three/drei';
 import * as math from 'mathjs';
 import * as THREE from 'three';
-import Robot from '../../components/Robot'; // Asigură-te că Robot.tsx e importat corect
+import RobotPalletizer from '../../components/RobotPalletizer'; // Asigură-te că Robot.tsx e importat corect
 
 // Componenta locală Box
 const Box = ({ position, size, color }: { position: [number, number, number], size: [number, number, number], color?: string }) => {
@@ -216,6 +216,8 @@ export default function PalletizerSandbox() {
                     <div className="robot-stage">
                     <Canvas shadows camera={{ position: [10, 10, 10], fov: 50 }}>
                         <color attach="background" args={['#151515']} />
+                        
+                        {/* Lighting setup for metallic look */}
                         <ambientLight intensity={0.5} />
                         <pointLight position={[5, 10, 5]} intensity={1} castShadow />
                         <spotLight position={[-5, 15, 0]} angle={0.3} penumbra={1} intensity={2} castShadow />
@@ -224,7 +226,7 @@ export default function PalletizerSandbox() {
                         <Grid infiniteGrid fadeDistance={100} sectionColor={'#444'} cellColor={'#222'} position={[0, -0.01, 0]} />
                         <Plane args={[100, 100]} rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.02, 0]}><meshBasicMaterial color="#0a0a0a" /></Plane>
 
-                        <Robot 
+                        <RobotPalletizer 
                             boxTarget={currentTargetVector} 
                             onGrab={handleGrab} 
                             onPlace={handlePlace}

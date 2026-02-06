@@ -62,7 +62,7 @@ export default function ClientPage({ slug }: { slug: string }) {
                 
                 {selectedArticle.hasSimulationLink && (
                     <div className="text-center my-8">
-                        <Link href="/palletizer/sandbox">
+                        <Link href="/simulation/palletizer" scroll={false}>
                             <button className="cyber-btn start px-8 py-4">
                                 <span className="btn-icon" style={{marginBottom: '2%'}}>▶</span>
                                 Test Logic in Simulator
