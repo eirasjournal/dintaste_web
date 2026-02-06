@@ -5,10 +5,10 @@ import { Canvas } from '@react-three/fiber';
 import { OrbitControls, Grid, Plane, PerspectiveCamera } from '@react-three/drei';
 import RobotDKinematics from '../../components/RobotDKinematics';
 
-// --- CONFIGURARE LIMITE AXE (Limitele Fizice ale Motoarelor) ---
+// --- CONFIGURARE LIMITE AXE ---
 const JOINT_LIMITS: Record<string, { min: number; max: number }> = {
     j1: { min: -170, max: 170 },
-    j2: { min: -190, max: 45 },  // Motorul poate merge pana la 45
+    j2: { min: -190, max: 45 },
     j3: { min: -160, max: 70 },
     j4: { min: -190, max: 190 },
     j5: { min: -120, max: 120 },
@@ -16,21 +16,23 @@ const JOINT_LIMITS: Record<string, { min: number; max: number }> = {
 };
 
 export default function DirectKinematicsSandbox() {
-    // --- STATE PENTRU UNGHIURI ---
     const HOME_POSITION = { j1: 0, j2: -90, j3: 0, j4: 0, j5: 90, j6: 0 };
-    
     const [joints, setJoints] = useState(HOME_POSITION);
+
+    // --- CONFIGURARE SAFETY ---
+    const FRONT_FLOOR_LIMIT = 5;    // J2 nu coboară sub orizontala din față
+    
+    // Suma limită (J2 + J3). Dacă suma e mai mică de atât (mai negativă), atingem podeaua în spate.
+    // Testat: -116 + (-144) = -260 (Valid). Deci limita e pe la -275.
+    const BACK_FLOOR_SUM_LIMIT = -275; 
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
         const limits = JOINT_LIMITS[name];
-        
         let newValue = parseFloat(value);
 
-        if (isNaN(newValue)) {
-             newValue = 0; 
-        } else {
-            // Clamp value within physical limits
+        if (isNaN(newValue)) newValue = 0;
+        else {
             if (newValue < limits.min) newValue = limits.min;
             if (newValue > limits.max) newValue = limits.max;
         }
@@ -42,15 +44,38 @@ export default function DirectKinematicsSandbox() {
         setJoints(HOME_POSITION);
     };
 
-    // --- LOGICA DE PROTECȚIE PODEA ---
-    // Calculăm o variantă "sigură" a unghiurilor doar pentru vizualizare.
-    // Slider-ul rămâne la valoarea reală setată de user (ex: 45), 
-    // dar robotul primește maxim 5 grade (aproape orizontal).
-    const visualJoints = {
-        ...joints,
-        // Math.min alege valoarea cea mai mică dintre inputul tău și limita sigură (5 grade)
-        j2: Math.min(joints.j2, 5) 
-    };
+    // --- LOGICA DE CALCUL VIZUAL (SAFETY) ---
+    const visualJoints = { ...joints };
+    let safetyMessage = "";
+    let isSafetyHit = false;
+
+    // 1. FRONT LIMIT (Simplu: J2 > 5)
+    if (visualJoints.j2 > FRONT_FLOOR_LIMIT) {
+        visualJoints.j2 = FRONT_FLOOR_LIMIT;
+        isSafetyHit = true;
+        safetyMessage = "⚠ FRONT COLLISION";
+    }
+
+    // 2. BACK LIMIT (Dinamic: Suma Unghiurilor)
+    // Verificăm dacă robotul e pe spate (J2 < -90)
+    if (joints.j2 < -90) {
+        const currentSum = joints.j2 + joints.j3;
+        
+        // Dacă suma lor e prea mică (prea negativă), înseamnă coliziune
+        if (currentSum < BACK_FLOOR_SUM_LIMIT) {
+            // Recalculăm J3 vizual ca să respecte limita: J3 = Limita - J2
+            visualJoints.j3 = BACK_FLOOR_SUM_LIMIT - joints.j2;
+            
+            // Verificăm să nu depășim totuși limitele fizice ale motorului J3 în timp ce corectăm
+            if (visualJoints.j3 < JOINT_LIMITS.j3.min) visualJoints.j3 = JOINT_LIMITS.j3.min;
+
+            // Activăm doar dacă diferența e vizibilă (pentru a evita flicker la limita exactă)
+            if (Math.abs(visualJoints.j3 - joints.j3) > 0.1) {
+                isSafetyHit = true;
+                safetyMessage = "⚠ BACK COLLISION";
+            }
+        }
+    }
 
     return (
         <div className="flex flex-col gap-6 relative animate-fade-in">
@@ -61,7 +86,6 @@ export default function DirectKinematicsSandbox() {
             </div>
 
             <div className="dk-grid">
-                {/* --- STÂNGA: CONTROLS PANEL --- */}
                 <div className="tech-panel bg-[#111] border border-[#333] rounded-xl shadow-2xl flex flex-col">
                     <div className="buttons-container">
                         <button 
@@ -78,16 +102,25 @@ export default function DirectKinematicsSandbox() {
                     {Object.keys(joints).map((joint) => {
                         const limits = JOINT_LIMITS[joint];
                         
-                        // Calculăm dacă valoarea curentă depășește limita vizuală (doar pentru styling)
-                        const isHitFloor = joint === 'j2' && joints.j2 > 5;
+                        // Detectăm care slider trebuie să fie roșu
+                        let showWarning = false;
+                        
+                        // J2 e roșu dacă lovește în față SAU contribuie la lovirea în spate
+                        if (joint === 'j2' && (joints.j2 > FRONT_FLOOR_LIMIT || (isSafetyHit && safetyMessage.includes("BACK")))) {
+                            showWarning = true;
+                        }
+                        // J3 e roșu doar la lovirea în spate
+                        if (joint === 'j3' && isSafetyHit && safetyMessage.includes("BACK")) {
+                            showWarning = true;
+                        }
 
                         return (
-                            <div key={joint} className={`bg-[#1a1a1a] rounded border transition-colors duration-300 ${isHitFloor ? 'border-red-500' : 'border-[#333]'}`}>
+                            <div key={joint} className={`bg-[#1a1a1a] rounded border transition-colors duration-300 ${showWarning ? 'border-red-500' : 'border-[#333]'}`}>
                                 <div className="input-wrapper flex justify-between items-end">
                                     <div>
-                                        <label className={`text-xs font-bold font-mono uppercase block ${isHitFloor ? 'text-red-500' : 'text-[#cca033]'}`}>
+                                        <label className={`text-xs font-bold font-mono uppercase block ${showWarning ? 'text-red-500' : 'text-[#cca033]'}`}>
                                             AXIS {joint.toUpperCase()} [{limits.min}° : {limits.max}°]
-                                            {isHitFloor && <span className="ml-2 text-[9px] animate-pulse">⚠ FLOOR LIMIT</span>}
+                                            {showWarning && <span className="ml-2 text-[9px] animate-pulse">{safetyMessage}</span>}
                                         </label>
                                     </div>
                                     <input 
@@ -97,7 +130,7 @@ export default function DirectKinematicsSandbox() {
                                         onChange={handleChange}
                                         min={limits.min}
                                         max={limits.max}
-                                        className={`full-width-input w-20 text-right ${isHitFloor ? 'text-red-500' : ''}`} 
+                                        className={`full-width-input w-20 text-right ${showWarning ? 'text-red-500' : ''}`} 
                                     />
                                 </div>
                                 <input
@@ -108,14 +141,13 @@ export default function DirectKinematicsSandbox() {
                                     step="1" 
                                     value={joints[joint as keyof typeof joints]} 
                                     onChange={handleChange} 
-                                    className={`w-full h-1.5 rounded-lg appearance-none cursor-pointer transition-colors ${isHitFloor ? 'accent-red-500 bg-red-900' : 'accent-[#cca033] bg-gray-700 hover:bg-gray-600'}`}
+                                    className={`w-full h-1.5 rounded-lg appearance-none cursor-pointer transition-colors ${showWarning ? 'accent-red-500 bg-red-900' : 'accent-[#cca033] bg-gray-700 hover:bg-gray-600'}`}
                                 />
                             </div>
                         );
                     })}
                 </div>
 
-                {/* --- DREAPTA: 3D CANVAS --- */}
                 <div className="robot-stage relative shadow-2xl border border-[#444] rounded bg-[#151515] overflow-hidden">
                     <Canvas shadows>
                         <PerspectiveCamera makeDefault position={[12, 12, 12]} fov={60} />
@@ -128,13 +160,7 @@ export default function DirectKinematicsSandbox() {
                         <Plane args={[100, 100]} rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.02, 0]} receiveShadow>
                             <meshStandardMaterial color="#0a0a0a" roughness={0.8} metalness={0.5} />
                         </Plane>
-                        
-                        {/* MODIFICARE MAJORĂ:
-                            Trimitem `visualJoints` în loc de `joints`.
-                            Canvas-ul randează varianta "safe", dar UI-ul păstrează inputul tău.
-                        */}
                         <RobotDKinematics angles={visualJoints} />
-                        
                     </Canvas>
                 </div>
             </div>
