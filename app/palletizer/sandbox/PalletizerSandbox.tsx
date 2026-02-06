@@ -214,7 +214,7 @@ export default function PalletizerSandbox() {
 
                 <div className="h-[500px] border border-[#444] bg-[#151515] rounded relative overflow-hidden shadow-2xl">
                     <div className="robot-stage">
-                    <Canvas shadows camera={{ position: [10, 10, 10], fov: 35 }}>
+                    <Canvas shadows camera={{ position: [10, 10, 10], fov: 50 }}>
                         <color attach="background" args={['#151515']} />
                         <ambientLight intensity={0.5} />
                         <pointLight position={[5, 10, 5]} intensity={1} castShadow />
