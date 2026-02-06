@@ -26,9 +26,6 @@ export default function DirectKinematicsSandbox() {
             
             {/* Header Secțiune */}
             <div className="mb-6 border-b border-[#333] pb-4">
-                <h3 className="text-[#cca033] font-bold text-3xl tracking-wider font-mono">
-                    DIRECT KINEMATICS
-                </h3>
                 <p className="text-sm text-gray-500 font-mono mt-1">
                     RENDER: THREE.JS FIBER
                 </p>
