@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { ArrowLeft, Info, X, Zap, Users, Globe, Fingerprint, HelpCircle } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import DreamInput from './components/DreamInput';
@@ -11,7 +12,7 @@ export default function DreamPage() {
   const [showInfo, setShowInfo] = useState(false);
 
   return (
-    <main className="min-h-screen bg-[#050505] text-white selection:bg-[#d499ff] selection:text-black pb-20 font-mono">
+    <main className="min-h-screen bg-[#050505] text-white selection:bg-[#d499ff] selection:text-black font-mono">
       
       {/* --- INFO MODAL (POP-UP) --- */}
       <AnimatePresence>
@@ -171,6 +172,68 @@ export default function DreamPage() {
       <div className="px-4 md:px-6 relative z-10">
         <DreamInput />
       </div>
+
+      {/* --- SECȚIUNEA NOUĂ: THE GENESIS (Footer Story) --- */}
+      <footer className="relative z-10 border-t border-[#222] mt-20 bg-[#0a050a]">
+        <div className="max-w-4xl mx-auto px-6 py-16 flex flex-col md:flex-row items-center gap-12">
+          
+          {/* Partea de Text (Stânga) */}
+          <div className="flex-1 space-y-6 text-center md:text-left">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#d499ff]/5 border border-[#d499ff]/20 text-[#d499ff] text-[10px] tracking-[0.2em] uppercase">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#d499ff] animate-pulse"></span>
+              Project Genesis
+            </div>
+            
+            <h3 className="text-2xl font-bold text-white">
+              It started with a <br/>
+              <span className="text-gray-500">signal from the noise.</span>
+            </h3>
+            
+            <p className="text-sm text-gray-400 leading-relaxed font-mono">
+              Sometimes the collective unconscious speaks through YouTube comments. 
+              User <span className="text-white">@christopherg6335</span> broadcasted a wish into the void. 
+            </p>
+            <p className="text-sm text-gray-400 leading-relaxed font-mono">
+              I accepted the challenge. <br/>
+              Dintaste is the response.
+            </p>
+          </div>
+
+          {/* Partea cu Imaginea (Dreapta) */}
+          <div className="flex-1 relative group cursor-pointer">
+            {/* Glow effect in spate */}
+            <div className="absolute -inset-2 bg-gradient-to-r from-[#d499ff] to-blue-600 rounded-lg blur opacity-20 group-hover:opacity-40 transition duration-1000"></div>
+            
+            <div className="relative bg-black p-2 rounded-lg border border-[#333] group-hover:border-[#d499ff]/50 transition-colors">
+              {/* Bara de sus a ferestrei (Mac/Browser style) */}
+              <div className="flex gap-1.5 mb-2 px-1 opacity-50">
+                <div className="w-2 h-2 rounded-full bg-red-500"></div>
+                <div className="w-2 h-2 rounded-full bg-yellow-500"></div>
+                <div className="w-2 h-2 rounded-full bg-green-500"></div>
+              </div>
+              
+              {/* Imaginea */}
+              <Image 
+                src="/origin-comment.png" 
+                alt="The YouTube comment that started it all" 
+                width={600}
+                height={400}
+                className="rounded w-full opacity-80 group-hover:opacity-100 transition-opacity grayscale group-hover:grayscale-0 duration-500"
+              />
+            </div>
+            
+            <div className="text-center mt-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500 text-[10px] text-[#d499ff] tracking-widest font-mono uppercase">
+              [ Source Identified ]
+            </div>
+          </div>
+
+        </div>
+        
+        {/* Copyright simplu */}
+        <div className="text-center py-8 border-t border-[#1a1a1a] text-[#333] text-[10px] uppercase tracking-widest">
+          Engineered by [AMI MICU] // {new Date().getFullYear()}
+        </div>
+      </footer>
 
     </main>
   );
