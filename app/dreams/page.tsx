@@ -20,7 +20,7 @@ export default function DreamPage() {
             <ArrowLeft size={16} /> RETURN_TO_PORTAL
           </Link>
           <div className="font-mono font-bold tracking-[0.2em] text-[#d499ff]">
-            DREAM_COLLECTIVE_V1
+            DREAM_AI
           </div>
         </div>
       </nav>
