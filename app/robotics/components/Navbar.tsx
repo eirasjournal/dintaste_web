@@ -21,7 +21,7 @@ export default function Navbar() {
         />
         <ul className={`nav-list ${isMenuOpen ? 'active' : ''}`}>
           <li className="list-item">
-            <Link href="/" onClick={() => setIsMenuOpen(false)} scroll={false}>Home</Link>
+            <Link href="/robotics" onClick={() => setIsMenuOpen(false)} scroll={false}>Home</Link>
           </li>
           
           {/* LOGICA DROPDOWN ROBOTICS */}
@@ -40,20 +40,24 @@ export default function Navbar() {
             
             <ul className="dropdown-menu">
               <li>
-                <Link href="/theory" onClick={() => setIsMenuOpen(false)} scroll={false}>Theory</Link>
+                <Link href="/robotics/theory" onClick={() => setIsMenuOpen(false)} scroll={false}>Theory</Link>
               </li>
               <li>
-                <Link href="/simulation" onClick={() => setIsMenuOpen(false)} scroll={false}>Simulation</Link>
+                <Link href="/robotics/simulation" onClick={() => setIsMenuOpen(false)} scroll={false}>Simulation</Link>
               </li>
             </ul>
           </li>
 
           <li className="list-item">
-            <Link href="/aboutme" onClick={() => setIsMenuOpen(false)} scroll={false}>About Me</Link>
+            <Link href="/robotics/aboutme" onClick={() => setIsMenuOpen(false)} scroll={false}>About Me</Link>
           </li>
           
           <li className="list-item">
-            <Link href="/contact" onClick={() => setIsMenuOpen(false)} scroll={false}>Contact</Link>
+            <Link href="/robotics/contact" onClick={() => setIsMenuOpen(false)} scroll={false}>Contact</Link>
+          </li>
+
+          <li className="list-item">
+            <Link href="/" onClick={() => setIsMenuOpen(false)} scroll={false}>← Return to portal</Link>
           </li>
         </ul>
       </div>

@@ -11,7 +11,7 @@ export default function TheoryListPage() {
     <PageLayout decorCount={2}>
       <PageTurn>
         <div className="fade-in">
-          <h2 style={{ paddingLeft: '40px', marginBottom: '20px', borderBottom: '2px solid #99c2ff', paddingBottom: '10px', color: '#dcdcdc'}}> 
+          <h2 style={{fontSize: '2rem', paddingLeft: '40px', marginBottom: '20px', borderBottom: '2px solid #99c2ff', paddingBottom: '10px', color: '#dcdcdc'}}> 
             Theoretical Concepts
           </h2> 
 
@@ -42,7 +42,7 @@ export default function TheoryListPage() {
 
           {/* GENERARE AUTOMATĂ A LISTEI */}
           {THEORY_ARTICLES.map((art) => (
-            <Link key={art.id} href={`/theory/${art.slug}`} scroll={false} style={{ textDecoration: 'none', color: 'inherit' }}>
+            <Link key={art.id} href={`/robotics/theory/${art.slug}`} scroll={false} style={{ textDecoration: 'none', color: 'inherit' }}>
                 <div
                   className="article-preview-card"
                   style={{

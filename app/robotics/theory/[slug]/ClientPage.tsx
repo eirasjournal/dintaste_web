@@ -38,7 +38,7 @@ export default function ClientPage({ slug }: { slug: string }) {
     <PageLayout decorCount={6}>
       <PageTurn>
         <div className="fade-in">
-            <Link href="/theory">
+            <Link href="/robotics/theory">
                 <button 
                     style={{
                     background: 'transparent', border: '1px solid #99c2ff', color: '#99c2ff', padding: '8px 20px', cursor: 'pointer', marginBottom: '30px', marginLeft: '40px', fontFamily: 'monospace', fontSize: '0.9rem', textTransform: 'uppercase', letterSpacing: '1px'
@@ -62,7 +62,7 @@ export default function ClientPage({ slug }: { slug: string }) {
                 
                 {selectedArticle.hasSimulationLink && (
                     <div className="text-center my-8">
-                        <Link href="/simulation/palletizer" scroll={false}>
+                        <Link href="/robotics/simulation/palletizer" scroll={false}>
                             <button className="cyber-btn start px-8 py-4">
                                 <span className="btn-icon" style={{marginBottom: '2%'}}>▶</span>
                                 Test Logic in Simulator

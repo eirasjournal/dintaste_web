@@ -97,8 +97,6 @@ export default function DirectKinematicsSandbox() {
                         </button>
                     </div>
 
-                    <div className="border-b border-[#333]"></div>
-
                     {Object.keys(joints).map((joint) => {
                         const limits = JOINT_LIMITS[joint];
                         
@@ -115,8 +113,8 @@ export default function DirectKinematicsSandbox() {
                         }
 
                         return (
-                            <div key={joint} className={`bg-[#1a1a1a] rounded border transition-colors duration-300 ${showWarning ? 'border-red-500' : 'border-[#333]'}`}>
-                                <div className="input-wrapper flex justify-between items-end">
+                            <div key={joint} className={`${showWarning ? 'border-red-500' : 'border-[#333]'}`}>
+                                <div className="input-wrapper">
                                     <div>
                                         <label className={`text-xs font-bold font-mono uppercase block ${showWarning ? 'text-red-500' : 'text-[#cca033]'}`}>
                                             AXIS {joint.toUpperCase()} [{limits.min}° : {limits.max}°]
@@ -130,7 +128,7 @@ export default function DirectKinematicsSandbox() {
                                         onChange={handleChange}
                                         min={limits.min}
                                         max={limits.max}
-                                        className={`full-width-input w-20 text-right ${showWarning ? 'text-red-500' : ''}`} 
+                                        className={`full-width-input w-20 ${showWarning ? 'text-red-500' : ''}`} 
                                     />
                                 </div>
                                 <input

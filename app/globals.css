@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 :root {
   /* SCHIMBARE: Albastru în loc de Roz */
   --accent-main: #99c2ff;        /* Albastru tehnic (cerneală/pix) */
@@ -1345,7 +1349,7 @@ input[type=number] {
   display: grid;
   /* Coloana 1: 320px fix (panoul), Coloana 2: restul spațiului (robotul) */
   grid-template-columns: 340px 1fr; 
-  gap: 20px;
+  gap: 10px;
   width: 100%;
   align-items: start; /* Aliniere sus */
 }
@@ -1395,8 +1399,7 @@ input[type=number] {
   display: flex;
   flex-direction: column; /* Așează input-ul sub label pentru lățime maximă */
   width: 100%;
-  gap: 4px;
-  margin-bottom: 8px;
+  margin-bottom: 4px;
 }
 
 /* Stilul pentru căsuța de input numeric/text */
@@ -1439,4 +1442,287 @@ input[type=number] {
 .full-width-input[type=number] {
   appearance: textfield;
   -moz-appearance: textfield;
+}
+
+/* ========================================= */
+/* --- NEW PORTAL PAGE STYLES --- */
+/* ========================================= */
+
+.portal-wrapper {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  background-color: #050505;
+  overflow: hidden;
+  position: relative;
+}
+
+.portal-card {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  position: relative;
+  transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  border-right: 1px solid #222;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+/* --- ROBOTICS CARD (LEFT) --- */
+.portal-card.left {
+  background: radial-gradient(circle at center, #111 0%, #000 100%);
+  color: #99c2ff; /* Your existing blue */
+}
+
+.portal-card.left:hover {
+  flex: 1.5; /* Grow on hover */
+  background: radial-gradient(circle at center, #1a1a1a 0%, #050505 100%);
+  box-shadow: inset -10px 0 50px rgba(153, 194, 255, 0.1);
+  z-index: 10;
+}
+
+.portal-card.left .card-title {
+  text-shadow: 0 0 15px rgba(153, 194, 255, 0.4);
+}
+
+/* Grid overlay for robotics */
+.grid-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    linear-gradient(rgba(153, 194, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(153, 194, 255, 0.05) 1px, transparent 1px);
+  background-size: 40px 40px;
+  opacity: 0.5;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* --- DREAMS CARD (RIGHT) --- */
+.portal-card.right {
+  background: radial-gradient(circle at center, #0a050a 0%, #000 100%);
+  color: #d499ff; /* Purple/Pink for dreams */
+  border-left: 1px solid #222;
+}
+
+.portal-card.right:hover {
+  flex: 1.5; /* Grow on hover */
+  background: radial-gradient(circle at center, #150a15 0%, #000 100%);
+  box-shadow: inset 10px 0 50px rgba(212, 153, 255, 0.1);
+  z-index: 10;
+}
+
+.portal-card.right .card-title {
+  text-shadow: 0 0 15px rgba(212, 153, 255, 0.4);
+}
+
+/* Stars overlay for dreams */
+.stars-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    radial-gradient(white 1px, transparent 1px),
+    radial-gradient(white 1px, transparent 1px);
+  background-size: 50px 50px;
+  background-position: 0 0, 25px 25px;
+  opacity: 0.1;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* --- SHARED CARD CONTENT --- */
+.card-content {
+  z-index: 2;
+  text-align: center;
+  transform: translateY(0);
+  transition: transform 0.4s ease;
+}
+
+.portal-card:hover .card-content {
+  transform: scale(1.1);
+}
+
+.portal-card.dimmed {
+  filter: grayscale(0.8) brightness(0.5);
+  flex: 0.8;
+}
+
+.card-icon {
+  font-size: 4rem;
+  margin-bottom: 20px;
+  filter: drop-shadow(0 0 10px currentColor);
+}
+
+.card-title {
+  font-family: 'Courier New', monospace;
+  font-size: 2rem;
+  font-weight: 900;
+  letter-spacing: 5px;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.card-subtitle {
+  font-family: 'Courier New', monospace;
+  font-size: 1rem;
+  opacity: 0.7;
+  letter-spacing: 2px;
+  margin-top: 10px;
+}
+
+.tech-readout {
+  margin-top: 40px;
+  font-family: 'Courier New', monospace;
+  font-size: 0.7rem;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  color: currentColor;
+}
+
+.portal-card:hover .tech-readout {
+  opacity: 0.6;
+}
+
+/* --- CENTER DIVIDER --- */
+.portal-divider {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 20;
+  pointer-events: none;
+}
+
+.logo-badge {
+  background: #000;
+  border: 1px solid #333;
+  color: #fff;
+  padding: 10px 20px;
+  font-family: 'Courier New', monospace;
+  font-weight: bold;
+  letter-spacing: 2px;
+  border-radius: 4px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.9);
+}
+
+/* --- MOBILE RESPONSIVE --- */
+@media screen and (max-width: 820px) {
+  .portal-wrapper {
+    flex-direction: column;
+  }
+  
+  .portal-card {
+    border-right: none;
+    border-bottom: 1px solid #222;
+  }
+  
+  .portal-card.left:hover, 
+  .portal-card.right:hover {
+    flex: 1.2; /* Less growth on mobile */
+  }
+
+  .card-title {
+    font-size: 2rem;
+  }
+  
+  .portal-divider {
+    transform: translate(-50%, -50%) rotate(90deg); /* Rotate badge for vertical layout */
+  }
+}
+
+/* ========================================= */
+/* --- DREAM COLLECTIVE THEME (PURPLE) --- */
+/* ========================================= */
+
+:root {
+  --dream-accent: #d499ff;
+  --dream-bg: #050505;
+  --dream-dark-panel: #0a050a;
+  --dream-border: #333;
+}
+
+/* --- UTILITY: NEON TEXT GLOW --- */
+.dream-glow-text {
+  text-shadow: 0 0 10px rgba(212, 153, 255, 0.5), 
+               0 0 20px rgba(212, 153, 255, 0.3);
+}
+
+/* --- COMPONENT: TERMINAL INPUT WINDOW --- */
+/* This targets the DreamInput container for a CRT Monitor look */
+textarea, input[type="text"], input[type="date"] {
+  color-scheme: dark; /* Forces calendar icon to be white */
+}
+
+/* Custom Scrollbar for the Dream Page */
+::-webkit-scrollbar {
+  width: 8px;
+  background: var(--dream-bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #333;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--dream-accent);
+}
+
+/* --- ANIMATION: VERTICAL SCANLINE --- */
+/* Adds a subtle moving line to the "Hero" section background */
+@keyframes scanline {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100vh); }
+}
+
+.dream-scanline::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 20px;
+  background: linear-gradient(to bottom, transparent, rgba(212, 153, 255, 0.1), transparent);
+  animation: scanline 8s linear infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* --- COMPONENT: DATE PICKER FIXES --- */
+/* Makes the date input look good in dark mode */
+input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(1) opacity(0.5); /* Turns the icon white */
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator:hover {
+  opacity: 1; 
+  filter: invert(1) drop-shadow(0 0 5px var(--dream-accent));
+}
+
+/* --- SELECTION COLOR --- */
+/* Overrides the blue selection for the dream page */
+::selection {
+  background: rgba(212, 153, 255, 0.3); /* Purple selection */
+  color: white;
+}
+
+/* --- RESPONSIVE TYPOGRAPHY TWEAKS --- */
+@media screen and (max-width: 768px) {
+  .dream-hero-title {
+    font-size: 2.5rem; /* Smaller title on mobile */
+  }
 }

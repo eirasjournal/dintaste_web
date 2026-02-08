@@ -12,7 +12,7 @@ export default function AboutMe() {
        {/* Tot ce pui aici va apărea automat în coloana centrală */}
        <PageTurn>
             <div className="fade-in">
-              <h2 style={{ paddingLeft: '40px', marginBottom: '40px', borderBottom: '2px solid #99c2ff', paddingBottom: '10px', color: '#dcdcdc'}}> 
+              <h2 style={{fontSize: '2rem', paddingLeft: '40px', marginBottom: '40px', borderBottom: '2px solid #99c2ff', paddingBottom: '10px', color: '#dcdcdc'}}> 
                 About me 
               </h2> 
               

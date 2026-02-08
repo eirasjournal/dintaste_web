@@ -11,7 +11,7 @@ export default function SimulationListPage() {
     <PageLayout decorCount={5}>
       <PageTurn>
         <div className="fade-in">
-          <h2 style={{ paddingLeft: '40px', marginBottom: '20px', borderBottom: '2px solid #99c2ff', paddingBottom: '10px', color: '#dcdcdc'}}> 
+          <h2 style={{fontSize: '2rem', paddingLeft: '40px', marginBottom: '20px', borderBottom: '2px solid #99c2ff', paddingBottom: '10px', color: '#dcdcdc'}}> 
             Industrial Simulations
           </h2> 
 
@@ -45,7 +45,7 @@ export default function SimulationListPage() {
           {SIMULATIONS.map((sim) => (
             <Link 
                 key={sim.id} 
-                href={`/simulation/${sim.slug}`} 
+                href={`/robotics/simulation/${sim.slug}`} 
                 scroll={false} 
                 style={{ textDecoration: 'none', color: 'inherit' }}
             >

@@ -177,7 +177,7 @@ export default function PalletizerSandbox() {
                                     <span>{placedBoxes.length}/{params.total}</span>
                                 </div>
                                 <div className="w-full bg-[#000] h-3 rounded-sm border border-[#333] relative">
-                                    <div className="absolute inset-0" style={{backgroundImage: 'linear-gradient(90deg, transparent 95%, #222 95%)', backgroundSize: '10% 100%'}}></div>
+                                    <div className="absolute inset-0"></div>
                                     <div 
                                         className="h-full transition-all duration-300 relative" 
                                         style={{ 

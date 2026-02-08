@@ -39,3 +39,10 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+
+venv/
+app/dreams/backend/venv/
+__pycache__/
+*.db
+.env

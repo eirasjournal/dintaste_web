@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from 'react';
-import { subscribeToNewsletter } from '../actions'; // Importă acțiunea
+import { subscribeToNewsletter } from '../../actions'; // Importă acțiunea
 
 export default function NewsletterForm() {
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
