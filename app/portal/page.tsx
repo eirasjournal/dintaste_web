@@ -1,8 +1,8 @@
-// app/page.tsx
 "use client";
 
 import React, { useState } from 'react';
 import Link from 'next/link';
+import { ArrowLeft } from 'lucide-react'; // 1. Importăm iconița
 
 type HoverState = 'left' | 'right' | null;
 
@@ -10,8 +10,19 @@ export default function Portal() {
   const [hoveredSide, setHoveredSide] = useState<HoverState>(null);
 
   return (
-    <main className="portal-wrapper">
+    <main className="portal-wrapper relative"> {/* 2. Adăugăm 'relative' aici dacă nu există deja în CSS */}
       
+      {/* --- 3. BUTONUL DE RETURN (Subtil & Tech) --- */}
+      <Link 
+        href="/" 
+        className="absolute top-6 left-6 z-50 flex items-center gap-2 text-white/30 hover:text-white transition-all duration-300 group"
+      >
+        <ArrowLeft size={18} className="transition-transform duration-300 group-hover:-translate-x-1" />
+        <span className="font-mono text-[10px] tracking-[0.2em] uppercase">
+          Return to Main Page
+        </span>
+      </Link>
+
       {/* --- LEFT CARD: ROBOTICS (LOGIC) --- */}
       <Link 
         href="/robotics" 
