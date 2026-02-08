@@ -33,8 +33,9 @@ export default function DreamPage() {
         <h1 className="text-5xl md:text-7xl font-black mb-6 tracking-tight">
           UPLOAD YOUR <span className="text-[#d499ff] animate-pulse">SUBCONSCIOUS</span>
         </h1>
-        <p className="text-[#888] max-w-xl mx-auto font-mono text-sm md:text-base leading-relaxed">
-          Participate in the global mapping of human dreamscapes. 
+        <p className="text-[#888] max-w-2xl mx-auto font-mono text-sm md:text-base leading-relaxed">
+          Carl Jung believed that dreams are not isolated events, but messages from a global network we all share: the Collective Unconscious. Until now, this was merely a theory. Dintaste transforms it into mathematical reality.
+          Participate in the global mapping of human dreamscapes. We compare the mathematical fingerprint of your dream against of others in our database. 
           Your data is anonymized, tokenized, and clustered to find 
           synchronistic patterns in the collective psyche.
         </p>
