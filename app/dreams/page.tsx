@@ -54,7 +54,7 @@ export default function DreamPage() {
                   <div>
                     <h4 className="text-white font-bold uppercase mb-2 text-xs tracking-widest">Match Intensity (%)</h4>
                     <p className="text-xs text-gray-400 mb-2">
-                      Answers the question: <em>"How much does my dream resemble the closest dream found?"</em>
+                      Answers the question: <em>&quot;How much does my dream resemble the closest dream found?&quot;</em>
                     </p>
                     <div className="space-y-1 text-xs">
                        <div className="flex justify-between">
@@ -79,7 +79,7 @@ export default function DreamPage() {
                   <div>
                     <h4 className="text-white font-bold uppercase mb-2 text-xs tracking-widest">Collective Resonance</h4>
                     <p className="text-xs text-gray-400 mb-3">
-                      Answers the question: <em>"How many people have dreamed this?"</em>
+                      Answers the question: <em>&quot;How many people have dreamed this?&quot;</em>
                     </p>
                     <ul className="space-y-3">
                       <li className="flex items-start gap-3">

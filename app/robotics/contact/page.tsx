@@ -9,7 +9,7 @@ import Comments from '../components/Comments';
 export default function Contact() {
   // State pentru efectul de "Copied!"
   const [copied, setCopied] = useState(false);
-  const email = "eirasjournal@gmail.com"; 
+  const email = "micuami09@gmail.com"; 
 
   const handleCopy = () => {
     navigator.clipboard.writeText(email);
