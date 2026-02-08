@@ -11,8 +11,15 @@ Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
 
-# CORS Setup
-origins = ["http://localhost:3000", "http://127.0.0.1:3000"]
+origins = [
+    "http://localhost:3000",           # Pentru teste locale
+    "http://127.0.0.1:3000",           # Pentru teste locale
+    "https://dintaste.vercel.app",     # Domeniul default Vercel
+    "https://dintaste.me",             # Domeniul tău custom (dacă îl folosești)
+    "https://www.dintaste.me",         # Domeniul tău cu www
+    # Poți adăuga și "*" pentru a permite ORICE site (mai puțin sigur, dar bun pentru debug)
+    # "*"
+]
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
