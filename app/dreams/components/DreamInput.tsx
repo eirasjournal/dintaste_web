@@ -4,6 +4,61 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Terminal, CheckCircle, Send, Calendar, Hash, Sparkles, Brain, Lightbulb } from 'lucide-react';
 import { submitDream } from '../services/dreamApi';
+import { Users, User, Globe, Fingerprint } from 'lucide-react';
+
+// ... importuri existente ...
+
+// Funcție nouă pentru design-ul rezonanței
+const getResonanceDetails = (label: string, count: number) => {
+  switch (label) {
+    case 'COLLECTIVE_ECHO':
+      return {
+        title: 'COLLECTIVE ECHO',
+        desc: `This dream has been experienced by ${count} other people.`,
+        color: 'text-amber-400',
+        borderColor: 'border-amber-400/50',
+        bg: 'bg-amber-400/10',
+        icon: <Globe size={18} />
+      };
+    case 'SHARED_ARCHETYPE':
+      return {
+        title: 'SHARED ARCHETYPE',
+        desc: `Common elements. Resonates with ${count} dreamer(s).`,
+        color: 'text-blue-400',
+        borderColor: 'border-blue-400/50',
+        bg: 'bg-blue-400/10',
+        icon: <Users size={18} />
+      };
+    case 'TWIN_CONNECTION':
+      return {
+        title: 'TWIN CONNECTION',
+        desc: 'Rarity! You had the exact same dream as another person.',
+        color: 'text-pink-400', // Special color for "Twin"
+
+        borderColor: 'border-pink-400/50',
+        bg: 'bg-pink-400/10',
+        icon: <User size={18} />
+      };
+    case 'VAGUE_RESONANCE':
+      return {
+        title: 'VAGUE RESONANCE',
+        desc: 'There are vague similarities, but your dream has its own unique imprint.',
+        color: 'text-purple-300',
+        borderColor: 'border-purple-300/30',
+        bg: 'bg-purple-300/5',
+        icon: <Sparkles size={18} />
+      };
+    default:
+      return {
+        title: 'UNIQUE VISION',
+        desc: 'A completely original dream. No similar dreams found in the database.',
+        color: 'text-gray-400',
+        borderColor: 'border-gray-500/30',
+        bg: 'bg-gray-500/5',
+        icon: <Fingerprint size={18} />
+      };
+  }
+};
 
 // Updated Interface to match the new JSON structure
 interface DreamReceipt {
@@ -135,21 +190,50 @@ export default function DreamInput() {
                 </div>
             </div>
 
-            {/* 1. Statistics Grid */}
-            <div className="grid grid-cols-2 gap-4 mb-8">
-              <div className="bg-[#111] p-3 rounded border border-[#333] flex flex-col items-center justify-center text-center">
-                <span className="text-[#555] text-[10px] uppercase mb-1">RESONANCE</span>
-                <span className="text-[#d499ff] font-bold text-sm uppercase">
-                  {receipt?.cluster_label}
-                </span>
-              </div>
-              <div className="bg-[#111] p-3 rounded border border-[#333] flex flex-col items-center justify-center text-center">
-                <span className="text-[#555] text-[10px] uppercase mb-1">COLLECTIVE MATCH</span>
-                <span className="text-white font-bold text-xl">
-                  {receipt?.similarity_percentage}%
-                </span>
-              </div>
-            </div>
+            {/* 1. Statistics Grid - ACTUALIZAT */}
+            {(() => {
+              // Aici calculăm stilul pe baza etichetei primite de la Python
+              const resonance = getResonanceDetails(receipt?.cluster_label || 'UNIQUE', receipt?.similar_count || 0);
+              
+              return (
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+                  
+                  {/* CARD 1: RESONANCE LABEL & TIP (Colorat dinamic) */}
+                  <div className={`p-4 rounded border flex flex-col justify-center ${resonance.borderColor} ${resonance.bg}`}>
+                    <div className={`flex items-center gap-2 mb-2 ${resonance.color} font-bold text-sm tracking-widest uppercase`}>
+                      {resonance.icon}
+                      {resonance.title}
+                    </div>
+                    <p className={`text-xs leading-relaxed opacity-80 ${resonance.color.replace('text-', 'text-')}`}>
+                      {resonance.desc}
+                    </p>
+                  </div>
+
+                  {/* CARD 2: INTENSITY SCORE (Cu bara de progres) */}
+                  <div className="bg-[#111] p-4 rounded border border-[#333] flex flex-col items-center justify-center text-center relative overflow-hidden">
+                    <span className="text-[#555] text-[10px] uppercase mb-1 z-10">
+                      Match Intensity
+                    </span>
+                    <span className="text-white font-bold text-3xl z-10">
+                      {receipt?.similarity_percentage}%
+                    </span>
+                    
+                    {/* Bara de progres de pe fundal */}
+                    <div 
+                        className="absolute bottom-0 left-0 h-1 opacity-50 transition-all duration-1000"
+                        style={{ 
+                            width: `${receipt?.similarity_percentage}%`, 
+                            backgroundColor: 'currentColor',
+                            color: resonance.color === 'text-pink-400' ? '#f472b6' : 
+                                  resonance.color === 'text-amber-400' ? '#fbbf24' : 
+                                  resonance.color === 'text-blue-400' ? '#60a5fa' : '#9ca3af'
+                        }}
+                    ></div>
+                  </div>
+                  
+                </div>
+              );
+            })()}
 
             {/* 2. Structured Tags (Motifs & Emotions) */}
             {receipt?.analysis && (

@@ -118,17 +118,19 @@ def get_embedding_from_api(text):
         
 def calculate_similarity(new_text: str, previous_dreams: list):
     """
-    Calculează similaritatea folosind vectori descărcați din cloud.
+    Logică Hibridă:
+    1. Max Similarity = Cât de mult seamănă cu cel mai apropiat vis (Twin).
+    2. Count = Câți oameni au visat asta (Collective).
     """
     if not previous_dreams:
         return {"percentage": 0, "count": 0, "label": "ORIGIN_POINT"}
 
-    # 1. Obținem vectorul pentru visul NOU
+    # 1. Vectorizare
     new_vec = get_embedding_from_api(new_text)
-    if not new_vec:
+    if not new_vec or isinstance(new_vec, dict) and 'error' in new_vec:
         return {"percentage": 0, "count": 0, "label": "API_LIMIT"}
 
-    # 2. Obținem textele vechi
+    # 2. Pregătire date vechi
     old_texts = []
     for d in previous_dreams:
         if hasattr(d, 'content'): old_texts.append(d.content)
@@ -138,40 +140,61 @@ def calculate_similarity(new_text: str, previous_dreams: list):
     if not old_texts:
          return {"percentage": 0, "count": 0, "label": "ORIGIN_POINT"}
 
-    # 3. Obținem vectorii pentru visele VECHI
-    # NOTĂ: În producție reală, acești vectori ar trebui salvați în baza de date ca să nu-i cerem mereu.
-    # Pentru acest demo, luăm doar ultimele 5 vise ca să nu blocăm API-ul gratuit.
-    recent_texts = old_texts[-5:] 
+    # Luăm mai multe vise pentru context (ex: ultimele 50)
+    recent_texts = old_texts[-50:] 
     
     try:
-        # HuggingFace acceptă o listă de string-uri
         old_vecs = get_embedding_from_api(recent_texts)
         
-        if not old_vecs or isinstance(old_vecs, dict): # Check for error response
+        if not old_vecs or isinstance(old_vecs, dict) and 'error' in old_vecs:
             return {"percentage": 0, "count": 0, "label": "CALC_SKIP"}
 
-        # Convertim la numpy array pentru viteză
+        # Calcule matematice
         v1 = np.array(new_vec)
         v2 = np.array(old_vecs)
         
-        # Dacă dimensiunile nu se potrivesc (API error), ieșim
         if v1.ndim == 1: v1 = v1.reshape(1, -1)
         if v2.ndim == 1: v2 = v2.reshape(1, -1)
 
         scores = cosine_similarity(v1, v2)[0]
         
-        # Statistici
+        # --- LOGICA HIBRIDĂ ---
+
+        # A. INTENSITATEA (Cea mai bună potrivire unică)
+        max_score = max(scores) if len(scores) > 0 else 0
+        max_percentage = int(max_score * 100)
+
+        # B. DENSITATEA (Câți oameni sunt peste pragul de 50%)
         threshold = 0.50
         matches = [s for s in scores if s > threshold]
         count = len(matches)
-        max_score = max(scores) if len(scores) > 0 else 0
-        percentage = int(max_score * 100)
 
+        # C. ETICHETAREA INTELIGENTĂ (Labeling)
         label = "UNIQUE_VISION"
-        if percentage > 80: label = "COLLECTIVE_ECHO"
-        elif percentage > 50: label = "SHARED_ARCHETYPE"
 
-        return {"percentage": percentage, "count": count, "label": label}
+        if max_percentage > 85:
+            # E foarte similar cu cineva
+            if count >= 3:
+                label = "COLLECTIVE_ECHO"  # Similar cu mulți (Trend)
+            else:
+                label = "TWIN_CONNECTION"  # Similar cu unul singur (Suflet pereche)
+        
+        elif max_percentage > 60:
+            label = "SHARED_ARCHETYPE"   # Teme comune
+            
+        elif max_percentage > 40:
+            label = "VAGUE_RESONANCE"    # Ceva familiar, dar nu clar
+            
+        else:
+            label = "UNIQUE_VISION"      # Nimic asemănător
+
+        # Returnăm totul. 
+        # Frontend-ul poate alege să afișeze 'max_percentage' ca scor principal.
+        return {
+            "percentage": max_percentage, 
+            "count": count, 
+            "label": label
+        }
 
     except Exception as e:
         print(f"Math Error: {e}")
