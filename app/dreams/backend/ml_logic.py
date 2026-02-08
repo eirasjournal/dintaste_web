@@ -80,7 +80,7 @@ def get_embedding_from_api(text):
         print("❌ Lipsă HF_TOKEN")
         return None
         
-    api_url = "https://api-inference.huggingface.co/pipeline/feature-extraction/sentence-transformers/all-MiniLM-L6-v2"
+    api_url = "https://router.huggingface.co/hf-inference/models/sentence-transformers/all-MiniLM-L6-v2"
     headers = {"Authorization": f"Bearer {hf_token}"}
     
     try:
