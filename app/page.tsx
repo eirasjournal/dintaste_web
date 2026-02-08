@@ -25,7 +25,7 @@ export default function LandingPage() {
       >
         {/* Titlu Simbolic */}
         <h1 className="text-4xl md:text-6xl font-bold mb-6 tracking-tighter">
-          THE DIGITAL <span className="text-[#d499ff]">CODEX</span>
+          THE <span className="text-[#d499ff]">POLYMATH</span> LAB 
         </h1>
 
         {/* Textul despre Da Vinci */}
@@ -36,9 +36,9 @@ export default function LandingPage() {
           </p>
           <p>
             Here lies the intersection of 
-            <span className="text-white font-bold mx-1">Silicon</span> 
+            <span className="text-white font-bold mx-1">Logic</span>  
             and 
-            <span className="text-white font-bold mx-1">Psyche</span>. 
+             <span className="text-white font-bold mx-1">Aether</span>. 
             A collection of varied interests, from the cold logic of robotics to the 
             deep symbolism of the collective unconscious.
           </p>
