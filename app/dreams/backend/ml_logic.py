@@ -72,27 +72,50 @@ def local_fallback(dream_text: str):
 # =========================
 def get_embedding_from_api(text):
     """
-    Trimite textul la Hugging Face API pentru a primi vectorii matematici.
-    Nu consumă RAM pe serverul nostru!
+    Folosește modelul BAAI/bge-small-en-v1.5 prin noul Router.
+    Acest model este strict pentru 'Feature Extraction', deci nu dă eroarea 400.
     """
     hf_token = os.getenv("HF_TOKEN")
     if not hf_token:
         print("❌ Lipsă HF_TOKEN")
         return None
         
-    api_url = "https://router.huggingface.co/hf-inference/models/sentence-transformers/all-MiniLM-L6-v2"
+    # --- SCHIMBARE MODEL: BAAI BGE SMALL ---
+    # Este un model excelent, rapid și gratuit pe HF
+    api_url = "https://router.huggingface.co/hf-inference/models/BAAI/bge-small-en-v1.5"
     headers = {"Authorization": f"Bearer {hf_token}"}
     
     try:
-        response = requests.post(api_url, headers=headers, json={"inputs": text, "options": {"wait_for_model": True}}, timeout=10)
+        # TRUC: Trimitem textul ca o listă ["text"]. 
+        # Asta forțează API-ul să returneze o listă de vectori.
+        payload = {
+            "inputs": [text], 
+            "options": {"wait_for_model": True}
+        }
+        
+        response = requests.post(api_url, headers=headers, json=payload, timeout=10)
+        
         if response.status_code != 200:
             print(f"HF API Error: {response.status_code} - {response.text}")
             return None
-        return response.json()
+            
+        # Răspunsul va fi o listă de liste (ex: [[0.1, 0.2...]])
+        # Noi vrem doar primul vector.
+        data = response.json()
+        
+        if isinstance(data, list) and len(data) > 0:
+            # Uneori API-ul returnează direct vectorul, alteori o listă de vectori.
+            # Verificăm structura:
+            if isinstance(data[0], list):
+                return data[0] # Este [[...]]
+            return data # Este [...]
+            
+        return None
+
     except Exception as e:
         print(f"Embedding Error: {e}")
         return None
-
+        
 def calculate_similarity(new_text: str, previous_dreams: list):
     """
     Calculează similaritatea folosind vectori descărcați din cloud.

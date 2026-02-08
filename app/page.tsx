@@ -21,7 +21,7 @@ export default function Portal() {
       >
         <div className="card-content">
           <div className="card-icon">⚙️</div>
-          <h2 className="card-title">ROBOT SIMULATIONS</h2>
+          <h2 className="card-title">ROBOTICS LEARNING</h2>
           <p className="card-subtitle">
             LOGIC. KINEMATICS. HARDWARE.
           </p>
