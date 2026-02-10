@@ -25,7 +25,11 @@ export default function LandingPage() {
       >
         {/* Titlu Simbolic */}
         <h1 className="text-4xl md:text-6xl font-bold mb-6 tracking-tighter">
-          THE <span className="text-[#d499ff]">POLYMATH</span> LAB 
+          THE{' '}
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#d499ff] via-[#3b82f6] to-[#d499ff] animate-text-gradient">
+            POLYMATH
+          </span>{' '}
+          LAB
         </h1>
 
         {/* Textul despre Da Vinci */}
