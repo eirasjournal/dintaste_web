@@ -275,72 +275,66 @@ def calculate_similarity(new_text: str, previous_dreams: list, current_date_obj:
         # Găsim indexul celui mai bun match
         best_match_idx = int(np.argmax(scores))
         
-        # --- DEBUG & NUMĂRARE STRICTĂ ---
-        count = 0
+        # --- DEBUG & NUMĂRARE DUALĂ ---
+        count = 0        # Numărătoare largă (> 45%) - Pentru afișare Frontend (Archetypes)
+        strict_count = 0 # Numărătoare strictă (> 82%) - Pentru logica de Twin/Sync
         temporal_matches = 0
         
-        # Praguri: 
-        # 0.82 = Foarte similar (povestea e cam aceeași)
-        # 0.95 = Identic (Copy-Paste)
-        STRICT_THRESHOLD = 0.82 
+        # Praguri
+        BROAD_THRESHOLD = 0.45   # Prag pentru Arhetipuri
+        STRICT_THRESHOLD = 0.82  # Prag pentru Identice
 
-        print(f"\n--- ANALIZĂ DETALIATĂ (Prag > {STRICT_THRESHOLD}) ---")
+        print(f"\n--- ANALIZĂ DETALIATĂ ---")
 
         for idx, score in enumerate(scores):
-            # Verificăm dacă scorul trece de pragul strict
+            # 1. Calculăm COUNT (Pentru afișare - include și arhetipurile)
+            if score > BROAD_THRESHOLD:
+                count += 1
+            
+            # 2. Calculăm STRICT_COUNT (Pentru logica de etichetare)
             if score > STRICT_THRESHOLD:
+                strict_count += 1
                 
-                # Extragem datele pentru debug
+                # Debug doar pentru cele stricte
                 match_text = old_data[idx]['text']
                 match_date = old_data[idx]['date']
-                
-                # Verificăm să nu ne comparăm cu noi înșine (în caz că visul nou a fost salvat deja)
-                # O comparație simplă de text (primele 50 caractere)
-                if new_text[:50] == match_text[:50]:
-                    print(f"   [SKIP] Ignorat (Este chiar visul curent): {score:.4f}")
-                    continue
-
-                count += 1
-                print(f"   [MATCH #{count}] Scor: {score:.4f} | Data: {match_date}")
-                print(f"   -> Fragment: '{match_text[:60]}...'")
+                print(f"   [STRICT MATCH #{strict_count}] Scor: {score:.4f} | Data: {match_date}")
 
                 # Verificăm sincronicitatea (timp)
                 if isinstance(match_date, datetime):
                      delta = abs((current_date_obj - match_date).days)
                      if delta <= 2: 
                          temporal_matches += 1
-                         print(f"      -> Sincronicitate temporală! (Diferență {delta} zile)")
+        
+        print(f"--- TOTAL BROAD: {count} | TOTAL STRICT: {strict_count} ---\n")
 
-        print(f"--- TOTAL REAL GĂSIT: {count} ---\n")
-
-        # --- LOGICA ETICHETELOR FINALĂ ---
+        # --- LOGICA ETICHETELOR FINALĂ (Folosim strict_count pentru decizii majore) ---
         label = "UNIQUE_VISION"
 
         # CAZ 1: IDENTIC SAU EXTREM DE SIMILAR (> 95%)
         if max_percentage >= 95:
-             # Aici facem diferența pe baza 'count' (câte match-uri am găsit)
-             if count >= 2:
-                 # Dacă există deja 2 sau mai multe vise identice în istoric -> Fenomen de grup
+             # Folosim STRICT_COUNT aici pentru a nu activa Synchronicity la vise vagi
+             if strict_count >= 2:
                  label = "SYNCHRONICITY" 
              else:
-                 # Dacă există doar 1 singur vis identic -> Legătură 1-la-1
                  label = "TWIN_CONNECTION"
 
         # CAZ 2: SINCRONICITATE TEMPORALĂ
-        # (Chiar dacă nu e 100% identic, e foarte similar și s-a întâmplat recent)
         elif max_percentage > 85 and days_diff <= 2:
              label = "SYNCHRONICITY" 
 
         # CAZ 3: REZONANȚĂ PUTERNICĂ
         elif max_percentage > 80:
-             if count >= 3:
-                label = "COLLECTIVE_ECHO" # Mulți oameni visează teme similare
+             # Folosim STRICT_COUNT pentru a garanta calitatea ecoului
+             if strict_count >= 3:
+                label = "COLLECTIVE_ECHO"
              else:
-                label = "DEEP_RESONANCE"
+                label = "COLLECTIVE_ECHO" # Putem lăsa Echo și la 1-2 matches dacă scorul e mare
 
-        # CAZ 4: ARHETIPURI
+        # CAZ 4: ARHETIPURI (Aici e modificarea importantă)
         elif max_percentage > 45:
             label = "SHARED_ARCHETYPE"
+            # Aici Frontend-ul va primi variabila 'count' (care e > 0), deci va afișa corect.
 
         # CAZ 5: VAG
         elif max_percentage > 15:
@@ -349,12 +343,13 @@ def calculate_similarity(new_text: str, previous_dreams: list, current_date_obj:
         # DEFAULT
         else:
             label = "UNIQUE_VISION"
+            count = 0 # Forțăm 0 dacă e unic
 
-        print(f" -> REZULTAT FINAL: {max_percentage}% | {label}")
+        print(f" -> REZULTAT FINAL: {max_percentage}% | {label} | Count Afișat: {count}")
 
         return {
             "percentage": max_percentage, 
-            "count": count, 
+            "count": count, # Returnăm numărătoarea largă pentru Frontend
             "label": label,
             "days_diff_best_match": days_diff,
             "temporal_matches": temporal_matches
