@@ -3,7 +3,8 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { ArrowLeft, Info, X, Zap, Users, Globe, Fingerprint, HelpCircle } from 'lucide-react';
+// Am adaugat 'Activity' la importuri
+import { ArrowLeft, Info, X, Zap, Users, Globe, Fingerprint, HelpCircle, Radio, User, Sparkles, Activity } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import DreamInput from './components/DreamInput';
 import "../globals.css";
@@ -14,7 +15,7 @@ export default function DreamPage() {
   return (
     <main className="min-h-screen bg-[#050505] text-white selection:bg-[#d499ff] selection:text-black font-mono">
       
-      {/* --- INFO MODAL (POP-UP) --- */}
+      {/* --- INFO MODAL (POP-UP) - SCROLLABLE & UPDATED --- */}
       <AnimatePresence>
         {showInfo && (
           <motion.div 
@@ -29,10 +30,11 @@ export default function DreamPage() {
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.95, opacity: 0, y: 20 }}
               onClick={(e) => e.stopPropagation()}
-              className="bg-[#0a050a] border border-[#d499ff]/30 w-full max-w-lg rounded-xl shadow-[0_0_50px_rgba(212,153,255,0.1)] overflow-hidden relative"
+              className="bg-[#0a050a] border border-[#d499ff]/30 w-full max-w-lg max-h-[85vh] flex flex-col rounded-xl shadow-[0_0_50px_rgba(212,153,255,0.1)] relative"
             >
-              {/* Header Modal */}
-              <div className="bg-[#1a0f1a] p-6 border-b border-[#333] flex justify-between items-center">
+              
+              {/* Header Modal (Fix) */}
+              <div className="bg-[#1a0f1a] p-5 border-b border-[#333] flex justify-between items-center shrink-0 rounded-t-xl">
                 <h3 className="text-[#d499ff] font-bold tracking-widest text-sm uppercase flex items-center gap-2">
                   <Info size={16} /> Algorithm Decoding
                 </h3>
@@ -44,9 +46,8 @@ export default function DreamPage() {
                 </button>
               </div>
 
-              {/* Content Modal */}
-              <div className="p-6 space-y-8 text-sm text-gray-300 leading-relaxed">
-                
+              {/* Content Modal (Scrollable) */}
+              <div className="p-6 space-y-6 text-sm text-gray-300 leading-relaxed overflow-y-auto custom-scrollbar">
                 {/* Section 1: Match Intensity */}
                 <div className="flex gap-4">
                   <div className="bg-[#d499ff]/10 p-3 rounded h-fit border border-[#d499ff]/20">
@@ -63,7 +64,11 @@ export default function DreamPage() {
                          <span className="text-gray-500">Perfect Mirror (Identical)</span>
                        </div>
                        <div className="flex justify-between">
-                         <span className="text-white">50-89%</span>
+                         <span className="text-white font-mono">85-94%</span>
+                         <span className="text-gray-500">High Resonance</span>
+                       </div>
+                       <div className="flex justify-between">
+                         <span className="text-white">45-84%</span>
                          <span className="text-gray-500">Similar Theme (Archetype)</span>
                        </div>
                     </div>
@@ -79,39 +84,132 @@ export default function DreamPage() {
                   </div>
                   <div>
                     <h4 className="text-white font-bold uppercase mb-2 text-xs tracking-widest">Collective Resonance</h4>
-                    <p className="text-xs text-gray-400 mb-3">
-                      Answers the question: <em>&quot;How many people have dreamed this?&quot;</em>
+                    <p className="text-xs text-gray-400 mb-4">
+                      Answers the question: <em>&quot;How many people have dreamed this and in what timeframe?&quot;</em>
                     </p>
-                    <ul className="space-y-3">
-                      <li className="flex items-start gap-3">
-                        <Fingerprint size={14} className="text-gray-500 mt-0.5 shrink-0"/> 
-                        <div>
-                            <span className="text-white block text-xs font-bold">UNIQUE VISION</span>
-                            <span className="text-[10px] text-gray-500">0 people. You are a pioneer.</span>
+
+                    {/* --- LISTA CATEGORIILOR --- */}
+                    <div className="space-y-5">
+
+                      {/* COLLECTIVE WAVE */}
+                      <div className="flex gap-4">
+                        <div className="flex items-start gap-3">
+                          <Radio size={18} className="text-indigo-400" />
                         </div>
-                      </li>
-                      <li className="flex items-start gap-3">
-                        <Users size={14} className="text-pink-400 mt-0.5 shrink-0"/> 
                         <div>
-                            <span className="text-pink-400 block text-xs font-bold">TWIN CONNECTION</span>
-                            <span className="text-[10px] text-gray-500">1 person. A rare coincidence.</span>
+                          <h4 className="text-indigo-400 font-bold uppercase text-xs tracking-widest mb-1">COLLECTIVE WAVE</h4>
+                          <p className="text-xs text-gray-400">
+                            Multiple people are dreaming this exact theme within the last 48 hours.
+                          </p>
                         </div>
-                      </li>
-                      <li className="flex items-start gap-3">
-                        <Globe size={14} className="text-amber-400 mt-0.5 shrink-0"/> 
+                      </div>
+
+                      {/* SYNCHRONICITY */}
+                      <div className="flex gap-4">
+                        <div className="flex items-start gap-3">
+                          <Zap size={18} className="text-cyan-400" />
+                        </div>
                         <div>
-                            <span className="text-amber-400 block text-xs font-bold">COLLECTIVE ECHO</span>
-                            <span className="text-[10px] text-gray-500">3+ people. A trend in the unconscious.</span>
+                          <h4 className="text-cyan-400 font-bold uppercase text-xs tracking-widest mb-1">SYNCHRONICITY</h4>
+                          <p className="text-xs text-gray-400">
+                            You and another dreamer connected within the last 48 hours.
+                          </p>
                         </div>
-                      </li>
-                    </ul>
+                      </div>
+
+                      {/* COLLECTIVE ECHO */}
+                      <div className="flex gap-4">
+                        <div className="flex items-start gap-3">
+                          <Globe size={18} className="text-amber-400" />
+                        </div>
+                        <div>
+                          <h4 className="text-amber-400 font-bold uppercase text-xs tracking-widest mb-1">COLLECTIVE ECHO</h4>
+                          <p className="text-xs text-gray-400">
+                            This dream acts as a recurring motif for multiple people over time.
+                          </p>
+                        </div>
+                      </div>
+
+                      {/* SHARED ARCHETYPE */}
+                      <div className="flex gap-4">
+                        <div className="flex items-start gap-3">
+                          <Users size={18} className="text-blue-400" />
+                        </div>
+                        <div>
+                          <h4 className="text-blue-400 font-bold uppercase text-xs tracking-widest mb-1">SHARED ARCHETYPE</h4>
+                          <p className="text-xs text-gray-400">
+                            Common psychological elements. Resonates with other dreamers structurally over time.
+                          </p>
+                        </div>
+                      </div>
+
+                      {/* TWIN CONNECTION */}
+                      <div className="flex gap-4">
+                        <div className="flex items-start gap-3">
+                          <User size={18} className="text-pink-400" />
+                        </div>
+                        <div>
+                          <h4 className="text-pink-400 font-bold uppercase text-xs tracking-widest mb-1">TWIN CONNECTION</h4>
+                          <p className="text-xs text-gray-400">
+                            You share this specific vision with another dreamer from the past (1-on-1).
+                          </p>
+                        </div>
+                      </div>
+
+                      {/* VAGUE RESONANCE */}
+                      <div className="flex gap-4">
+                        <div className="flex items-start gap-3">
+                          <Sparkles size={18} className="text-purple-300" />
+                        </div>
+                        <div>
+                          <h4 className="text-purple-300 font-bold uppercase text-xs tracking-widest mb-1">VAGUE RESONANCE</h4>
+                          <p className="text-xs text-gray-400">
+                            There are faint ripples, but your dream has its own unique imprint.
+                          </p>
+                        </div>
+                      </div>
+
+                      {/* UNIQUE VISION */}
+                      <div className="flex gap-4">
+                        <div className="flex items-start gap-3">
+                          <Fingerprint size={18} className="text-gray-400" />
+                        </div>
+                        <div>
+                          <h4 className="text-gray-500 font-bold uppercase text-xs tracking-widest mb-1">UNIQUE VISION</h4>
+                          <p className="text-xs text-gray-400">
+                            A completely original dream. No similar dreams found in the database.
+                          </p>
+                        </div>
+                      </div>
+
+                      {/* --- LIVE SYNC INDICATOR --- */}
+                      <div className="pt-4 mt-2 border-t border-[#222]">
+                        <div className="flex gap-4">
+                            <div className="mt-1 shrink-0 bg-red-500/10 p-2 rounded h-fit border border-red-500/50">
+                                <Activity size={18} className="text-red-500 animate-pulse" />
+                            </div>
+                            <div>
+                                <h4 className="text-red-500 font-bold uppercase text-xs tracking-widest mb-1 flex items-center gap-2">
+                                    LIVE SYNC
+                                    <span className="relative flex h-2 w-2">
+                                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                                      <span className="relative inline-flex rounded-full h-2 w-2 bg-red-500"></span>
+                                    </span>
+                                </h4>
+                                <p className="text-xs text-gray-400">
+                                    Special Temporal Status. Indicates a dream that is both mathematically significant AND happened within the last 48 hours.
+                                </p>
+                            </div>
+                        </div>
+                      </div>
+
+                    </div>
                   </div>
                 </div>
-
               </div>
 
-              {/* Footer Modal */}
-              <div className="bg-[#111] p-4 text-center border-t border-[#333]">
+              {/* Footer Modal (Fix) */}
+              <div className="bg-[#111] p-4 text-center border-t border-[#333] shrink-0 rounded-b-xl">
                 <button 
                   onClick={() => setShowInfo(false)}
                   className="w-full py-2 bg-[#d499ff]/10 text-[#d499ff] hover:bg-[#d499ff] hover:text-black transition-all text-xs uppercase tracking-widest rounded"
@@ -119,6 +217,7 @@ export default function DreamPage() {
                   Close Guide
                 </button>
               </div>
+              
             </motion.div>
           </motion.div>
         )}
