@@ -67,6 +67,7 @@ export default function DreamInput() {
       setStatus('SUCCESS');
       setContent('');
     } catch (err) {
+      // TODO: Surface validation and network errors in the form and offer a retry path.
       console.error(err);
       setStatus('ERROR');
     }

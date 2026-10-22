@@ -34,3 +34,5 @@ else:
 
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 Base = declarative_base()
+
+# TODO: Replace import-time create_all usage with a versioned database migration workflow.

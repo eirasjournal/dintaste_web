@@ -21,6 +21,7 @@ export const submitDream = async (data: DreamSubmission) => {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(data),
   });
+  // TODO: Preserve backend validation details and status codes instead of collapsing all failures.
   if (!response.ok) throw new Error('Failed to submit dream');
   return response.json();
 };

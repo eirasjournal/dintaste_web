@@ -5,6 +5,8 @@ import { Resend } from 'resend';
 // Asigură-te că ai cheia în fișierul .env.local
 const resend = new Resend(process.env.RESEND_API_KEY);
 
+// TODO: Return structured validation errors and handle missing Resend configuration explicitly.
+
 export async function subscribeToNewsletter(formData: FormData) {
   const email = formData.get('email') as string;
 
